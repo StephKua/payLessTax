@@ -15,7 +15,9 @@ class LoginViewController: UIViewController {
         
     }
 
-    
+    @IBAction func backToLogin (segue: UIStoryboardSegue) {
+        
+    }
     
 }
 

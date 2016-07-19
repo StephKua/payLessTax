@@ -20,6 +20,7 @@
 		44840AA11D3E226A00071DAE /* NewRebateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840AA01D3E226A00071DAE /* NewRebateViewController.swift */; };
 		44840AA31D3E227800071DAE /* IncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840AA21D3E227800071DAE /* IncomeViewController.swift */; };
 		44840AA51D3E228A00071DAE /* RebateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840AA41D3E228A00071DAE /* RebateTableViewController.swift */; };
+		EDF16A84558D568672D20C20 /* Pods_PayLessTax.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBCC983C9428DE1F3AF825DD /* Pods_PayLessTax.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,9 @@
 		44840AA01D3E226A00071DAE /* NewRebateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRebateViewController.swift; sourceTree = "<group>"; };
 		44840AA21D3E227800071DAE /* IncomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomeViewController.swift; sourceTree = "<group>"; };
 		44840AA41D3E228A00071DAE /* RebateTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RebateTableViewController.swift; sourceTree = "<group>"; };
+		86FAC1704652C77E12145874 /* Pods-PayLessTax.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PayLessTax.release.xcconfig"; path = "Pods/Target Support Files/Pods-PayLessTax/Pods-PayLessTax.release.xcconfig"; sourceTree = "<group>"; };
+		93D76607A46217C14F72A9AE /* Pods-PayLessTax.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PayLessTax.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PayLessTax/Pods-PayLessTax.debug.xcconfig"; sourceTree = "<group>"; };
+		BBCC983C9428DE1F3AF825DD /* Pods_PayLessTax.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PayLessTax.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,17 +49,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDF16A84558D568672D20C20 /* Pods_PayLessTax.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0074A4CD6D3634AFAA0B0FEE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				93D76607A46217C14F72A9AE /* Pods-PayLessTax.debug.xcconfig */,
+				86FAC1704652C77E12145874 /* Pods-PayLessTax.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		440219831D3CD02B0056954E = {
 			isa = PBXGroup;
 			children = (
 				4402198E1D3CD02B0056954E /* PayLessTax */,
 				4402198D1D3CD02B0056954E /* Products */,
+				0074A4CD6D3634AFAA0B0FEE /* Pods */,
+				76E02987C8D988C407CF5812 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,8 +109,8 @@
 		44840A9B1D3E223600071DAE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				440219911D3CD02B0056954E /* LoginViewController.swift */,
 				44840A991D3E223000071DAE /* SignUpViewController.swift */,
+				440219911D3CD02B0056954E /* LoginViewController.swift */,
 				44840AA41D3E228A00071DAE /* RebateTableViewController.swift */,
 				44840A9C1D3E225300071DAE /* SummaryViewController.swift */,
 				44840AA21D3E227800071DAE /* IncomeViewController.swift */,
@@ -104,6 +120,14 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		76E02987C8D988C407CF5812 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BBCC983C9428DE1F3AF825DD /* Pods_PayLessTax.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -111,9 +135,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 440219A11D3CD02B0056954E /* Build configuration list for PBXNativeTarget "PayLessTax" */;
 			buildPhases = (
+				19C0DE9F33F6DB26651E9D42 /* [CP] Check Pods Manifest.lock */,
 				440219881D3CD02B0056954E /* Sources */,
 				440219891D3CD02B0056954E /* Frameworks */,
 				4402198A1D3CD02B0056954E /* Resources */,
+				21B6646C325F7F47B1B9B87C /* [CP] Embed Pods Frameworks */,
+				6FC8FAC232AD3D950C830B7F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -171,6 +198,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		19C0DE9F33F6DB26651E9D42 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		21B6646C325F7F47B1B9B87C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PayLessTax/Pods-PayLessTax-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6FC8FAC232AD3D950C830B7F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PayLessTax/Pods-PayLessTax-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		440219881D3CD02B0056954E /* Sources */ = {
@@ -298,6 +373,7 @@
 		};
 		440219A21D3CD02B0056954E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 93D76607A46217C14F72A9AE /* Pods-PayLessTax.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PayLessTax/Info.plist;
@@ -309,6 +385,7 @@
 		};
 		440219A31D3CD02B0056954E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86FAC1704652C77E12145874 /* Pods-PayLessTax.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PayLessTax/Info.plist;
