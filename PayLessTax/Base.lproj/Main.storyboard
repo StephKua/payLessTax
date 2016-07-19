@@ -10,7 +10,7 @@
         <!--Get Rebates-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="RebateTableViewController" customModule="PayLessTax" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeController" automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="RebateTableViewController" customModule="PayLessTax" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -47,7 +47,7 @@
                                                         <constraint firstAttribute="width" constant="80" id="nZv-cW-03o"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/ RM XX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pIw-Px-6XG">
@@ -134,8 +134,8 @@
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="x2L-Uk-gjt">
-                                <rect key="frame" x="350" y="194" width="150" height="150"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="x2L-Uk-gjt">
+                                <rect key="frame" x="390" y="197" width="150" height="150"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="RM" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7eK-yj-1p6">
                                         <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
@@ -157,25 +157,25 @@
                                     <constraint firstAttribute="width" constant="150" id="vmw-hl-pwa"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillEqually" alignment="top" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="eWf-1f-UA4">
-                                <rect key="frame" x="100" y="194" width="96" height="150"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="eWf-1f-UA4">
+                                <rect key="frame" x="60" y="197" width="96" height="150"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Employment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YVx-gd-qlO">
                                         <rect key="frame" x="0.0" y="0.0" width="96" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rental" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BU9-BF-pLO">
                                         <rect key="frame" x="0.0" y="60" width="48" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Others" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjM-oZ-8fC">
                                         <rect key="frame" x="0.0" y="120" width="52" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -187,8 +187,8 @@
                             <constraint firstItem="eWf-1f-UA4" firstAttribute="top" secondItem="x2L-Uk-gjt" secondAttribute="top" id="BX9-J2-Ge4"/>
                             <constraint firstItem="x2L-Uk-gjt" firstAttribute="top" secondItem="gjX-pX-fpM" secondAttribute="bottom" constant="50" id="BdJ-Nu-IEF"/>
                             <constraint firstItem="eWf-1f-UA4" firstAttribute="bottom" secondItem="x2L-Uk-gjt" secondAttribute="bottom" id="PSR-yi-40G"/>
-                            <constraint firstItem="eWf-1f-UA4" firstAttribute="leading" secondItem="xFe-Q8-hTh" secondAttribute="leadingMargin" constant="80" id="bbK-iQ-YDf"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="x2L-Uk-gjt" secondAttribute="trailing" constant="80" id="i9j-QL-wnQ"/>
+                            <constraint firstItem="eWf-1f-UA4" firstAttribute="leading" secondItem="xFe-Q8-hTh" secondAttribute="leadingMargin" constant="40" id="bbK-iQ-YDf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="x2L-Uk-gjt" secondAttribute="trailing" constant="40" id="i9j-QL-wnQ"/>
                             <constraint firstItem="gjX-pX-fpM" firstAttribute="top" secondItem="jny-rJ-uVP" secondAttribute="bottom" constant="50" id="x97-AY-N1A"/>
                         </constraints>
                     </view>
@@ -392,7 +392,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="cHD-Kw-CsP">
                                 <rect key="frame" x="100" y="263" width="400" height="75"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vfV-fy-Ud5">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vfV-fy-Ud5">
                                         <rect key="frame" x="0.0" y="0.0" width="400" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -407,13 +407,14 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Mq-PJ-M9J">
                                 <rect key="frame" x="279" y="212" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KQS-ts-hI4">
                                 <rect key="frame" x="265" y="368" width="70" height="30"/>
                                 <state key="normal" title="Login now"/>
                                 <connections>
+                                    <action selector="onLoginBtnClicked:" destination="y1I-Ax-gsJ" eventType="touchUpInside" id="cqf-jg-XkO"/>
                                     <segue destination="63g-lw-gJN" kind="show" id="xer-7A-jbn"/>
                                 </connections>
                             </button>
@@ -440,6 +441,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="snx-TL-kyX"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="vfV-fy-Ud5" id="zdn-ah-rMg"/>
+                        <outlet property="passwordTextField" destination="HrZ-Ic-wZC" id="Jmb-vL-yXH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="50F-Wv-dhc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -480,7 +485,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oE1-QU-Zut">
                                 <rect key="frame" x="270" y="189" width="61" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQC-um-FfE">
@@ -526,7 +531,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Z4f-aC-WQ7">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="63g-lw-gJN" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" automaticallyAdjustsScrollViewInsets="NO" id="63g-lw-gJN" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="eAU-zR-f3Z"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="PmV-Ul-O6O">
@@ -535,8 +540,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="b0h-AU-VUp" kind="relationship" relationship="viewControllers" id="1Kv-0p-2Za"/>
-                        <segue destination="3dV-Qk-be7" kind="relationship" relationship="viewControllers" id="4vq-Hn-Zsd"/>
                         <segue destination="6fJ-Jj-ZMY" kind="relationship" relationship="viewControllers" id="Vax-Ba-IeS"/>
+                        <segue destination="3dV-Qk-be7" kind="relationship" relationship="viewControllers" id="4vq-Hn-Zsd"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jtb-M1-dUc" userLabel="First Responder" sceneMemberID="firstResponder"/>

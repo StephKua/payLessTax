@@ -29,6 +29,7 @@ class SignUpViewController: UIViewController {
                 self.firebaseRef.child("users").child(user.uid).setValue(userDict)
                 NSUserDefaults.standardUserDefaults().setValue(user.uid, forKey: "uid")
                 
+                User.signIn(user.uid)
                 
             } else {
                 let controller = UIAlertController(title: "Error", message: (error?.localizedDescription), preferredStyle: .Alert)
