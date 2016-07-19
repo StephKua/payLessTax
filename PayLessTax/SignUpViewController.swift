@@ -11,18 +11,23 @@ import Firebase
 
 class SignUpViewController: UIViewController {
 
+    @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var confirmPasswordTextField: UITextField!
+
     
     var firebaseRef = FIRDatabase.database().reference()
     
     
     
     @IBAction func onSignUpBtnClicked(sender: UIButton) {
-        guard let email = emailTextField.text, let password = passwordTextField.text, let confirmPassword = confirmPasswordTextField.text else { return }
+        guard let username = usernameTextField.text, let email = emailTextField.text, let password = passwordTextField.text else { return }
         
-        FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: <#T##FIRAuthResultCallback?##FIRAuthResultCallback?##(FIRUser?, NSError?) -> Void#>)
+        FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { (user, error) in
+            if let user = user {
+                let userDict = ["email": email, "username": username, ]
+            }
+        })
     }
     
     override func viewDidLoad() {
