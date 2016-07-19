@@ -1,0 +1,447 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		440219901D3CD02B0056954E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4402198F1D3CD02B0056954E /* AppDelegate.swift */; };
+		440219921D3CD02B0056954E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440219911D3CD02B0056954E /* LoginViewController.swift */; };
+		440219951D3CD02B0056954E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 440219931D3CD02B0056954E /* Main.storyboard */; };
+		440219981D3CD02B0056954E /* PayLessTax.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 440219961D3CD02B0056954E /* PayLessTax.xcdatamodeld */; };
+		4402199A1D3CD02B0056954E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 440219991D3CD02B0056954E /* Assets.xcassets */; };
+		4402199D1D3CD02B0056954E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4402199B1D3CD02B0056954E /* LaunchScreen.storyboard */; };
+		44840A981D3DD5B900071DAE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44840A971D3DD5B900071DAE /* GoogleService-Info.plist */; };
+		44840A9A1D3E223000071DAE /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840A991D3E223000071DAE /* SignUpViewController.swift */; };
+		44840A9D1D3E225300071DAE /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840A9C1D3E225300071DAE /* SummaryViewController.swift */; };
+		44840A9F1D3E225C00071DAE /* NewIncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840A9E1D3E225C00071DAE /* NewIncomeViewController.swift */; };
+		44840AA11D3E226A00071DAE /* NewRebateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840AA01D3E226A00071DAE /* NewRebateViewController.swift */; };
+		44840AA31D3E227800071DAE /* IncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840AA21D3E227800071DAE /* IncomeViewController.swift */; };
+		44840AA51D3E228A00071DAE /* RebateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840AA41D3E228A00071DAE /* RebateTableViewController.swift */; };
+		44840AA71D3E2B1000071DAE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840AA61D3E2B1000071DAE /* User.swift */; };
+		EDF16A84558D568672D20C20 /* Pods_PayLessTax.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBCC983C9428DE1F3AF825DD /* Pods_PayLessTax.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4402198C1D3CD02B0056954E /* PayLessTax.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PayLessTax.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4402198F1D3CD02B0056954E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		440219911D3CD02B0056954E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		440219941D3CD02B0056954E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		440219971D3CD02B0056954E /* PayLessTax.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PayLessTax.xcdatamodel; sourceTree = "<group>"; };
+		440219991D3CD02B0056954E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4402199C1D3CD02B0056954E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4402199E1D3CD02B0056954E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		44840A971D3DD5B900071DAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		44840A991D3E223000071DAE /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		44840A9C1D3E225300071DAE /* SummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
+		44840A9E1D3E225C00071DAE /* NewIncomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewIncomeViewController.swift; sourceTree = "<group>"; };
+		44840AA01D3E226A00071DAE /* NewRebateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRebateViewController.swift; sourceTree = "<group>"; };
+		44840AA21D3E227800071DAE /* IncomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomeViewController.swift; sourceTree = "<group>"; };
+		44840AA41D3E228A00071DAE /* RebateTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RebateTableViewController.swift; sourceTree = "<group>"; };
+		44840AA61D3E2B1000071DAE /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		86FAC1704652C77E12145874 /* Pods-PayLessTax.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PayLessTax.release.xcconfig"; path = "Pods/Target Support Files/Pods-PayLessTax/Pods-PayLessTax.release.xcconfig"; sourceTree = "<group>"; };
+		93D76607A46217C14F72A9AE /* Pods-PayLessTax.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PayLessTax.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PayLessTax/Pods-PayLessTax.debug.xcconfig"; sourceTree = "<group>"; };
+		BBCC983C9428DE1F3AF825DD /* Pods_PayLessTax.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PayLessTax.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		440219891D3CD02B0056954E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDF16A84558D568672D20C20 /* Pods_PayLessTax.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0074A4CD6D3634AFAA0B0FEE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				93D76607A46217C14F72A9AE /* Pods-PayLessTax.debug.xcconfig */,
+				86FAC1704652C77E12145874 /* Pods-PayLessTax.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		440219831D3CD02B0056954E = {
+			isa = PBXGroup;
+			children = (
+				4402198E1D3CD02B0056954E /* PayLessTax */,
+				4402198D1D3CD02B0056954E /* Products */,
+				0074A4CD6D3634AFAA0B0FEE /* Pods */,
+				76E02987C8D988C407CF5812 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4402198D1D3CD02B0056954E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4402198C1D3CD02B0056954E /* PayLessTax.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4402198E1D3CD02B0056954E /* PayLessTax */ = {
+			isa = PBXGroup;
+			children = (
+				44840A9B1D3E223600071DAE /* Controllers */,
+				44840AA81D3E2B1500071DAE /* Models */,
+				440219931D3CD02B0056954E /* Main.storyboard */,
+				440219A41D3CD0750056954E /* Supporting Files */,
+			);
+			path = PayLessTax;
+			sourceTree = "<group>";
+		};
+		440219A41D3CD0750056954E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				44840A971D3DD5B900071DAE /* GoogleService-Info.plist */,
+				4402198F1D3CD02B0056954E /* AppDelegate.swift */,
+				440219991D3CD02B0056954E /* Assets.xcassets */,
+				4402199B1D3CD02B0056954E /* LaunchScreen.storyboard */,
+				4402199E1D3CD02B0056954E /* Info.plist */,
+				440219961D3CD02B0056954E /* PayLessTax.xcdatamodeld */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		44840A9B1D3E223600071DAE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				44840A991D3E223000071DAE /* SignUpViewController.swift */,
+				440219911D3CD02B0056954E /* LoginViewController.swift */,
+				44840AA41D3E228A00071DAE /* RebateTableViewController.swift */,
+				44840A9C1D3E225300071DAE /* SummaryViewController.swift */,
+				44840AA21D3E227800071DAE /* IncomeViewController.swift */,
+				44840A9E1D3E225C00071DAE /* NewIncomeViewController.swift */,
+				44840AA01D3E226A00071DAE /* NewRebateViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		44840AA81D3E2B1500071DAE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				44840AA61D3E2B1000071DAE /* User.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		76E02987C8D988C407CF5812 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BBCC983C9428DE1F3AF825DD /* Pods_PayLessTax.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4402198B1D3CD02B0056954E /* PayLessTax */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 440219A11D3CD02B0056954E /* Build configuration list for PBXNativeTarget "PayLessTax" */;
+			buildPhases = (
+				19C0DE9F33F6DB26651E9D42 /* [CP] Check Pods Manifest.lock */,
+				440219881D3CD02B0056954E /* Sources */,
+				440219891D3CD02B0056954E /* Frameworks */,
+				4402198A1D3CD02B0056954E /* Resources */,
+				21B6646C325F7F47B1B9B87C /* [CP] Embed Pods Frameworks */,
+				6FC8FAC232AD3D950C830B7F /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PayLessTax;
+			productName = PayLessTax;
+			productReference = 4402198C1D3CD02B0056954E /* PayLessTax.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		440219841D3CD02B0056954E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = SMoh;
+				TargetAttributes = {
+					4402198B1D3CD02B0056954E = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 6583AHL4V5;
+					};
+				};
+			};
+			buildConfigurationList = 440219871D3CD02B0056954E /* Build configuration list for PBXProject "PayLessTax" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 440219831D3CD02B0056954E;
+			productRefGroup = 4402198D1D3CD02B0056954E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4402198B1D3CD02B0056954E /* PayLessTax */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4402198A1D3CD02B0056954E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4402199D1D3CD02B0056954E /* LaunchScreen.storyboard in Resources */,
+				44840A981D3DD5B900071DAE /* GoogleService-Info.plist in Resources */,
+				4402199A1D3CD02B0056954E /* Assets.xcassets in Resources */,
+				440219951D3CD02B0056954E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		19C0DE9F33F6DB26651E9D42 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		21B6646C325F7F47B1B9B87C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PayLessTax/Pods-PayLessTax-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6FC8FAC232AD3D950C830B7F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PayLessTax/Pods-PayLessTax-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		440219881D3CD02B0056954E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				44840AA51D3E228A00071DAE /* RebateTableViewController.swift in Sources */,
+				440219921D3CD02B0056954E /* LoginViewController.swift in Sources */,
+				440219981D3CD02B0056954E /* PayLessTax.xcdatamodeld in Sources */,
+				44840A9A1D3E223000071DAE /* SignUpViewController.swift in Sources */,
+				44840AA11D3E226A00071DAE /* NewRebateViewController.swift in Sources */,
+				440219901D3CD02B0056954E /* AppDelegate.swift in Sources */,
+				44840A9F1D3E225C00071DAE /* NewIncomeViewController.swift in Sources */,
+				44840A9D1D3E225300071DAE /* SummaryViewController.swift in Sources */,
+				44840AA71D3E2B1000071DAE /* User.swift in Sources */,
+				44840AA31D3E227800071DAE /* IncomeViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		440219931D3CD02B0056954E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				440219941D3CD02B0056954E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4402199B1D3CD02B0056954E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4402199C1D3CD02B0056954E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4402199F1D3CD02B0056954E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		440219A01D3CD02B0056954E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		440219A21D3CD02B0056954E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 93D76607A46217C14F72A9AE /* Pods-PayLessTax.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = PayLessTax/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.smohcodes.PayLessTax;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		440219A31D3CD02B0056954E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86FAC1704652C77E12145874 /* Pods-PayLessTax.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = PayLessTax/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.smohcodes.PayLessTax;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		440219871D3CD02B0056954E /* Build configuration list for PBXProject "PayLessTax" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4402199F1D3CD02B0056954E /* Debug */,
+				440219A01D3CD02B0056954E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		440219A11D3CD02B0056954E /* Build configuration list for PBXNativeTarget "PayLessTax" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				440219A21D3CD02B0056954E /* Debug */,
+				440219A31D3CD02B0056954E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		440219961D3CD02B0056954E /* PayLessTax.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				440219971D3CD02B0056954E /* PayLessTax.xcdatamodel */,
+			);
+			currentVersion = 440219971D3CD02B0056954E /* PayLessTax.xcdatamodel */;
+			path = PayLessTax.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 440219841D3CD02B0056954E /* Project object */;
+}
