@@ -7,7 +7,29 @@
 //
 
 import Foundation
+import FirebaseDatabase
 
 class User: NSObject {
-    <#code#>
+    
+    class func signIn (uid: String) {
+        NSUserDefaults.standardUserDefaults().setValue(uid, forKey: "uid")
+        
+    }
+    
+    class func isSignedIn () -> Bool {
+        if let _ = NSUserDefaults.standardUserDefaults().valueForKey("uid") as? String {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    class func currentUserId() -> String? {
+        return NSUserDefaults.standardUserDefaults().valueForKey("uid") as? String
+    }
+    
+    class func removeUserUid () {
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("uid")
+    }
+    
 }
