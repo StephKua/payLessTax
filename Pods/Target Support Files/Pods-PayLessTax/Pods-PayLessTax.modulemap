@@ -1,0 +1,6 @@
+framework module Pods_PayLessTax {
+  umbrella header "Pods-PayLessTax-umbrella.h"
+
+  export *
+  module * { export * }
+}

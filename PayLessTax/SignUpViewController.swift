@@ -13,6 +13,7 @@ class SignUpViewController: UIViewController {
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var incomeTaxNoTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
 
     
@@ -23,9 +24,17 @@ class SignUpViewController: UIViewController {
     @IBAction func onSignUpBtnClicked(sender: UIButton) {
         guard let username = usernameTextField.text, let email = emailTextField.text, let password = passwordTextField.text else { return }
         
+        
+        var incomeTaxNo = String()
+        if incomeTaxNoTextField.text != nil {
+            incomeTaxNo = incomeTaxNoTextField.text!
+        } else {
+            incomeTaxNo = "not entered"
+        }
+        
         FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { (user, error) in
             if let user = user {
-                let userDict = ["email": email, "username": username]
+                let userDict = ["email": email, "username": username, "incomeTaxNo": incomeTaxNo]
                 self.firebaseRef.child("users").child(user.uid).setValue(userDict)
                 NSUserDefaults.standardUserDefaults().setValue(user.uid, forKey: "uid")
                 
