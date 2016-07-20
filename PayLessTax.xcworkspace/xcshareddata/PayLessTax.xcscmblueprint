@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "DA61D11223A320BB269D21DBE0B7154ECD396E00",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "95ABE7831684F053772E0E3C92035F5D65EA8D51" : 0,
+    "DA61D11223A320BB269D21DBE0B7154ECD396E00" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "B6060AE8-3191-4E9E-8000-CF0BE05E0AA6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "95ABE7831684F053772E0E3C92035F5D65EA8D51" : "",
+    "DA61D11223A320BB269D21DBE0B7154ECD396E00" : "payLessTax\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "PayLessTax",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "PayLessTax.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/StephKua\/FakeStagram.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "95ABE7831684F053772E0E3C92035F5D65EA8D51"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:sheenamoh\/payLessTax.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DA61D11223A320BB269D21DBE0B7154ECD396E00"
+    }
+  ]
+}
