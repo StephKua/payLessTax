@@ -10,7 +10,7 @@ import Foundation
 import FirebaseDatabase
 
 class User: NSObject {
-    // wa very nice and awesome
+
     class func signIn (uid: String) {
         NSUserDefaults.standardUserDefaults().setValue(uid, forKey: "uid")
         

@@ -19,40 +19,49 @@ import Firebase
 
 class NewRebateViewController: UIViewController {
     
-    var selectedRebate: Rebate
+    var selectedRebate = String()
+    var lastSubtotal = Int()
     let firebaseRef = FIRDatabase.database().reference()
     
     @IBOutlet weak var dateTextField: UITextField!
-    
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var receiptTextField: UITextField!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = selectedRebate.rebateName
+        self.title = selectedRebate
         // Do any additional setup after loading the view.
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func onSaveBtnPressed(sender: UIBarButtonItem) {
+        self.addRebate()
     }
     
+    
     func addRebate() {
-        let rebateRef = firebaseRef.child("Rebate").child(User.useruid()).child(selectedRebate)
+        let receiptID = NSUUID().UUIDString
+        let rebateRef = firebaseRef.child("Rebate").child(User.currentUserId()!).child(selectedRebate)
         
-        guard let dateTextField != nil, let amountTextField != nil else {return }
+        guard dateTextField.text != nil && amountTextField.text != nil else {return }
         
-        let addedAmount = amountTextField.text as? Int
-        let subtotal = selectedRebate.rebatePoints + addedAmount
-        let rebateDict = ["subtotal": subtotal]
+        let addedAmount = Int(amountTextField.text!)
+        
+        rebateRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
+            if let rebate = Rebate(snapshot: snapshot) {
+                self.lastSubtotal = rebate.subTotal
+            }
+        })
+        
+        let subtotal = self.lastSubtotal + addedAmount!
+        let rebateDict = ["subtotal": subtotal, "receiptID": [receiptID:true]]
         rebateRef.setValue(rebateDict)
         
-        let receiptRef = firebaseRef.child("Receipt").childByAutoId()
-        let receiptDict = ["date": dateTextField.text, "amount": addedAmount, "receipt no": receiptTextField.text]
-        receiptRef.setValue(receiptDict)
+        let receiptRef = firebaseRef.child("Receipt").child(User.currentUserId()!)
         
+        let receiptDict = ["date": dateTextField.text!, "amount": addedAmount!, "receipt no": receiptTextField.text!]
+        receiptRef.child(receiptID).setValue(receiptDict)
         
     }
     
