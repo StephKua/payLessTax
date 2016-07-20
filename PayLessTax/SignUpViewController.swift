@@ -22,15 +22,9 @@ class SignUpViewController: UIViewController {
     
     
     @IBAction func onSignUpBtnClicked(sender: UIButton) {
-        guard let username = usernameTextField.text, let email = emailTextField.text, let password = passwordTextField.text else { return }
+        guard let username = usernameTextField.text, let email = emailTextField.text, let password = passwordTextField.text, let incomeTaxNo = incomeTaxNoTextField.text else { return }
         
-        
-        var incomeTaxNo = String()
-        if incomeTaxNoTextField.text != nil {
-            incomeTaxNo = incomeTaxNoTextField.text!
-        } else {
-            incomeTaxNo = "not entered"
-        }
+
         
         FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { (user, error) in
             if let user = user {

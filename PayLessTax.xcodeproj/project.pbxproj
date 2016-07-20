@@ -16,13 +16,14 @@
 		442093C61D3F1B1600261120 /* RebateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442093C51D3F1B1600261120 /* RebateTableViewCell.swift */; };
 		442093C81D3F1B2B00261120 /* Rebate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442093C71D3F1B2B00261120 /* Rebate.swift */; };
 		442093CC1D3F1CD600261120 /* RebateDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442093CB1D3F1CD600261120 /* RebateDetailViewController.swift */; };
+		442093EC1D3F70BF00261120 /* Receipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442093EB1D3F70BF00261120 /* Receipt.swift */; };
 		44840A981D3DD5B900071DAE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44840A971D3DD5B900071DAE /* GoogleService-Info.plist */; };
 		44840A9A1D3E223000071DAE /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840A991D3E223000071DAE /* SignUpViewController.swift */; };
 		44840A9D1D3E225300071DAE /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840A9C1D3E225300071DAE /* SummaryViewController.swift */; };
 		44840A9F1D3E225C00071DAE /* NewIncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840A9E1D3E225C00071DAE /* NewIncomeViewController.swift */; };
 		44840AA11D3E226A00071DAE /* NewRebateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840AA01D3E226A00071DAE /* NewRebateViewController.swift */; };
 		44840AA31D3E227800071DAE /* IncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840AA21D3E227800071DAE /* IncomeViewController.swift */; };
-		44840AA51D3E228A00071DAE /* RebateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840AA41D3E228A00071DAE /* RebateTableViewController.swift */; };
+		44840AA51D3E228A00071DAE /* RebateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840AA41D3E228A00071DAE /* RebateViewController.swift */; };
 		44840AA71D3E2B1000071DAE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840AA61D3E2B1000071DAE /* User.swift */; };
 		EDF16A84558D568672D20C20 /* Pods_PayLessTax.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBCC983C9428DE1F3AF825DD /* Pods_PayLessTax.framework */; };
 /* End PBXBuildFile section */
@@ -39,13 +40,14 @@
 		442093C51D3F1B1600261120 /* RebateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RebateTableViewCell.swift; sourceTree = "<group>"; };
 		442093C71D3F1B2B00261120 /* Rebate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rebate.swift; sourceTree = "<group>"; };
 		442093CB1D3F1CD600261120 /* RebateDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RebateDetailViewController.swift; sourceTree = "<group>"; };
+		442093EB1D3F70BF00261120 /* Receipt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Receipt.swift; sourceTree = "<group>"; };
 		44840A971D3DD5B900071DAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		44840A991D3E223000071DAE /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		44840A9C1D3E225300071DAE /* SummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
 		44840A9E1D3E225C00071DAE /* NewIncomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewIncomeViewController.swift; sourceTree = "<group>"; };
 		44840AA01D3E226A00071DAE /* NewRebateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRebateViewController.swift; sourceTree = "<group>"; };
 		44840AA21D3E227800071DAE /* IncomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomeViewController.swift; sourceTree = "<group>"; };
-		44840AA41D3E228A00071DAE /* RebateTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RebateTableViewController.swift; sourceTree = "<group>"; };
+		44840AA41D3E228A00071DAE /* RebateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RebateViewController.swift; sourceTree = "<group>"; };
 		44840AA61D3E2B1000071DAE /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		86FAC1704652C77E12145874 /* Pods-PayLessTax.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PayLessTax.release.xcconfig"; path = "Pods/Target Support Files/Pods-PayLessTax/Pods-PayLessTax.release.xcconfig"; sourceTree = "<group>"; };
 		93D76607A46217C14F72A9AE /* Pods-PayLessTax.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PayLessTax.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PayLessTax/Pods-PayLessTax.debug.xcconfig"; sourceTree = "<group>"; };
@@ -98,7 +100,6 @@
 				44840AA81D3E2B1500071DAE /* Models */,
 				440219931D3CD02B0056954E /* Main.storyboard */,
 				440219A41D3CD0750056954E /* Supporting Files */,
-				442093C51D3F1B1600261120 /* RebateTableViewCell.swift */,
 			);
 			path = PayLessTax;
 			sourceTree = "<group>";
@@ -121,7 +122,7 @@
 			children = (
 				44840A991D3E223000071DAE /* SignUpViewController.swift */,
 				440219911D3CD02B0056954E /* LoginViewController.swift */,
-				44840AA41D3E228A00071DAE /* RebateTableViewController.swift */,
+				44840AA41D3E228A00071DAE /* RebateViewController.swift */,
 				44840A9C1D3E225300071DAE /* SummaryViewController.swift */,
 				44840AA21D3E227800071DAE /* IncomeViewController.swift */,
 				44840A9E1D3E225C00071DAE /* NewIncomeViewController.swift */,
@@ -136,6 +137,8 @@
 			children = (
 				44840AA61D3E2B1000071DAE /* User.swift */,
 				442093C71D3F1B2B00261120 /* Rebate.swift */,
+				442093C51D3F1B1600261120 /* RebateTableViewCell.swift */,
+				442093EB1D3F70BF00261120 /* Receipt.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -272,8 +275,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44840AA51D3E228A00071DAE /* RebateTableViewController.swift in Sources */,
+				44840AA51D3E228A00071DAE /* RebateViewController.swift in Sources */,
 				442093CC1D3F1CD600261120 /* RebateDetailViewController.swift in Sources */,
+				442093EC1D3F70BF00261120 /* Receipt.swift in Sources */,
 				440219921D3CD02B0056954E /* LoginViewController.swift in Sources */,
 				440219981D3CD02B0056954E /* PayLessTax.xcdatamodeld in Sources */,
 				44840A9A1D3E223000071DAE /* SignUpViewController.swift in Sources */,

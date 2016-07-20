@@ -7,3 +7,18 @@
 //
 
 import Foundation
+import FirebaseDatabase
+
+class Receipt: NSObject {
+//    var receiptUID = String()
+//    
+//    init?(snapshot: FIRDataSnapshot) {
+//        guard let receiptDict = snapshot.value as? [String: AnyObject] else {
+//            return nil
+//        }
+//        
+//        if let receiptUID = receiptDict["]
+//        
+//    }
+    
+}

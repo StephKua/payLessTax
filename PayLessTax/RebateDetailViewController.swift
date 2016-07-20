@@ -23,6 +23,16 @@ class RebateDetailViewController: UIViewController, UITableViewDataSource, UITab
     }
     
 
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("RebateDetailCell")!
+        cell.textLabel?.text = ""
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
     /*
     // MARK: - Navigation
 

@@ -9,7 +9,7 @@
         <!--Get Rebates-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="HomeController" automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="RebateTableViewController" customModule="PayLessTax" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeController" automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="RebateViewController" customModule="PayLessTax" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="145" id="sgf-L2-nKS">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RebateCell" rowHeight="145" id="sgf-L2-nKS" customClass="RebateTableViewCell" customModule="PayLessTax" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="600" height="145"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sgf-L2-nKS" id="9EP-ds-Lzc">
@@ -59,7 +59,7 @@
                                                     <color key="textColor" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="donation" translatesAutoresizingMaskIntoConstraints="NO" id="t4j-BF-LEv">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t4j-BF-LEv">
                                                     <rect key="frame" x="10" y="5" width="150" height="130"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="130" id="cJx-cT-9zI"/>
@@ -85,7 +85,11 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="fe3-if-Ahe" kind="show" id="UxY-EX-ZEc"/>
+                                            <outlet property="maxPointLabel" destination="pIw-Px-6XG" id="3u6-wD-Fek"/>
+                                            <outlet property="pointLabel" destination="pA5-Ii-w4V" id="BVC-MS-re2"/>
+                                            <outlet property="rebateImageView" destination="t4j-BF-LEv" id="NpC-Aj-dCo"/>
+                                            <outlet property="rebateLabel" destination="Y5C-cJ-wtY" id="M4s-dA-rUA"/>
+                                            <segue destination="fe3-if-Ahe" kind="show" identifier="NewRebateSegue" id="UxY-EX-ZEc"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -107,6 +111,9 @@
                     <navigationItem key="navigationItem" title="Get Rebates" id="qix-1R-lHh">
                         <barButtonItem key="rightBarButtonItem" title="Logout" id="rXc-GK-Jyj"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="zhv-yD-OrV" id="bSS-ec-Ohm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -321,10 +328,15 @@
                     <navigationItem key="navigationItem" title="Category Name" id="dG8-T2-ho5">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="JR8-f5-Ag7">
                             <connections>
-                                <action selector="onSaveBtnPressed:" destination="fe3-if-Ahe" id="Stf-mr-m7a"/>
+                                <action selector="onSaveBtnPressed:" destination="fe3-if-Ahe" id="1SC-0S-mx6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="amountTextField" destination="PA7-v4-b7y" id="cw7-F3-JbC"/>
+                        <outlet property="dateTextField" destination="3CL-Kp-ZcS" id="MEY-1H-yw3"/>
+                        <outlet property="receiptTextField" destination="MJb-IT-4EP" id="g9n-DF-9Ua"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="27b-6d-8fk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -598,6 +610,7 @@
                                 <rect key="frame" x="258" y="413" width="84" height="30"/>
                                 <state key="normal" title="Sign up now"/>
                                 <connections>
+                                    <action selector="onSignUpBtnClicked:" destination="m4F-d9-elk" eventType="touchUpInside" id="quT-LW-YO9"/>
                                     <segue destination="63g-lw-gJN" kind="show" id="gzO-Pk-Bqc"/>
                                 </connections>
                             </button>
@@ -706,7 +719,6 @@
     </scenes>
     <resources>
         <image name="camera" width="30" height="30"/>
-        <image name="donation" width="206" height="173"/>
         <image name="receipt" width="180" height="179"/>
     </resources>
     <inferredMetricsTieBreakers>
