@@ -7,28 +7,55 @@
 //
 
 import UIKit
+import Firebase
 
 class IncomeViewController: UIViewController {
-
+    
+    let firebaseRef = FIRDatabase.database().reference()
+    var listOfIncome = [Income]()
+    var typesOfIncome = [String]()
+    
+    @IBOutlet weak var employmentLabel: UILabel!
+    @IBOutlet weak var rentalLabel: UILabel!
+    @IBOutlet weak var otherLabel: UILabel!
+    
+    @IBOutlet weak var totalLabel: UILabel!
+    var totalInc = Int()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.typesOfIncome = ["Employment", "Rental", "Others"]
+        self.getIncome()
 
-        // Do any additional setup after loading the view.
+        
     }
-
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.getIncome()
+    }
+    
     @IBAction func onEditBtnPressed(sender: UIBarButtonItem) {
     }
     
     
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func getIncome () {
+        let incomeRef = firebaseRef.child("income").child(User.currentUserId()!)
+        incomeRef.observeEventType(.Value, withBlock: { (snapshot) in
+            if let income = Income(snapshot: snapshot) {
+                self.employmentLabel.text = "RM \(income.employmentSubTotal)"
+                self.rentalLabel.text = "RM \(income.rentalSubTotal)"
+                self.otherLabel.text = "RM \(income.othersSubTotal)"
+                
+                self.totalInc = income.employmentSubTotal + income.rentalSubTotal + income.othersSubTotal
+                self.totalLabel.text = "RM \(self.totalInc)"
+                
+                
+            }
+        })
     }
-    */
 
+    
+    
 }

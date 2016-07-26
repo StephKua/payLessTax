@@ -13,9 +13,15 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+ 
+    @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.hideKeyboardWhenTapped()
+        
+//        self.imageView.image = UIImage(named: "blue")        
         
     }
     @IBAction func onLoginBtnClicked(sender: UIButton) {
@@ -24,6 +30,7 @@ class LoginViewController: UIViewController {
         FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (user, error) in
             if let user = user {
                 User.signIn(user.uid)
+                self.performSegueWithIdentifier("LoginSegue", sender: sender)
                 
             } else {
                 let controller = UIAlertController(title: "Error", message: (error?.localizedDescription), preferredStyle: .Alert)

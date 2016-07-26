@@ -37,43 +37,39 @@ class NewRebateViewController: UIViewController {
     
     @IBAction func onSaveBtnPressed(sender: UIBarButtonItem) {
         self.addRebate()
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     
     func addRebate() {
+        guard let date = dateTextField.text, let receiptNo = receiptTextField.text, let amount = amountTextField.text else { return }
+        
+        var amountAdded = Int()
+        if amount != "" {
+            amountAdded = Int(amount)!
+        }
+        
         let receiptID = NSUUID().UUIDString
-        let rebateRef = firebaseRef.child("Rebate").child(User.currentUserId()!).child(selectedRebate)
         
-        guard dateTextField.text != nil && amountTextField.text != nil else {return }
+        let receiptRef = firebaseRef.child("receipt").child(receiptID)
+        let receiptDict = ["date": date, "receipt no": receiptNo, "amount": amountAdded, "category": selectedRebate]
+        receiptRef.setValue(receiptDict)
         
-        let addedAmount = Int(amountTextField.text!)
+        
+        let rebateRef = firebaseRef.child("rebate").child(User.currentUserId()!).child(selectedRebate)
+        rebateRef.child("receiptID").child(receiptID).setValue(true)
         
         rebateRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
-            if let rebate = Rebate(snapshot: snapshot) {
-                self.lastSubtotal = rebate.subTotal
+            if var rebateTypeDict = snapshot.value as? [String: AnyObject] {
+                if let oldValue = rebateTypeDict["subtotal"] as? Int {
+                    rebateTypeDict["subtotal"] = oldValue + amountAdded
+                } else {
+                    rebateTypeDict["subtotal"] = amountAdded
+                }
+                rebateRef.updateChildValues(rebateTypeDict)
             }
-        })
-        
-        let subtotal = self.lastSubtotal + addedAmount!
-        let rebateDict = ["subtotal": subtotal, "receiptID": [receiptID:true]]
-        rebateRef.setValue(rebateDict)
-        
-        let receiptRef = firebaseRef.child("Receipt").child(User.currentUserId()!)
-        
-        let receiptDict = ["date": dateTextField.text!, "amount": addedAmount!, "receipt no": receiptTextField.text!]
-        receiptRef.child(receiptID).setValue(receiptDict)
-        
+        })        
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 
