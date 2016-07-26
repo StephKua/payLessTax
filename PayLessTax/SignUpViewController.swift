@@ -31,8 +31,11 @@ class SignUpViewController: UIViewController {
                 let userDict = ["email": email, "username": username, "incomeTaxNo": incomeTaxNo]
                 self.firebaseRef.child("users").child(user.uid).setValue(userDict)
                 NSUserDefaults.standardUserDefaults().setValue(user.uid, forKey: "uid")
-                
                 User.signIn(user.uid)
+                self.performSegueWithIdentifier("LoginSegue", sender: sender)
+                
+                let incomeDict = ["receiptID": [:], "subtotal": 0]
+                self.firebaseRef.child("testing").child(user.uid).setValue(incomeDict)
                 
             } else {
                 let controller = UIAlertController(title: "Error", message: (error?.localizedDescription), preferredStyle: .Alert)
@@ -49,8 +52,21 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.hideKeyboardWhenTapped()
+        
         // Do any additional setup after loading the view.
     }
 
    
+}
+
+extension UIViewController {
+    func hideKeyboardWhenTapped() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard()  {
+        view.endEditing(true)
+    }
 }
