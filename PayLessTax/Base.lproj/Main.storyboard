@@ -393,6 +393,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="480" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="fe3-if-Ahe" id="d6l-g5-m9e"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Receipt Number*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MJb-IT-4EP">
                                         <rect key="frame" x="0.0" y="45" width="480" height="30"/>
@@ -683,11 +686,17 @@
                                         <rect key="frame" x="0.0" y="0.0" width="480" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="SPF-Vw-MsA" id="drn-Mw-SvS"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type of Income*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GgC-Gh-XkQ">
                                         <rect key="frame" x="0.0" y="40" width="480" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="SPF-Vw-MsA" id="xQ5-Nh-T7U"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Reference Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9gZ-rK-4kz">
                                         <rect key="frame" x="0.0" y="80" width="480" height="30"/>
@@ -718,51 +727,19 @@
                                 <rect key="frame" x="440" y="308" width="30" height="30"/>
                                 <state key="normal" image="camera"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Cw-DH-LtA">
-                                <rect key="frame" x="528" y="158" width="22" height="22"/>
-                                <connections>
-                                    <action selector="onAddBtnPressed:" destination="SPF-Vw-MsA" eventType="touchUpInside" id="mCa-tL-zzg"/>
-                                </connections>
-                            </button>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hmo-1d-jr5">
-                                <rect key="frame" x="40" y="184" width="510" height="110"/>
-                                <color key="backgroundColor" white="0.83859409959999998" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="110" id="l9v-IB-lDU"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="dataSource" destination="SPF-Vw-MsA" id="Q3W-Eg-zuU"/>
-                                    <outlet property="delegate" destination="SPF-Vw-MsA" id="uW6-gO-Vuh"/>
-                                </connections>
-                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="hmo-1d-jr5" firstAttribute="trailing" secondItem="GgC-Gh-XkQ" secondAttribute="trailing" id="7MC-9t-5Zw"/>
-                            <constraint firstItem="3Cw-DH-LtA" firstAttribute="leading" secondItem="GgC-Gh-XkQ" secondAttribute="trailing" constant="8" id="7Om-44-cmy"/>
                             <constraint firstItem="HaV-jy-xjM" firstAttribute="centerX" secondItem="lpS-np-Kig" secondAttribute="centerX" id="8wB-pO-pBz"/>
-                            <constraint firstItem="hmo-1d-jr5" firstAttribute="trailing" secondItem="3Cw-DH-LtA" secondAttribute="trailing" id="9ZE-8B-lSs"/>
                             <constraint firstItem="4r9-2I-0Yr" firstAttribute="top" secondItem="JRk-Og-2is" secondAttribute="bottom" constant="50" id="G33-jW-rNt"/>
                             <constraint firstItem="1KO-tj-kIj" firstAttribute="centerY" secondItem="Ua2-aS-t2w" secondAttribute="centerY" id="IPP-1y-Y13"/>
                             <constraint firstItem="Ua2-aS-t2w" firstAttribute="trailing" secondItem="HaV-jy-xjM" secondAttribute="trailing" id="Iix-xA-Soa"/>
                             <constraint firstItem="1KO-tj-kIj" firstAttribute="leading" secondItem="Ua2-aS-t2w" secondAttribute="trailing" constant="15" id="L8v-o3-Cm9"/>
-                            <constraint firstItem="hmo-1d-jr5" firstAttribute="leading" secondItem="GgC-Gh-XkQ" secondAttribute="leading" id="Ods-J9-oZ0"/>
                             <constraint firstItem="Ua2-aS-t2w" firstAttribute="top" secondItem="4r9-2I-0Yr" secondAttribute="bottom" constant="50" id="UBT-CT-2d1"/>
-                            <constraint firstItem="hmo-1d-jr5" firstAttribute="top" secondItem="GgC-Gh-XkQ" secondAttribute="bottom" id="eU1-Rj-kc1"/>
                             <constraint firstItem="4r9-2I-0Yr" firstAttribute="leading" secondItem="lpS-np-Kig" secondAttribute="leading" constant="40" id="fRk-hs-jV9"/>
                             <constraint firstItem="HaV-jy-xjM" firstAttribute="top" secondItem="Ua2-aS-t2w" secondAttribute="bottom" constant="8" id="mT2-9V-D8w"/>
-                            <constraint firstItem="hmo-1d-jr5" firstAttribute="bottom" secondItem="GgC-Gh-XkQ" secondAttribute="top" id="ooa-ib-vUh"/>
-                            <constraint firstItem="hmo-1d-jr5" firstAttribute="trailing" secondItem="3Cw-DH-LtA" secondAttribute="trailing" id="pZn-ZZ-swx"/>
-                            <constraint firstItem="3Cw-DH-LtA" firstAttribute="centerY" secondItem="GgC-Gh-XkQ" secondAttribute="centerY" id="uFa-cK-5ai"/>
                             <constraint firstAttribute="trailing" secondItem="4r9-2I-0Yr" secondAttribute="trailing" constant="80" id="xYI-xT-c9k"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="7MC-9t-5Zw"/>
-                                <exclude reference="ooa-ib-vUh"/>
-                                <exclude reference="pZn-ZZ-swx"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="New Income" id="koy-sV-nbb">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="xGv-X2-RnH">
@@ -774,7 +751,6 @@
                     <connections>
                         <outlet property="amountTextField" destination="9ra-fI-7vG" id="gPq-Vf-EkQ"/>
                         <outlet property="dateTextField" destination="qti-c5-guf" id="cji-EV-Gnb"/>
-                        <outlet property="incomePickerView" destination="hmo-1d-jr5" id="2Qh-0Q-Www"/>
                         <outlet property="incomeTextField" destination="GgC-Gh-XkQ" id="go3-Hn-IbD"/>
                         <outlet property="refTextField" destination="9gZ-rK-4kz" id="NuI-ys-wbe"/>
                     </connections>
@@ -923,11 +899,17 @@
                                                 <rect key="frame" x="0.0" y="40" width="460" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="4f2-3Y-s1f" id="UWH-GT-MGP"/>
+                                                </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Reference Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zly-vk-W8m">
                                                 <rect key="frame" x="0.0" y="80" width="460" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="4f2-3Y-s1f" id="wWV-Mo-24X"/>
+                                                </connections>
                                             </textField>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="P1c-wn-zyU">
                                                 <rect key="frame" x="0.0" y="120" width="460" height="30"/>
@@ -942,6 +924,9 @@
                                                         <rect key="frame" x="25" y="0.0" width="435" height="30"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="4f2-3Y-s1f" id="agr-xI-wsk"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
