@@ -30,6 +30,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("registerForKeyboardNotifications:"), name:UIKeyboardWillShowNotification, object: self.view.window)
+        
         self.registerForKeyboardNotifications()
     }
     

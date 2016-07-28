@@ -19,6 +19,9 @@ class EditIncViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var editBtn: UIButton!
     
+    var strDate: String = ""
+    var datePicker = UIDatePicker()
+    
     var edit = false
     var firebaseRef = FIRDatabase.database().reference()
     
@@ -57,34 +60,80 @@ class EditIncViewController: UIViewController, UITextFieldDelegate {
     
     
     func updateIncome() {
-        guard let date = dateTextField?.text, let incomeType = incomeTypeTextField.text, let ref = refTextField.text, let amount = amountTextField.text, let receiptID = incReceipt?.key else { return }
+        guard let date = dateTextField?.text, let incomeType = incomeTypeTextField.text, let ref = refTextField.text, let amountString = amountTextField.text, let amount = Int(amountString), let receiptID = incReceipt?.key else { return }
         
         let receiptRef = firebaseRef.child("receipt").child(receiptID)
-        let receiptDict = ["date": date, "reference no": ref, "amount": amount, "category": incomeType]
-        receiptRef.setValue(receiptDict)
+        let receiptDict: [String:AnyObject] = ["date": date, "reference no": ref, "amount": amount, "category": incomeType]
+        receiptRef.updateChildValues(receiptDict)
         print(receiptDict)
+        
+        
+        let amountDiff = amount - (incReceipt?.amount)!
+        
+        let incomeRef = firebaseRef.child("income").child(User.currentUserId()!).child(incomeType)
+        incomeRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
+            if var incomeTypeDict = snapshot.value as? [String: AnyObject] {
+                if let oldValue = incomeTypeDict["subtotal"] as? Int {
+                    incomeTypeDict["subtotal"] = oldValue + amountDiff
+                } else {
+                    incomeTypeDict["subtotal"] = amountDiff
+                }
+                incomeRef.updateChildValues(incomeTypeDict)
+            }
+        })
+    }
+        
+    func textFieldDidBeginEditing(textField: UITextField) {
+        let inputView = UIView(frame: CGRectMake(0, 200, view.frame.width, 200))
+        inputView.backgroundColor = UIColor.whiteColor()
+        
+        datePicker.datePickerMode = UIDatePickerMode.Date
+        inputView.addSubview(datePicker)
+        
+        datePicker.addTarget(self, action: #selector(NewRebateViewController.donePicker), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        let toolbar = UIToolbar()
+        toolbar.barStyle = UIBarStyle.Default
+        toolbar.translucent = true
+        toolbar.tintColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
+        toolbar.sizeToFit()
+        
+        let doneBarBtn = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: #selector(NewRebateViewController.donePicker))
+        let spaceBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let cancelBarBtn = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NewRebateViewController.cancelPicker))
+        
+        toolbar.setItems([cancelBarBtn, spaceBarBtn, doneBarBtn], animated: false)
+        toolbar.userInteractionEnabled = true
+        
+        dateTextField.inputView = inputView
+        dateTextField.inputAccessoryView = toolbar
         
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
-        textField.layer.borderColor = UIColor.blueColor().CGColor
-        print("editing")
+    func donePicker() {
+        dateTextField.resignFirstResponder()
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        strDate = dateFormatter.stringFromDate(datePicker.date)
+        
+        self.dateTextField.text = strDate
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
-        textField.layer.borderColor = UIColor.clearColor().CGColor
-        print("stopped editing")
-        self.editBtn.setTitle("hello", forState: UIControlState.Normal)
+    func cancelPicker() {
+        dateTextField.resignFirstResponder()
     }
+    
+
     
     func enableEdit () {
         self.dateTextField.userInteractionEnabled = true
-        self.incomeTypeTextField.userInteractionEnabled = true
+//        self.incomeTypeTextField.userInteractionEnabled = true
         self.refTextField.userInteractionEnabled = true
         self.amountTextField.userInteractionEnabled = true
         
         self.dateTextField.backgroundColor = UIColor.whiteColor()
-        self.incomeTypeTextField.backgroundColor = UIColor.whiteColor()
+//        self.incomeTypeTextField.backgroundColor = UIColor.whiteColor()
         self.refTextField.backgroundColor = UIColor.whiteColor()
         self.amountTextField.backgroundColor = UIColor.whiteColor()
 

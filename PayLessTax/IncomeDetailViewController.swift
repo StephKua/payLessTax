@@ -27,8 +27,13 @@ class IncomeDetailViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.getIncome()
+//        self.calcTotal()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        self.calcTotal()
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -37,15 +42,15 @@ class IncomeDetailViewController: UIViewController, UITableViewDelegate, UITable
         switch indexPath.section {
         case 0:
             let selectedReceipt = self.employmentInc[indexPath.row]
-            cell.textLabel?.text = "Ref. No: \(selectedReceipt.refNo) (Date: \(selectedReceipt.date))"
+            cell.textLabel?.text = "Ref. No: \(selectedReceipt.refNo)"
             cell.detailTextLabel?.text = "RM \(selectedReceipt.amount)"
         case 1:
             let selectedReceipt = self.rentalInc[indexPath.row]
-            cell.textLabel?.text = "Ref. No: \(selectedReceipt.refNo) (Date: \(selectedReceipt.date))"
+            cell.textLabel?.text = "Ref. No: \(selectedReceipt.refNo)"
             cell.detailTextLabel?.text = "RM \(selectedReceipt.amount)"
         case 2:
             let selectedReceipt = self.otherInc[indexPath.row]
-            cell.textLabel?.text = "Ref. No: \(selectedReceipt.refNo) (Date: \(selectedReceipt.date))"
+            cell.textLabel?.text = "Ref. No: \(selectedReceipt.refNo)"
             cell.detailTextLabel?.text = "RM \(selectedReceipt.amount)"
         default:
             cell.textLabel?.text = "No income"
@@ -124,7 +129,6 @@ class IncomeDetailViewController: UIViewController, UITableViewDelegate, UITable
         default:
             break
         }
-        
     }
     
     
@@ -141,26 +145,39 @@ class IncomeDetailViewController: UIViewController, UITableViewDelegate, UITable
                         let receiptRef = self.firebaseRef.child("receipt").child(key)
                         receiptRef.observeEventType(.Value, withBlock: { (receiptSnapshot) in
                             if let receipt = Receipt(snapshot: receiptSnapshot) {
-                                self.allIncome.append(receipt)
-                            }
-                            
-                            for receipt in self.allIncome {
-                                self.allAmounts.append(receipt.amount)
-                                self.totalLabel.text = "RM \(self.allAmounts.reduce(0, combine: +))"
-                                
                                 switch receipt.category {
                                 case self.incomeType[0]:
-                                    self.employmentInc.removeAll()
-                                    self.employmentInc.append(receipt)
+                                    let previousReceipts = self.employmentInc.filter({ $0.key == receipt.key})
+                                    if let previousReceipt = previousReceipts.first {
+                                        if let index = self.employmentInc.indexOf(previousReceipt) {
+                                            self.employmentInc.removeAtIndex(index)
+                                            self.employmentInc.insert(receipt, atIndex: index)
+                                        }
+                                    } else {
+                                        self.employmentInc.append(receipt)
+                                    }
                                     
                                 case self.incomeType[1]:
-                                    self.rentalInc.removeAll()
-                                    self.rentalInc.append(receipt)
+                                    let previousReceipts = self.rentalInc.filter({ $0.key == receipt.key})
+                                    if let previousReceipt = previousReceipts.first {
+                                        if let index = self.rentalInc.indexOf(previousReceipt) {
+                                            self.rentalInc.removeAtIndex(index)
+                                            self.rentalInc.insert(receipt, atIndex: index)
+                                        }
+                                    } else {
+                                        self.rentalInc.append(receipt)
+                                    }
                                     
                                 case self.incomeType[2]:
-                                    self.otherInc.removeAll()
-                                    self.otherInc.append(receipt)
-                                    
+                                    let previousReceipts = self.otherInc.filter({ $0.key == receipt.key})
+                                    if let previousReceipt = previousReceipts.first {
+                                        if let index = self.otherInc.indexOf(previousReceipt) {
+                                            self.otherInc.removeAtIndex(index)
+                                            self.otherInc.insert(receipt, atIndex: index)
+                                        }
+                                    } else {
+                                        self.otherInc.append(receipt)
+                                    }
                                 default:
                                     break
                                 }
@@ -171,7 +188,24 @@ class IncomeDetailViewController: UIViewController, UITableViewDelegate, UITable
                 }
             })
         }
-        
     }
+    
+    func calcTotal() {
+        for category in incomeType {
+            let rebateRef = firebaseRef.child("income").child(User.currentUserId()!).child(category)
+            
+            rebateRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+                if var rebateTypeDict = snapshot.value as? [String: AnyObject] {
+                    if let categoryAmount = rebateTypeDict["subtotal"] as? Int {
+                        self.allAmounts.removeAll()
+                        self.allAmounts.append(categoryAmount)
+                    }
+                    let total = self.allAmounts.reduce(0, combine: +)
+                    self.totalLabel.text = "RM \(total)"
+                }
+            })
+        }
+    }
+
     
 }
