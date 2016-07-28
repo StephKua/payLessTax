@@ -15,6 +15,7 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
     var firebaseRef = FIRDatabase.database().reference()
     var income: Income?
     var rebate: Rebate?
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     @IBOutlet weak var incomeLabel: UILabel!
     @IBOutlet weak var deductionsLabel: UILabel!

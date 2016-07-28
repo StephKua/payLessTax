@@ -97,7 +97,6 @@ class IncomeDetailViewController: UIViewController, UITableViewDelegate, UITable
         popover?.permittedArrowDirections = UIPopoverArrowDirection.Up
         popover?.delegate = self
         popover?.sourceView = self.tableView
-        //        popover?.sourceRect = CGRect(
         
         self.presentViewController(navController, animated: true, completion: nil)
         self.performSegueWithIdentifier("EditIncSegue", sender: self)

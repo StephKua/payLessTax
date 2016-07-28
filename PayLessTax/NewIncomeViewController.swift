@@ -14,6 +14,8 @@ class NewIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     let firebaseRef = FIRDatabase.database().reference()
     var lastSubtotal = Int()
     var strDate: String = ""
+    var datePicker = UIDatePicker()
+    
     var activeTextField: UITextField?
     
     //    @IBOutlet weak var incomePickerView: UIPickerView!
@@ -23,12 +25,14 @@ class NewIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     @IBOutlet weak var incomeTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
     
+    var incomePickerView = UIPickerView()
     let pickerData = ["Employment", "Rental", "Others"]
     var selectedData: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        datePicker = UIDatePicker(frame: CGRectMake(10, 10, view.frame.width, 200))
+        incomePickerView = UIPickerView(frame: CGRectMake(10, 10, view.frame.width, 200))
     }
     
     
@@ -74,11 +78,9 @@ class NewIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         let inputView = UIView(frame: CGRectMake(0, 200, view.frame.width, 200))
         inputView.backgroundColor = UIColor.whiteColor()
         
-        let datePicker = UIDatePicker(frame: CGRectMake(10, 10, view.frame.width, 200))
         datePicker.datePickerMode = UIDatePickerMode.Date
         datePicker.addTarget(self, action: #selector(NewRebateViewController.donePicker), forControlEvents: UIControlEvents.TouchUpInside)
         
-        let incomePickerView = UIPickerView(frame: CGRectMake(10, 10, view.frame.width, 200))
         incomePickerView.backgroundColor = UIColor.clearColor()
         incomePickerView.dataSource = self
         incomePickerView.delegate = self
@@ -103,7 +105,6 @@ class NewIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         switch activeTextField! {
         case dateTextField:
             inputView.addSubview(datePicker)
-            handleDatePicker(datePicker)
         case incomeTextField:
             inputView.addSubview(incomePickerView)
         default:
@@ -112,19 +113,17 @@ class NewIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
     }
     
-    func handleDatePicker(sender: UIDatePicker) {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        strDate = dateFormatter.stringFromDate(sender.date)
-        
-    }
     
     func donePicker() {
         activeTextField!.resignFirstResponder()
         
         switch activeTextField! {
         case dateTextField:
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yyyy"
+            strDate = dateFormatter.stringFromDate(datePicker.date)
             activeTextField?.text = strDate
+            
         case incomeTextField:
             activeTextField?.text = selectedData
         default:

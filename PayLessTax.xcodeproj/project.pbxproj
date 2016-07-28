@@ -21,7 +21,6 @@
 		442093F41D40861500261120 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 442093F31D40861500261120 /* .gitignore */; };
 		442093F61D40B56A00261120 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442093F51D40B56A00261120 /* Section.swift */; };
 		4438CAEE1D41F3D300168EB6 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4438CAED1D41F3D300168EB6 /* Image.swift */; };
-		44840A981D3DD5B900071DAE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44840A971D3DD5B900071DAE /* GoogleService-Info.plist */; };
 		44840A9A1D3E223000071DAE /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840A991D3E223000071DAE /* SignUpViewController.swift */; };
 		44840A9D1D3E225300071DAE /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840A9C1D3E225300071DAE /* SummaryViewController.swift */; };
 		44840A9F1D3E225C00071DAE /* NewIncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840A9E1D3E225C00071DAE /* NewIncomeViewController.swift */; };
@@ -32,6 +31,7 @@
 		44B340751D460F47005C31DC /* IncomeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B340741D460F47005C31DC /* IncomeDetailViewController.swift */; };
 		44B340771D461CF2005C31DC /* EditIncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B340761D461CF2005C31DC /* EditIncViewController.swift */; };
 		44B340791D475CD9005C31DC /* EditRebateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B340781D475CD9005C31DC /* EditRebateViewController.swift */; };
+		44B3407B1D48949E005C31DC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44B3407A1D48949E005C31DC /* GoogleService-Info.plist */; };
 		EDF16A84558D568672D20C20 /* Pods_PayLessTax.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBCC983C9428DE1F3AF825DD /* Pods_PayLessTax.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,7 +52,6 @@
 		442093F31D40861500261120 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		442093F51D40B56A00261120 /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		4438CAED1D41F3D300168EB6 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
-		44840A971D3DD5B900071DAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		44840A991D3E223000071DAE /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		44840A9C1D3E225300071DAE /* SummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
 		44840A9E1D3E225C00071DAE /* NewIncomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewIncomeViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +62,7 @@
 		44B340741D460F47005C31DC /* IncomeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomeDetailViewController.swift; sourceTree = "<group>"; };
 		44B340761D461CF2005C31DC /* EditIncViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditIncViewController.swift; sourceTree = "<group>"; };
 		44B340781D475CD9005C31DC /* EditRebateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditRebateViewController.swift; sourceTree = "<group>"; };
+		44B3407A1D48949E005C31DC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		86FAC1704652C77E12145874 /* Pods-PayLessTax.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PayLessTax.release.xcconfig"; path = "Pods/Target Support Files/Pods-PayLessTax/Pods-PayLessTax.release.xcconfig"; sourceTree = "<group>"; };
 		93D76607A46217C14F72A9AE /* Pods-PayLessTax.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PayLessTax.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PayLessTax/Pods-PayLessTax.debug.xcconfig"; sourceTree = "<group>"; };
 		BBCC983C9428DE1F3AF825DD /* Pods_PayLessTax.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PayLessTax.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,8 +122,8 @@
 		440219A41D3CD0750056954E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				44840A971D3DD5B900071DAE /* GoogleService-Info.plist */,
 				4402198F1D3CD02B0056954E /* AppDelegate.swift */,
+				44B3407A1D48949E005C31DC /* GoogleService-Info.plist */,
 				440219991D3CD02B0056954E /* Assets.xcassets */,
 				4402199B1D3CD02B0056954E /* LaunchScreen.storyboard */,
 				4402199E1D3CD02B0056954E /* Info.plist */,
@@ -207,7 +207,15 @@
 				TargetAttributes = {
 					4402198B1D3CD02B0056954E = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 6583AHL4V5;
+						DevelopmentTeam = 7QD8QWTY7W;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -236,7 +244,7 @@
 			files = (
 				442093F41D40861500261120 /* .gitignore in Resources */,
 				4402199D1D3CD02B0056954E /* LaunchScreen.storyboard in Resources */,
-				44840A981D3DD5B900071DAE /* GoogleService-Info.plist in Resources */,
+				44B3407B1D48949E005C31DC /* GoogleService-Info.plist in Resources */,
 				4402199A1D3CD02B0056954E /* Assets.xcassets in Resources */,
 				440219951D3CD02B0056954E /* Main.storyboard in Resources */,
 			);
@@ -433,10 +441,12 @@
 			baseConfigurationReference = 93D76607A46217C14F72A9AE /* Pods-PayLessTax.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = PayLessTax/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.smohcodes.PayLessTax;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smohcodes.PayLessTax2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PayLessTax-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -445,10 +455,12 @@
 			baseConfigurationReference = 86FAC1704652C77E12145874 /* Pods-PayLessTax.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = PayLessTax/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.smohcodes.PayLessTax;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smohcodes.PayLessTax2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PayLessTax-Bridging-Header.h";
 			};
 			name = Release;
 		};

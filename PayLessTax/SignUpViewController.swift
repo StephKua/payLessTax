@@ -16,7 +16,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var incomeTaxNoTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
 
-    //add iboutlet fr scroll view
+    @IBOutlet weak var scrollView: UIScrollView!
     var activeTextField: UITextField?
     
     var firebaseRef = FIRDatabase.database().reference()
@@ -30,7 +30,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-//        self.registerForKeyboardNotifications()
+        self.registerForKeyboardNotifications()
     }
     
     @IBAction func onSignUpBtnClicked(sender: UIButton) {
@@ -59,8 +59,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         })
     }
     
-    /*
-    
+
     func registerForKeyboardNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWasShown), name: UIKeyboardWillShowNotification, object: nil)
     }
@@ -73,19 +72,17 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         scrollView.contentInset = contentInsets //need too add iboutlet
         scrollView.scrollIndicatorInsets = contentInsets
         
-        var varrect = self.view.frame //getting frame of whole view
+        var rect = self.view.frame //getting frame of whole view
         rect.size.height -= kbSize!.height
         
         if let activeField = activeTextField {
-            if CGRectContainsPoint(rect, activeTextField?.frame.origin) {
+            if CGRectContainsPoint(rect, activeTextField!.frame.origin) {
                 self.scrollView.scrollRectToVisible(activeField.frame, animated: true)
 
             }
         }
     }
- 
- */
-    
+
     
     func textFieldDidBeginEditing(textField: UITextField) {
         activeTextField = textField
@@ -94,13 +91,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(textField: UITextField) {
         activeTextField = nil
     }
-
     
 }
 
 extension UIViewController {
     func hideKeyboardWhenTapped() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
     

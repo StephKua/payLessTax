@@ -27,10 +27,8 @@ class RebateDetailViewController: UIViewController, UITableViewDataSource, UITab
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.getReceipts()
     }
-    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("RebateDetailCell")!
@@ -78,7 +76,9 @@ class RebateDetailViewController: UIViewController, UITableViewDataSource, UITab
         
         switch section {
         case 0:
+            print("bookcount row count: \(self.bookReceipt.count)")
             return self.bookReceipt.count
+            
         case 1:
             return self.donationReceipt.count
         case 2:
@@ -101,7 +101,6 @@ class RebateDetailViewController: UIViewController, UITableViewDataSource, UITab
         popover?.permittedArrowDirections = UIPopoverArrowDirection.Up
         popover?.delegate = self
         popover?.sourceView = self.tableView
-        //        popover?.sourceRect = CGRect(
         
         self.presentViewController(navController, animated: true, completion: nil)
         self.performSegueWithIdentifier("EditRebSegue", sender: self)
@@ -111,20 +110,20 @@ class RebateDetailViewController: UIViewController, UITableViewDataSource, UITab
             let selectedReceipt: Receipt?
             selectedReceipt = self.bookReceipt[indexPath.row]
             vc.rebReceipt = selectedReceipt
-            print(selectedReceipt!.amount)
-            print("receipt \(selectedReceipt)")
+//            print(selectedReceipt!.amount)
+//            print("receipt \(selectedReceipt)")
             
         case 1:
             let selectedReceipt: Receipt?
             selectedReceipt = self.donationReceipt[indexPath.row]
             vc.rebReceipt = selectedReceipt
-            print(selectedReceipt!.amount)
+//            print(selectedReceipt!.amount)
             
         case 2:
             let selectedReceipt: Receipt?
             selectedReceipt = self.sportReceipt[indexPath.row]
             vc.rebReceipt = selectedReceipt
-            print(selectedReceipt!.amount)
+//            print(selectedReceipt!.amount)
             
         default:
             break
@@ -137,7 +136,6 @@ class RebateDetailViewController: UIViewController, UITableViewDataSource, UITab
     
     
     func getReceipts() {
-        
         for category in rebateType {
             let rebateRef = firebaseRef.child("rebate").child(User.currentUserId()!).child(category).child("receiptID")
             rebateRef.observeEventType(.Value, withBlock: { (snapshot) in
@@ -147,25 +145,29 @@ class RebateDetailViewController: UIViewController, UITableViewDataSource, UITab
                         receiptRef.observeEventType(.Value, withBlock: { (receiptSnapshot) in
                             if let receipt = Receipt(snapshot: receiptSnapshot) {
                                 print("amount: \(receipt.amount)")
+                                self.allReceipts.removeAll()
                                 self.allReceipts.append(receipt)
                                 
                                 print("receipt: \(self.allReceipts)")
+                                print("receipt count \(self.allReceipts.count)")
                             }
                             
                             for receipt in self.allReceipts {
-                                self.allAmounts.append(receipt.amount)
-                                self.totalLabel.text = "RM \(self.allAmounts.reduce(0, combine: +))"
+//                                self.allAmounts.append(receipt.amount)
+//                                self.totalLabel.text = "RM \(self.allAmounts.reduce(0, combine: +))"
                                 
                                 switch receipt.category {
                                 case self.rebateType[0]:
-                                    self.bookReceipt.removeAll()
+//                                    self.bookReceipt.removeAll()
                                     self.bookReceipt.append(receipt)
-                                case self.rebateType[0]:
-                                    self.donationReceipt.removeAll()
+                                    print("bookcount: \(self.bookReceipt.count)")
+                                case self.rebateType[1]:
+//                                    self.donationReceipt.removeAll()
                                     self.donationReceipt.append(receipt)
-                                case self.rebateType[0]:
-                                    self.sportReceipt.removeAll()
+                                case self.rebateType[2]:
+//                                    self.sportReceipt.removeAll()
                                     self.sportReceipt.append(receipt)
+                                    print("sportscount: \(self.sportReceipt.count)")
                                 default:
                                     break
                                 }

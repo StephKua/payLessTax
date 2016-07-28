@@ -23,6 +23,7 @@ class NewRebateViewController: UIViewController, UITextFieldDelegate {
     var lastSubtotal = Int()
     let firebaseRef = FIRDatabase.database().reference()
     var strDate: String = ""
+    var datePicker = UIDatePicker()
     
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
@@ -33,12 +34,7 @@ class NewRebateViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.title = selectedRebate
         
-    }
-    
-    func handleDatePicker(sender: UIDatePicker) {
-        var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        strDate = dateFormatter.stringFromDate(sender.date)
+        datePicker = UIDatePicker(frame: CGRectMake(10, 10, view.frame.width, 200))
         
     }
     
@@ -46,7 +42,6 @@ class NewRebateViewController: UIViewController, UITextFieldDelegate {
         let inputView = UIView(frame: CGRectMake(0, 200, view.frame.width, 200))
         inputView.backgroundColor = UIColor.whiteColor()
         
-        let datePicker = UIDatePicker(frame: CGRectMake(10, 10, view.frame.width, 200))
         datePicker.datePickerMode = UIDatePickerMode.Date
         inputView.addSubview(datePicker)
         
@@ -65,15 +60,18 @@ class NewRebateViewController: UIViewController, UITextFieldDelegate {
         toolbar.setItems([cancelBarBtn, spaceBarBtn, doneBarBtn], animated: false)
         toolbar.userInteractionEnabled = true
         
-        handleDatePicker(datePicker)
         dateTextField.inputView = inputView
         dateTextField.inputAccessoryView = toolbar
-        
         
     }
     
     func donePicker() {
         dateTextField.resignFirstResponder()
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        strDate = dateFormatter.stringFromDate(datePicker.date)
+        
         self.dateTextField.text = strDate
     }
     

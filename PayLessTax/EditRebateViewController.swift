@@ -52,11 +52,11 @@ class EditRebateViewController: UIViewController {
     
     
     func updateRebate() {
-        guard let date = rebReceipt?.date, let rebateType = rebReceipt?.category, let receiptNo = rebReceipt?.receiptNo, let amount = rebReceipt?.amount, let receiptID = rebReceipt?.key else { return }
+        guard let date = rebReceipt?.date, let rebateType = rebReceipt?.category, let receiptNo = rebReceipt?.receiptNo, let amountString = amountTextField.text, let amount = Int(amountString), let receiptID = rebReceipt?.key else { return }
         
         let receiptRef = firebaseRef.child("receipt").child(receiptID)
-        let receiptDict = ["date": date, "receipt no": receiptNo, "amount": amount, "category": rebateType]
-        receiptRef.setValue(receiptDict)
+        let receiptDict: [String: AnyObject] = ["date": date, "receipt no": receiptNo, "amount": amount, "category": rebateType]
+        receiptRef.updateChildValues(receiptDict)
         print(receiptDict)
         
     }
