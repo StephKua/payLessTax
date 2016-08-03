@@ -9,13 +9,13 @@
 import UIKit
 import Firebase
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+class LoginViewController: ReusableKeyboardViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    @IBOutlet weak var scrollView: UIScrollView!
-    var activeTextField:UITextField?
+//    @IBOutlet weak var scrollView: UIScrollView!
+//    var activeTextField:UITextField?
     
     
     override func viewDidLoad() {
@@ -30,45 +30,37 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    func registerForKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWasShown), name: UIKeyboardWillShowNotification, object: nil)
-    }
-    
-    func keyboardWasShown(notification: NSNotification) {
-        let info = notification.userInfo!    //userinfo tells u info incl keyboard size (info tat notification sends)
-        let kbSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue().size    //obtain keyboard frame N size
-        
-        let contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize!.height, 0.0)
-        scrollView.contentInset = contentInsets
-        scrollView.scrollIndicatorInsets = contentInsets
-        
-        var rect = self.view.frame //getting frame of whole view
-        rect.size.height -= kbSize!.height
-        
-        if let activeField = activeTextField {
-            if CGRectContainsPoint(rect, activeTextField!.frame.origin) {
-                self.scrollView.scrollRectToVisible(activeField.frame, animated: true)
-                
-            }
-        }
-    }
-    
-//    - (void)keyboardWasShown:(NSNotification*)aNotification {
-//    NSDictionary* info = [aNotification userInfo];
-//    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-//    CGRect bkgndRect = activeField.superview.frame;
-//    bkgndRect.size.height += kbSize.height;
-//    [activeField.superview setFrame:bkgndRect];
-//    [scrollView setContentOffset:CGPointMake(0.0, activeField.frame.origin.y-kbSize.height) animated:YES];
+//    func registerForKeyboardNotifications() {
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWasShown), name: UIKeyboardWillShowNotification, object: nil)
 //    }
+//    
+//    func keyboardWasShown(notification: NSNotification) {
+//        let info = notification.userInfo!    //userinfo tells u info incl keyboard size (info tat notification sends)
+//        let kbSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue().size    //obtain keyboard frame N size
+//        
+//        let contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize!.height, 0.0)
+//        scrollView.contentInset = contentInsets
+//        scrollView.scrollIndicatorInsets = contentInsets
+//        
+//        var rect = self.view.frame //getting frame of whole view
+//        rect.size.height -= kbSize!.height
+//        
+//        if let activeField = activeTextField {
+//            if CGRectContainsPoint(rect, activeTextField!.frame.origin) {
+//                self.scrollView.scrollRectToVisible(activeField.frame, animated: true)
+//                
+//            }
+//        }
+//    }
+
     
-    func textFieldDidBeginEditing(textField: UITextField) {
-        activeTextField = textField
-    }
-    
-    func textFieldDidEndEditing(textField: UITextField) {
-        activeTextField = nil
-    }
+//    func textFieldDidBeginEditing(textField: UITextField) {
+//        activeTextField = textField
+//    }
+//    
+//    func textFieldDidEndEditing(textField: UITextField) {
+//        activeTextField = nil
+//    }
     
     @IBAction func onLoginBtnClicked(sender: UIButton) {
         guard let email = emailTextField.text, let password = passwordTextField.text else { return }

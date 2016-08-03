@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class EditRebateViewController: UIViewController, UITextFieldDelegate {
-
+    
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var rebateTypeTextField: UITextField!
     @IBOutlet weak var receiptNoTextField: UITextField!
@@ -20,12 +20,16 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
     var strDate: String = ""
     var datePicker = UIDatePicker()
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    var activeTextField: UITextField?
+    
     var edit = false
     var firebaseRef = FIRDatabase.database().reference()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.hideKeyboardWhenTapped()
+       
         guard let title = rebReceipt?.category, let date = rebReceipt?.date, let rebateType = rebReceipt?.category, let receiptNo = rebReceipt?.receiptNo, let amount = rebReceipt?.amount else { return }
         
         self.disableEdit()
@@ -37,9 +41,16 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
         self.amountTextField.text = "\(amount)"
         
         datePicker = UIDatePicker(frame: CGRectMake(10, 10, view.frame.width, 200))
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SignUpViewController.registerForKeyboardNotifications), name:UIKeyboardWillShowNotification, object: self.view.window)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SignUpViewController.registerForKeyboardNotifications), name: UIKeyboardWillHideNotification, object: self.view.window)
         
     }
-
+    
+    
     @IBAction func onEditBtnPressed(sender: UIButton) {
         if edit == true {
             self.disableEdit()
@@ -55,25 +66,30 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    
     func updateRebate() {
         guard let date = dateTextField.text, let rebateType = rebateTypeTextField.text, let receiptNo = receiptNoTextField.text, let amountString = amountTextField.text, let amount = Int(amountString), let receiptID = rebReceipt?.key else { return }
         
         let receiptRef = firebaseRef.child("receipt").child(receiptID)
         let receiptDict: [String: AnyObject] = ["date": date, "receipt no": receiptNo, "amount": amount, "category": rebateType]
         receiptRef.updateChildValues(receiptDict)
-        print(receiptDict)
         
         let amountDiff = amount - (rebReceipt?.amount)!
+        
+        var newTotal = Int()
+        let rebateCatRef = firebaseRef.child("RebateCategories").child(rebateType).child("subtotal")
         
         let rebateRef = firebaseRef.child("rebate").child(User.currentUserId()!).child(rebateType)
         rebateRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
             if var rebateTypeDict = snapshot.value as? [String: AnyObject] {
                 if let oldValue = rebateTypeDict["subtotal"] as? Int {
                     rebateTypeDict["subtotal"] = oldValue + amountDiff
+                    newTotal = oldValue + amountDiff
                 } else {
                     rebateTypeDict["subtotal"] = amountDiff
+                    newTotal = amountDiff
                 }
+                
+                rebateCatRef.child(User.currentUserId()!).setValue(newTotal)
                 rebateRef.updateChildValues(rebateTypeDict)
             }
         })
@@ -81,6 +97,10 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
+        activeTextField = textField
+        
+        self.view.frame = CGRectMake(0, -300, 320, 700)
+        
         let inputView = UIView(frame: CGRectMake(0, 200, view.frame.width, 200))
         inputView.backgroundColor = UIColor.whiteColor()
         
@@ -107,6 +127,10 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    func textFieldDidEndEditing(textField: UITextField) {
+        activeTextField = nil
+    }
+    
     func donePicker() {
         dateTextField.resignFirstResponder()
         
@@ -121,15 +145,15 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
         dateTextField.resignFirstResponder()
     }
     
-
+    
     func enableEdit () {
         self.dateTextField.userInteractionEnabled = true
-//        self.rebateTypeTextField.userInteractionEnabled = true
+        //        self.rebateTypeTextField.userInteractionEnabled = true
         self.receiptNoTextField.userInteractionEnabled = true
         self.amountTextField.userInteractionEnabled = true
         
         self.dateTextField.backgroundColor = UIColor.whiteColor()
-//        self.rebateTypeTextField.backgroundColor = UIColor.whiteColor()
+        //        self.rebateTypeTextField.backgroundColor = UIColor.whiteColor()
         self.receiptNoTextField.backgroundColor = UIColor.whiteColor()
         self.amountTextField.backgroundColor = UIColor.whiteColor()
         
@@ -149,6 +173,29 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
         self.amountTextField.backgroundColor = color
         
     }
-
+    
+    func registerForKeyboardNotifications() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWasShown), name: UIKeyboardWillShowNotification, object: nil)
+    }
+    
+    func keyboardWasShown(notification: NSNotification) {
+        let info = notification.userInfo!
+        let kbSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue().size
+        
+        let contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize!.height, 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+        
+        var rect = self.view.frame
+        rect.size.height -= kbSize!.height
+        
+        if let activeField = activeTextField {
+            if CGRectContainsPoint(rect, activeTextField!.frame.origin) {
+                self.scrollView.scrollRectToVisible(activeField.frame, animated: true)
+                
+            }
+        }
+    }
+    
     
 }

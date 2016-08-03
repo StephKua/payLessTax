@@ -16,10 +16,7 @@ class IncomeDetailViewController: UIViewController, UITableViewDelegate, UITable
     var employmentInc = [Receipt]()
     var rentalInc = [Receipt]()
     var otherInc = [Receipt]()
-    
-    var allIncome = [Receipt]()
-    var allAmounts = [Int]()
-    
+
     var incomeType = ["Employment", "Rental", "Others"]
     
     @IBOutlet weak var totalLabel: UILabel!
@@ -28,13 +25,15 @@ class IncomeDetailViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getIncome()
-//        self.calcTotal()
+        self.calcTotal { (x, y, z) in
+            self.totalLabel.text = "RM \(x + y + z)"
+        }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
-        self.calcTotal()
-    }
+    //    override func viewWillAppear(animated: Bool) {
+    //        super.viewWillAppear(true)
+    //        self.calcTotal()
+    //    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("IncomeDetailCell")!
@@ -99,12 +98,14 @@ class IncomeDetailViewController: UIViewController, UITableViewDelegate, UITable
         let popover = navController.popoverPresentationController
         let section = tableView.indexPathForSelectedRow?.section
         
-        popover?.permittedArrowDirections = UIPopoverArrowDirection.Up
+        guard let cell = tableView.cellForRowAtIndexPath(indexPath) else { return }
+        
+        popover?.permittedArrowDirections = UIPopoverArrowDirection.init(rawValue: 100)
         popover?.delegate = self
-        popover?.sourceView = self.tableView
+        popover?.sourceView = cell.textLabel
+        popover?.sourceRect = CGRectMake(0, 20, 0, 0)
         
         self.presentViewController(navController, animated: true, completion: nil)
-        self.performSegueWithIdentifier("EditIncSegue", sender: self)
         
         switch section! {
         case 0:
@@ -131,6 +132,65 @@ class IncomeDetailViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        switch indexPath.section {
+        case 0:
+            let selectedReceipt = self.employmentInc[indexPath.row]
+            self.deleteReceipt(selectedReceipt.key, category: selectedReceipt.category)
+            self.employmentInc.removeAtIndex(indexPath.row)
+            
+        case 1:
+            let selectedReceipt = self.rentalInc[indexPath.row]
+            self.deleteReceipt(selectedReceipt.key, category: selectedReceipt.category)
+            self.rentalInc.removeAtIndex(indexPath.row)
+            
+        case 2:
+            let selectedReceipt = self.otherInc[indexPath.row]
+            self.deleteReceipt(selectedReceipt.key, category: selectedReceipt.category)
+            self.otherInc.removeAtIndex(indexPath.row)
+            
+        default:
+            break
+        }
+        self.tableView.reloadData()
+    }
+    
+    
+    func deleteReceipt(key: String, category: String) {
+        self.updateSubtotal(key, category: category)
+        
+        let incomeRef = firebaseRef.child("income").child(User.currentUserId()!).child(category).child("receiptID").child(key)
+        incomeRef.removeValue()
+        
+        let receiptRef = firebaseRef.child("receipt").child(key)
+        receiptRef.removeValue()
+        
+    }
+    
+    func updateSubtotal(key: String, category: String) {
+        self.getReceipt(key) { (receipt) in
+            let amountDiff = receipt.amount
+            let incomeRef = self.firebaseRef.child("income").child(User.currentUserId()!).child(category)
+            incomeRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
+                if var incomeTypeDict = snapshot.value as? [String: AnyObject] {
+                    if let oldValue = incomeTypeDict["subtotal"] as? Int {
+                        incomeTypeDict["subtotal"] = oldValue - amountDiff
+                    }
+                    incomeRef.updateChildValues(incomeTypeDict)
+                }
+            })
+        }
+    }
+    
+    func getReceipt(key: String, completionHandler: (receipt: Receipt) -> ()){
+        let receiptRef = firebaseRef.child("receipt").child(key)
+        receiptRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            if let receipt = Receipt(snapshot: snapshot) {
+                completionHandler(receipt: receipt)
+            }
+        })
+    }
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.None
@@ -190,22 +250,32 @@ class IncomeDetailViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
-    func calcTotal() {
+    func calcTotal(completionHandler: (x: Int, y: Int, z: Int) -> ()) {
+        var employment: Int = 0
+        var rental: Int = 0
+        var other: Int = 0
+        
+        let incomeRef = firebaseRef.child("income").child(User.currentUserId()!)
         for category in incomeType {
-            let rebateRef = firebaseRef.child("income").child(User.currentUserId()!).child(category)
-            
-            rebateRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-                if var rebateTypeDict = snapshot.value as? [String: AnyObject] {
-                    if let categoryAmount = rebateTypeDict["subtotal"] as? Int {
-                        self.allAmounts.removeAll()
-                        self.allAmounts.append(categoryAmount)
+            incomeRef.child(category).observeEventType(.Value, withBlock: { (snapshot) in
+                if var incomeTypeDict = snapshot.value as? [String: AnyObject] {
+                    if let categoryAmount = incomeTypeDict ["subtotal"] as? Int {
+                        switch category {
+                        case self.incomeType[0]:
+                            employment = categoryAmount
+                        case self.incomeType[1]:
+                            rental = categoryAmount
+                        case self.incomeType[2]:
+                            other = categoryAmount
+                        default:
+                            break
+                        }
+                        completionHandler(x: employment, y: rental, z: other)
                     }
-                    let total = self.allAmounts.reduce(0, combine: +)
-                    self.totalLabel.text = "RM \(total)"
+                    
                 }
             })
         }
     }
-
     
 }

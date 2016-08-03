@@ -28,6 +28,7 @@ class EditIncViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTapped()
         
         guard let title = incReceipt?.category, let date = incReceipt?.date, let incomeType = incReceipt?.category, let ref = incReceipt?.refNo, let amount = incReceipt?.amount else { return }
         
@@ -65,7 +66,6 @@ class EditIncViewController: UIViewController, UITextFieldDelegate {
         let receiptRef = firebaseRef.child("receipt").child(receiptID)
         let receiptDict: [String:AnyObject] = ["date": date, "reference no": ref, "amount": amount, "category": incomeType]
         receiptRef.updateChildValues(receiptDict)
-        print(receiptDict)
         
         
         let amountDiff = amount - (incReceipt?.amount)!

@@ -16,6 +16,5 @@ class RebateTableViewCell: UITableViewCell {
     @IBOutlet weak var pointLabel: UILabel!
     @IBOutlet weak var rebateLabel: UILabel!
 
-    
 
 }

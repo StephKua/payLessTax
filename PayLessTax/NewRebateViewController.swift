@@ -16,29 +16,52 @@
 
 import UIKit
 import Firebase
+import Fusuma
 
-class NewRebateViewController: UIViewController, UITextFieldDelegate {
+class NewRebateViewController: CameraViewController, UITextFieldDelegate {
     
-    var selectedRebate = String()
+    var selectedRebate: RebateCategories?
     var lastSubtotal = Int()
-    let firebaseRef = FIRDatabase.database().reference()
+    
     var strDate: String = ""
     var datePicker = UIDatePicker()
     
+    @IBOutlet weak var categoryDetailsTextView: UITextView!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var receiptTextField: UITextField!
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    var activeTextField: UITextField?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = selectedRebate
         
+        self.title = selectedRebate!.title
         datePicker = UIDatePicker(frame: CGRectMake(10, 10, view.frame.width, 200))
+        
+        let rebateCategoryRef = firebaseRef.child("RebateCategories").child(selectedRebate!.title).child("catDesc")
+        rebateCategoryRef.observeEventType(.Value, withBlock:  { (snapshot) in
+            if let description = snapshot.value as? String {
+                let text = description
+                self.categoryDetailsTextView.text = text
+            }
+        })
+
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SignUpViewController.registerForKeyboardNotifications), name:UIKeyboardWillShowNotification, object: self.view.window)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SignUpViewController.registerForKeyboardNotifications), name: UIKeyboardWillHideNotification, object: self.view.window)
         
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
+        activeTextField = textField
+        
         let inputView = UIView(frame: CGRectMake(0, 200, view.frame.width, 200))
         inputView.backgroundColor = UIColor.whiteColor()
         
@@ -65,6 +88,10 @@ class NewRebateViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    func textFieldDidEndEditing(textField: UITextField) {
+        activeTextField = nil
+    }
+    
     func donePicker() {
         dateTextField.resignFirstResponder()
         
@@ -80,10 +107,24 @@ class NewRebateViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onSaveBtnPressed(sender: UIBarButtonItem) {
-        self.addRebate()
-        self.navigationController?.popViewControllerAnimated(true)
+        
+        if amountTextField.text == "" || receiptTextField.text == "" {
+            self.resignFirstResponder()
+            let alertController = UIAlertController(title: "Missing Info", message: "Please enter both the receipt number and receipt amount", preferredStyle: .Alert)
+            let dismissAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(dismissAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+        } else {
+            self.resignFirstResponder()
+            self.addRebate()
+            self.navigationController?.popViewControllerAnimated(true)
+        }
     }
     
+    @IBAction func cameraButtonPressed(sender: UIButton) {
+        self.presentViewController(fusuma, animated: true, completion: nil)
+    }
     
     func addRebate() {
         guard let date = dateTextField.text, let receiptNo = receiptTextField.text, let amount = amountTextField.text else { return }
@@ -96,24 +137,55 @@ class NewRebateViewController: UIViewController, UITextFieldDelegate {
         let receiptID = NSUUID().UUIDString
         
         let receiptRef = firebaseRef.child("receipt").child(receiptID)
-        let receiptDict = ["date": date, "receipt no": receiptNo, "amount": amountAdded, "category": selectedRebate]
+        let receiptDict = ["date": date, "receipt no": receiptNo, "amount": amountAdded, "category": selectedRebate!.title]
         receiptRef.setValue(receiptDict)
         
         
-        let rebateRef = firebaseRef.child("rebate").child(User.currentUserId()!).child(selectedRebate)
+        let rebateRef = firebaseRef.child("rebate").child(User.currentUserId()!).child(selectedRebate!.title)
         rebateRef.child("receiptID").child(receiptID).setValue(true)
+        
+        var newTotal = Int()
+        let rebateCatRef = firebaseRef.child("RebateCategories").child(self.selectedRebate!.title).child("subtotal")
         
         rebateRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
             if var rebateTypeDict = snapshot.value as? [String: AnyObject] {
                 if let oldValue = rebateTypeDict["subtotal"] as? Int {
                     rebateTypeDict["subtotal"] = oldValue + amountAdded
+                    newTotal = oldValue + amountAdded
                 } else {
                     rebateTypeDict["subtotal"] = amountAdded
+                    newTotal = amountAdded
                 }
+                rebateCatRef.child(User.currentUserId()!).setValue(newTotal)
                 rebateRef.updateChildValues(rebateTypeDict)
+                
             }
         })
     }
     
+    func registerForKeyboardNotifications() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWasShown), name: UIKeyboardWillShowNotification, object: nil)
+    }
+    
+    func keyboardWasShown(notification: NSNotification) {
+        let info = notification.userInfo!
+        let kbSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue().size
+        
+        let contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize!.height, 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+        
+        var rect = self.view.frame
+        rect.size.height -= kbSize!.height
+        
+        if let activeField = activeTextField {
+            if CGRectContainsPoint(rect, activeTextField!.frame.origin) {
+                self.scrollView.scrollRectToVisible(activeField.frame, animated: true)
+                
+            }
+        }
+    }
+    
 }
+
 

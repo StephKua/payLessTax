@@ -12,4 +12,8 @@ target 'PayLessTax' do
 	pod 'FirebaseStorage’
     pod 'Firebase/Messaging'
     pod 'OneSignal'
+    pod 'Fusuma'
+    pod 'SwiftyJSON'
+    pod 'SDWebImage'
+
 end
