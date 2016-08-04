@@ -42,14 +42,7 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
         
         datePicker = UIDatePicker(frame: CGRectMake(10, 10, view.frame.width, 200))
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SignUpViewController.registerForKeyboardNotifications), name:UIKeyboardWillShowNotification, object: self.view.window)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SignUpViewController.registerForKeyboardNotifications), name: UIKeyboardWillHideNotification, object: self.view.window)
-        
-    }
-    
+
     
     @IBAction func onEditBtnPressed(sender: UIButton) {
         if edit == true {
@@ -126,10 +119,10 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
         dateTextField.inputAccessoryView = toolbar
         
     }
-    
-    func textFieldDidEndEditing(textField: UITextField) {
-        activeTextField = nil
-    }
+//    
+//    func textFieldDidEndEditing(textField: UITextField) {
+//        activeTextField = nil
+//    }
     
     func donePicker() {
         dateTextField.resignFirstResponder()
