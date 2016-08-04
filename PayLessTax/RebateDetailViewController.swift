@@ -69,7 +69,7 @@ class RebateDetailViewController: UIViewController, UITableViewDataSource, UITab
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let vc = storyboard?.instantiateViewControllerWithIdentifier("EditRebateController") as! EditRebateViewController
-        vc.preferredContentSize = CGSizeMake(400, 300)
+        vc.preferredContentSize = CGSizeMake(400, 500)
         let navController = UINavigationController(rootViewController: vc)
         navController.modalPresentationStyle = UIModalPresentationStyle.Popover
         

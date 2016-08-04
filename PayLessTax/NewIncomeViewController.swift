@@ -9,15 +9,15 @@
 import UIKit
 import Firebase
 
-class NewIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class NewIncomeViewController: CameraViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
-    let firebaseRef = FIRDatabase.database().reference()
     var lastSubtotal = Int()
     var strDate: String = ""
     var datePicker = UIDatePicker()
-    
+    var imageUrl: String?
     var activeTextField: UITextField?
     
+    @IBOutlet weak var incomeImage: UIImageView!
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var refTextField: UITextField!
     @IBOutlet weak var incomeTextField: UITextField!
@@ -36,6 +36,15 @@ class NewIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         incomePickerView = UIPickerView(frame: CGRectMake(10, 10, view.frame.width, 200))
     }
     
+    override func imageUploadCompleted(imageURL: String, image: UIImage) {
+        incomeImage.image = image
+        self.imageUrl = imageURL
+
+    }
+    
+    @IBAction func addReceipt(sender: UIButton) {
+        self.presentViewController(fusuma, animated: true, completion: nil)
+    }
     
     @IBAction func onSaveBtnPressed(sender: UIBarButtonItem) {
         if amountTextField.text == "" {
@@ -56,24 +65,33 @@ class NewIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     func addIncome() {
         guard let date = dateTextField.text, let incomeType = incomeTextField.text, let ref = refTextField.text, let amount = amountTextField.text else { return }
         
-        var amountAdded = Int()
+        var amountAdded = Double()
         if amount != "" {
-            amountAdded = Int(amount)!
+            amountAdded = Double(amount)!
         }
         
+        let imageLink = self.imageUrl ?? ""
+        
+        
         let receiptID = NSUUID().UUIDString
+        let imageID = NSUUID().UUIDString
         
         let receiptRef = firebaseRef.child("receipt").child(receiptID)
         let receiptDict = ["date": date, "reference no": ref, "amount": amountAdded, "category": incomeType]
         receiptRef.setValue(receiptDict)
         
+        let imageRef = firebaseRef.child("image").child(imageID)
+        let imageDict = ["imageUrl": imageLink, "userID": User.currentUserId()!]
+        imageRef.setValue(imageDict)
+        
         let incomeRef = firebaseRef.child("income").child(User.currentUserId()!).child(incomeType)
         
         incomeRef.child("receiptID").child(receiptID).setValue(true)
+        incomeRef.child("imageID").child(imageID).setValue(true)
         
         incomeRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
             if var incomeTypeDict = snapshot.value as? [String: AnyObject]{
-                if let oldValue = incomeTypeDict["subtotal"] as? Int{
+                if let oldValue = incomeTypeDict["subtotal"] as? Double{
                     incomeTypeDict["subtotal"] = oldValue + amountAdded
                 }else{
                     incomeTypeDict["subtotal"] = amountAdded
@@ -189,6 +207,12 @@ class NewIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
                 
             }
         }
+    }
+    
+    override func setInfo(total: String, date: String, InvNo: String) {
+        self.amountTextField.text = total
+        self.dateTextField.text = date
+        self.refTextField.text = InvNo
     }
 
     

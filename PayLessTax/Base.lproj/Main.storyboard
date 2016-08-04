@@ -30,7 +30,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rebate category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y5C-cJ-wtY">
-                                                    <rect key="frame" x="100" y="5" width="238" height="30"/>
+                                                    <rect key="frame" x="85" y="5" width="238" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="j1z-TB-o2h"/>
                                                         <constraint firstAttribute="width" constant="238" id="uqA-dj-dcn"/>
@@ -50,10 +50,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t4j-BF-LEv">
-                                                    <rect key="frame" x="10" y="5" width="80" height="70"/>
+                                                    <rect key="frame" x="10" y="5" width="70" height="70"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="70" id="cJx-cT-9zI"/>
-                                                        <constraint firstAttribute="width" constant="80" id="snh-JI-4Cz"/>
+                                                        <constraint firstAttribute="width" constant="70" id="snh-JI-4Cz"/>
                                                         <constraint firstAttribute="height" constant="130" id="tvd-JT-VnU"/>
                                                     </constraints>
                                                     <variation key="default">
@@ -81,7 +81,7 @@
                                                 <constraint firstItem="t4j-BF-LEv" firstAttribute="leading" secondItem="9EP-ds-Lzc" secondAttribute="leading" constant="10" id="G3m-zs-EBR"/>
                                                 <constraint firstItem="t4j-BF-LEv" firstAttribute="top" secondItem="9EP-ds-Lzc" secondAttribute="top" constant="5" id="NRq-jq-1FJ"/>
                                                 <constraint firstItem="pA5-Ii-w4V" firstAttribute="trailing" secondItem="pIw-Px-6XG" secondAttribute="trailing" id="eJm-3t-t8b"/>
-                                                <constraint firstItem="Y5C-cJ-wtY" firstAttribute="leading" secondItem="t4j-BF-LEv" secondAttribute="trailing" constant="10" id="fSx-3o-u5Y"/>
+                                                <constraint firstItem="Y5C-cJ-wtY" firstAttribute="leading" secondItem="t4j-BF-LEv" secondAttribute="trailing" constant="5" id="fSx-3o-u5Y"/>
                                                 <constraint firstItem="pIw-Px-6XG" firstAttribute="bottom" secondItem="pA5-Ii-w4V" secondAttribute="bottom" id="fZL-I4-bPW"/>
                                                 <constraint firstItem="pIw-Px-6XG" firstAttribute="top" secondItem="pA5-Ii-w4V" secondAttribute="bottom" constant="4" id="hbt-F0-cgQ"/>
                                                 <constraint firstAttribute="trailing" secondItem="pIw-Px-6XG" secondAttribute="trailing" constant="2" id="p8I-Rl-GPn"/>
@@ -442,7 +442,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="aAJ-Pc-r5U">
-                                                <rect key="frame" x="150" y="193" width="300" height="30"/>
+                                                <rect key="frame" x="150" y="218" width="300" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload receipt/ supporting documents" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3w-cd-EhR">
                                                         <rect key="frame" x="0.0" y="0.0" width="265" height="30"/>
@@ -460,9 +460,9 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="jZN-uV-hST">
-                                                <rect key="frame" x="38" y="43" width="524" height="120"/>
+                                                <rect key="frame" x="38" y="68" width="524" height="120"/>
                                                 <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3CL-Kp-ZcS">
+                                                    <textField autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3CL-Kp-ZcS">
                                                         <rect key="frame" x="0.0" y="0.0" width="524" height="30"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -483,16 +483,16 @@
                                                 </subviews>
                                             </stackView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iDN-3B-Yc1">
-                                                <rect key="frame" x="38" y="8" width="524" height="30"/>
+                                                <rect key="frame" x="29" y="8" width="542" height="50"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="VaP-Ib-Tbo"/>
+                                                    <constraint firstAttribute="height" constant="50" id="VaP-Ib-Tbo"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="receipt" translatesAutoresizingMaskIntoConstraints="NO" id="GRa-QV-ufN">
-                                                <rect key="frame" x="193" y="226" width="180" height="179"/>
+                                                <rect key="frame" x="193" y="251" width="180" height="179"/>
                                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="250" id="mMM-QP-0zx"/>
@@ -506,17 +506,25 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="jZN-uV-hST" firstAttribute="top" secondItem="iDN-3B-Yc1" secondAttribute="bottom" constant="5" id="0MJ-6u-1Bq"/>
+                                            <constraint firstItem="jZN-uV-hST" firstAttribute="top" secondItem="iDN-3B-Yc1" secondAttribute="bottom" constant="10" id="0MJ-6u-1Bq"/>
                                             <constraint firstItem="aAJ-Pc-r5U" firstAttribute="top" secondItem="jZN-uV-hST" secondAttribute="bottom" constant="30" id="4kV-zi-F78"/>
+                                            <constraint firstItem="iDN-3B-Yc1" firstAttribute="leading" secondItem="Lgg-di-vb6" secondAttribute="leading" constant="29" id="VhO-TJ-Y0A"/>
                                             <constraint firstItem="iDN-3B-Yc1" firstAttribute="leading" secondItem="jZN-uV-hST" secondAttribute="leading" id="Zdv-Lk-LW5"/>
                                             <constraint firstItem="jZN-uV-hST" firstAttribute="leading" secondItem="Lgg-di-vb6" secondAttribute="leadingMargin" constant="30" id="cIC-gA-C8V"/>
                                             <constraint firstItem="iDN-3B-Yc1" firstAttribute="top" secondItem="Lgg-di-vb6" secondAttribute="topMargin" id="ddV-v0-MNw"/>
+                                            <constraint firstAttribute="trailing" secondItem="iDN-3B-Yc1" secondAttribute="trailing" constant="29" id="fXi-sx-mXf"/>
                                             <constraint firstItem="GRa-QV-ufN" firstAttribute="top" secondItem="aAJ-Pc-r5U" secondAttribute="bottom" constant="3" id="nMV-JM-ISF"/>
                                             <constraint firstItem="T3w-cd-EhR" firstAttribute="centerX" secondItem="GRa-QV-ufN" secondAttribute="centerX" id="oED-KO-c7l"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="jZN-uV-hST" secondAttribute="trailing" constant="30" id="rMB-52-cRN"/>
-                                            <constraint firstItem="iDN-3B-Yc1" firstAttribute="trailing" secondItem="jZN-uV-hST" secondAttribute="trailing" id="xm1-9y-uXx"/>
+                                            <constraint firstItem="iDN-3B-Yc1" firstAttribute="trailing" secondItem="jZN-uV-hST" secondAttribute="trailing" constant="5" id="xm1-9y-uXx"/>
                                             <constraint firstItem="aAJ-Pc-r5U" firstAttribute="centerX" secondItem="Lgg-di-vb6" secondAttribute="centerX" id="yD8-lB-YUc"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Zdv-Lk-LW5"/>
+                                                <exclude reference="xm1-9y-uXx"/>
+                                            </mask>
+                                        </variation>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -548,6 +556,7 @@
                         <outlet property="amountTextField" destination="PA7-v4-b7y" id="cw7-F3-JbC"/>
                         <outlet property="categoryDetailsTextView" destination="iDN-3B-Yc1" id="q3r-vm-be2"/>
                         <outlet property="dateTextField" destination="3CL-Kp-ZcS" id="MEY-1H-yw3"/>
+                        <outlet property="rebateImage" destination="GRa-QV-ufN" id="jbq-dV-6bN"/>
                         <outlet property="receiptTextField" destination="MJb-IT-4EP" id="g9n-DF-9Ua"/>
                         <outlet property="scrollView" destination="Qjd-M5-n7f" id="3eM-bG-T28"/>
                     </connections>
@@ -734,6 +743,9 @@
                                                                 <rect key="frame" x="0.0" y="80" width="501" height="30"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="37N-Vv-x87" id="ItL-5y-9ow"/>
+                                                                </connections>
                                                             </textField>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="gPJ-uE-Jgb">
                                                                 <rect key="frame" x="0.0" y="120" width="501" height="30"/>
@@ -748,6 +760,9 @@
                                                                         <rect key="frame" x="25" y="0.0" width="476" height="30"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                                                        <connections>
+                                                                            <outlet property="delegate" destination="37N-Vv-x87" id="5Vm-O6-kTm"/>
+                                                                        </connections>
                                                                     </textField>
                                                                 </subviews>
                                                             </stackView>
@@ -775,15 +790,24 @@
                                                     <action selector="onEditBtnPressed:" destination="4f2-3Y-s1f" eventType="touchUpInside" id="I3y-BF-lJq"/>
                                                 </connections>
                                             </button>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tnh-CG-FIQ">
+                                                <rect key="frame" x="176" y="211" width="240" height="300"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="240" id="ilc-jN-3nV"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="tMe-MR-cqE" firstAttribute="top" secondItem="8Gq-5x-dj8" secondAttribute="topMargin" constant="5" id="5g2-k3-GOq"/>
+                                            <constraint firstItem="Tnh-CG-FIQ" firstAttribute="top" secondItem="Tiz-hM-z1f" secondAttribute="bottom" constant="8" symbolic="YES" id="FIV-Y7-ghn"/>
                                             <constraint firstItem="Tiz-hM-z1f" firstAttribute="top" secondItem="tMe-MR-cqE" secondAttribute="bottom" constant="10" id="HbJ-50-pTU"/>
                                             <constraint firstItem="Tiz-hM-z1f" firstAttribute="leading" secondItem="8Gq-5x-dj8" secondAttribute="leading" constant="5" id="JKI-rw-IeT"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="tMe-MR-cqE" secondAttribute="trailing" constant="5" id="KuF-w1-dyh"/>
                                             <constraint firstItem="tMe-MR-cqE" firstAttribute="top" secondItem="8Gq-5x-dj8" secondAttribute="top" constant="10" id="Va1-Lj-dXl"/>
+                                            <constraint firstItem="Tnh-CG-FIQ" firstAttribute="centerX" secondItem="Tiz-hM-z1f" secondAttribute="centerX" id="geZ-TM-Chs"/>
                                             <constraint firstAttribute="trailing" secondItem="tMe-MR-cqE" secondAttribute="trailing" constant="5" id="owB-Tw-gqy"/>
+                                            <constraint firstAttribute="bottom" secondItem="Tnh-CG-FIQ" secondAttribute="bottom" constant="69" id="qWC-Gx-lOJ"/>
                                             <constraint firstItem="tMe-MR-cqE" firstAttribute="trailing" secondItem="Tiz-hM-z1f" secondAttribute="trailing" id="rgt-mj-GvF"/>
                                         </constraints>
                                         <variation key="default">
@@ -815,6 +839,7 @@
                     <connections>
                         <outlet property="amountTextField" destination="PKU-0y-sch" id="QE9-Hi-Xdl"/>
                         <outlet property="dateTextField" destination="g1Z-mr-vn8" id="8hv-Z8-xfb"/>
+                        <outlet property="rebateImageView" destination="Tnh-CG-FIQ" id="85h-Jo-rWM"/>
                         <outlet property="rebateTypeTextField" destination="OvW-mY-8lb" id="9Px-xE-IpZ"/>
                         <outlet property="receiptNoTextField" destination="YZI-6p-rNc" id="8f1-Is-PtE"/>
                     </connections>
@@ -853,6 +878,9 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1KO-tj-kIj">
                                                         <rect key="frame" x="270" y="0.0" width="30" height="30"/>
                                                         <state key="normal" image="camera"/>
+                                                        <connections>
+                                                            <action selector="addReceipt:" destination="SPF-Vw-MsA" eventType="touchUpInside" id="QF3-kn-bfG"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -932,6 +960,7 @@
                     <connections>
                         <outlet property="amountTextField" destination="9ra-fI-7vG" id="gPq-Vf-EkQ"/>
                         <outlet property="dateTextField" destination="qti-c5-guf" id="cji-EV-Gnb"/>
+                        <outlet property="incomeImage" destination="HaV-jy-xjM" id="YMH-a2-1MQ"/>
                         <outlet property="incomeTextField" destination="GgC-Gh-XkQ" id="go3-Hn-IbD"/>
                         <outlet property="refTextField" destination="9gZ-rK-4kz" id="NuI-ys-wbe"/>
                         <outlet property="scrollView" destination="OaO-YW-ctt" id="DS4-cN-tdX"/>
@@ -1146,13 +1175,22 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="alg-A5-ATg">
+                                                <rect key="frame" x="180" y="203" width="240" height="300"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="240" id="6yk-fi-Qdd"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstItem="alg-A5-ATg" firstAttribute="top" secondItem="MdO-Zt-6Sa" secondAttribute="bottom" constant="8" symbolic="YES" id="4Zd-SC-hKu"/>
                                             <constraint firstAttribute="trailing" secondItem="xyX-sT-T1p" secondAttribute="trailing" constant="5" id="6zT-vE-M8X"/>
                                             <constraint firstItem="xyX-sT-T1p" firstAttribute="top" secondItem="sIS-yj-SiR" secondAttribute="top" constant="5" id="BX7-x3-v5E"/>
+                                            <constraint firstItem="alg-A5-ATg" firstAttribute="centerX" secondItem="MdO-Zt-6Sa" secondAttribute="centerX" id="LsX-UQ-MVj"/>
                                             <constraint firstItem="MdO-Zt-6Sa" firstAttribute="top" secondItem="xyX-sT-T1p" secondAttribute="bottom" constant="10" id="NCE-Ri-sWw"/>
                                             <constraint firstItem="xyX-sT-T1p" firstAttribute="trailing" secondItem="MdO-Zt-6Sa" secondAttribute="trailing" id="mOI-CZ-bhc"/>
+                                            <constraint firstAttribute="bottom" secondItem="alg-A5-ATg" secondAttribute="bottom" constant="77" id="tJ6-so-0BF"/>
                                             <constraint firstItem="MdO-Zt-6Sa" firstAttribute="leading" secondItem="sIS-yj-SiR" secondAttribute="leading" constant="5" id="zx9-19-f4M"/>
                                         </constraints>
                                     </view>
@@ -1180,6 +1218,7 @@
                         <outlet property="dateTextField" destination="W3a-pK-YKx" id="l8g-dp-da9"/>
                         <outlet property="editBtn" destination="xyX-sT-T1p" id="LxW-rr-mM5"/>
                         <outlet property="incomeTypeTextField" destination="bm2-rT-OSf" id="cVf-7l-tNu"/>
+                        <outlet property="receiptImageView" destination="alg-A5-ATg" id="bmN-sh-Bpq"/>
                         <outlet property="refTextField" destination="zly-vk-W8m" id="1sa-fd-tQf"/>
                     </connections>
                 </viewController>

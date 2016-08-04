@@ -24,6 +24,7 @@ class CameraViewController: UIViewController, FusumaDelegate {
     var date: String!
     var invoiceNo: String!
     var total: String!
+    var imageURL: String!
     
     var fusuma = FusumaViewController()
 
@@ -38,9 +39,6 @@ class CameraViewController: UIViewController, FusumaDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-
-        getUserName()
-        
     }
 
 
@@ -56,12 +54,8 @@ class CameraViewController: UIViewController, FusumaDelegate {
                 }
                 
                 if let imageUrl = metadata?.downloadURL()?.absoluteString {
-                    let imageDict = ["imageURL": imageUrl, "userID": User.currentUserId()!, "userName": self.userName]
-                    self.firebaseRef.child("Images").child(imageName).setValue(imageDict)
-                    self.firebaseRef.child("users").child(User.currentUserId()!).child("uploaded").child(imageName).setValue(true)
-                    let commentDict = ["imageUID": imageName]
-                    self.firebaseRef.child("Comments").setValue(commentDict)
-                    
+                    self.imageURL = imageUrl
+                    self.imageUploadCompleted(imageUrl, image: image)
                 }
             })
         }
@@ -73,21 +67,8 @@ class CameraViewController: UIViewController, FusumaDelegate {
         createRequest(binaryImageData)
     }
     
-    func getUserName() {
-        let firebaseRef = FIRDatabase.database().reference()
-        let userRef = firebaseRef.child("users")
-        
-        userRef.observeEventType(.ChildAdded, withBlock: {(snapshot) in
-            
-            if let tweetDict = snapshot.value as? [String : AnyObject]{
-                print (snapshot.key)
-                if (snapshot.key == User.currentUserId()) {
-                    if let tweetText = tweetDict["username"] as? String{
-                        self.userName = tweetText
-                    }
-                }
-            }
-        })
+    func imageUploadCompleted(imageURL: String, image: UIImage){
+        // Not implemented
     }
     
     // Return the image but called after is dismissed.
@@ -216,12 +197,37 @@ class CameraViewController: UIViewController, FusumaDelegate {
                     }
                     
                     for (index, label) in labels.enumerate() {
-//
+                        //
                         let label = label.lowercaseString
-//                        
+                        //
                         if label.containsString("total") {
-                            self.total = labels[index+1]
+                            var num = index
+                            var numberString: String? = nil
+                            while numberString == nil {
+                                num += 1
+                                if num < labels.count {
+                                    numberString = self.regexMatch(labels[num])
+                                    self.total = numberString
+                                } else {
+                                    break
+                                }
+                            }
+                            print("numberString \(numberString)")
+                        } else if label.containsString("amt") || label.containsString("amount") {
+                            var num = index
+                            var numberString: String? = nil
+                            while numberString == nil {
+                                num += 1
+                                if num < labels.count {
+                                    numberString = self.regexMatch(labels[num])
+                                    self.total = numberString
+                                } else {
+                                    break
+                                }
+                            }
+                            print("numberString \(numberString)")
                         }
+                        
                         
                         
                         if label.containsString("date") {
@@ -232,22 +238,10 @@ class CameraViewController: UIViewController, FusumaDelegate {
                             self.invoiceNo = labels[index+1]
                         }
                     }
-                    
-//                    for label in floatLabels {
-//                        guard let floatLabel = Float(label) else { continue }
-//                        print("running convert to float \(floatLabel)")
-//                        labelValue.append(floatLabel)
-//                    }
-//                    
-//                    let sortedValue = labelValue.sort({ (float1, float2) -> Bool in
-//                        return float1 < float2
-//                    })
-//                    
-//                    self.finalValue = sortedValue[sortedValue.count-1]
-//                    print(sortedValue)
-                let total = self.total ?? "b"
-                    let date = self.date ?? "b"
-                    let Inv = self.invoiceNo ?? "b"
+
+                    let total = self.total ?? "Unable to detect"
+                    let date = self.date ?? "Unable to detect"
+                    let Inv = self.invoiceNo ?? "Unable to detect"
                     self.confirmInfo(total, date: date, InvNo: Inv)
                 } else {
                     print("No labels found")
@@ -259,25 +253,31 @@ class CameraViewController: UIViewController, FusumaDelegate {
     func confirmInfo(total: String, date: String, InvNo: String) {
         print("checking")
         let alert = UIAlertController(title: "Confirmation Message", message: "Total: \(total)\nDate: \(date)\nInvoice No: \(InvNo)", preferredStyle: .Alert)
-        let yes = UIAlertAction(title: "Yes", style: .Default) { (action) in
-            self.fusumaClosed()
-        }
-        let no = UIAlertAction(title: "No", style: .Default) { (action) in
-            let edit = UIAlertController(title: "Confirm with Correct Info", message: nil, preferredStyle: .Alert)
-            edit.addTextFieldWithConfigurationHandler({ (textField) in
-                textField.placeholder = "Total"
-                textField.keyboardType = .DecimalPad
-            })
-            let okay = UIAlertAction(title: "Confirm", style: .Default, handler: { (action) in
-                self.fusumaClosed()
-            })
-            edit.addAction(okay)
+        let yes = UIAlertAction(title: "Okay", style: .Default) { (action) in
+            self.setInfo(total, date: date, InvNo: InvNo)
         }
         
         alert.addAction(yes)
-        alert.addAction(no)
-        self.presentViewController(alert, animated: true) { 
+        self.presentViewController(alert, animated: true) {
             print("Yays")
+        }
+    }
+    
+    func setInfo(total: String, date: String, InvNo: String) {
+    }
+    
+    func regexMatch(message: String) -> String?{
+        do {
+            let regex = try NSRegularExpression(pattern: "[0-9]+\\.[0-9][0-9]", options: [])
+            if let matches = regex.firstMatchInString(message, options: [], range: NSMakeRange(0, message.characters.count)) {
+                if matches.range.length != NSNotFound{
+                    let newString = message as NSString
+                    return newString.substringWithRange(matches.range)
+                }
+            }
+            return nil
+        } catch _ as NSError {
+            return nil
         }
     }
     
