@@ -18,7 +18,8 @@ class EditIncViewController: UIViewController, UITextFieldDelegate {
     var incReceipt: Receipt?
     
     @IBOutlet weak var editBtn: UIButton!
-    
+    @IBOutlet weak var receiptImageView: UIImageView!
+
     var strDate: String = ""
     var datePicker = UIDatePicker()
     
@@ -33,7 +34,7 @@ class EditIncViewController: UIViewController, UITextFieldDelegate {
         guard let title = incReceipt?.category, let date = incReceipt?.date, let incomeType = incReceipt?.category, let ref = incReceipt?.refNo, let amount = incReceipt?.amount else { return }
         
         self.disableEdit()
-        
+        getImage()
         self.title = title
         self.dateTextField.text = date
         self.incomeTypeTextField.text = incomeType
@@ -57,6 +58,33 @@ class EditIncViewController: UIViewController, UITextFieldDelegate {
             self.edit = true
             
         }
+    }
+    
+    func getImage() {
+        var imageID: String!
+        
+        let incomeRef = firebaseRef.child("income").child(User.currentUserId()!).child(incReceipt!.category).child("imageID")
+        incomeRef.observeEventType(.Value, withBlock:  { (snapshot) in
+            if let imageDict = snapshot.value as? [String: Bool] {
+                for (index, _) in imageDict {
+                    imageID = index
+                    self.printImage(imageID)
+                }
+            }
+        })
+        
+    }
+    
+    func printImage(imageID: String) {
+        let imageRef = firebaseRef.child("image").child(imageID)
+        imageRef.observeEventType(.Value, withBlock: { (snapshot) in
+            if let imageDict = snapshot.value as? [String: AnyObject] {
+                let  url = imageDict["imageUrl"] as! String
+                let imageurl = NSURL(string: url)
+                self.receiptImageView.sd_setImageWithURL(imageurl)
+                
+            }
+        })
     }
     
     

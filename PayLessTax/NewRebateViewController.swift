@@ -25,7 +25,9 @@ class NewRebateViewController: CameraViewController, UITextFieldDelegate {
     
     var strDate: String = ""
     var datePicker = UIDatePicker()
+    var imageUrl: String?
     
+    @IBOutlet weak var rebateImage: UIImageView!
     @IBOutlet weak var categoryDetailsTextView: UITextView!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
@@ -129,27 +131,34 @@ class NewRebateViewController: CameraViewController, UITextFieldDelegate {
     func addRebate() {
         guard let date = dateTextField.text, let receiptNo = receiptTextField.text, let amount = amountTextField.text else { return }
         
-        var amountAdded = Int()
+        var amountAdded = Double()
         if amount != "" {
-            amountAdded = Int(amount)!
+            amountAdded = Double(amount)!
         }
         
+        let imageUrl = self.imageUrl ?? ""
+        
         let receiptID = NSUUID().UUIDString
+        let imageID = NSUUID().UUIDString
         
         let receiptRef = firebaseRef.child("receipt").child(receiptID)
         let receiptDict = ["date": date, "receipt no": receiptNo, "amount": amountAdded, "category": selectedRebate!.title]
         receiptRef.setValue(receiptDict)
         
+        let imageRef = firebaseRef.child("image").child(imageID)
+        let imageDict = ["imageUrl": imageUrl, "userID": User.currentUserId()!]
+        imageRef.setValue(imageDict)
         
         let rebateRef = firebaseRef.child("rebate").child(User.currentUserId()!).child(selectedRebate!.title)
         rebateRef.child("receiptID").child(receiptID).setValue(true)
+        rebateRef.child("imageID").child(imageID).setValue(true)
         
-        var newTotal = Int()
+        var newTotal = Double()
         let rebateCatRef = firebaseRef.child("RebateCategories").child(self.selectedRebate!.title).child("subtotal")
         
         rebateRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
             if var rebateTypeDict = snapshot.value as? [String: AnyObject] {
-                if let oldValue = rebateTypeDict["subtotal"] as? Int {
+                if let oldValue = rebateTypeDict["subtotal"] as? Double {
                     rebateTypeDict["subtotal"] = oldValue + amountAdded
                     newTotal = oldValue + amountAdded
                 } else {
@@ -161,6 +170,7 @@ class NewRebateViewController: CameraViewController, UITextFieldDelegate {
                 
             }
         })
+        
     }
     
     func registerForKeyboardNotifications() {
@@ -184,6 +194,18 @@ class NewRebateViewController: CameraViewController, UITextFieldDelegate {
                 
             }
         }
+    }
+    
+    override func imageUploadCompleted(imageURL: String, image: UIImage) {
+        rebateImage.image = image
+        self.imageUrl = imageURL
+
+    }
+    
+    override func setInfo(total: String, date: String, InvNo: String) {
+        self.amountTextField.text = total
+        self.dateTextField.text = date
+        self.receiptTextField.text = InvNo
     }
     
 }

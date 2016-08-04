@@ -556,6 +556,7 @@
                         <outlet property="amountTextField" destination="PA7-v4-b7y" id="cw7-F3-JbC"/>
                         <outlet property="categoryDetailsTextView" destination="iDN-3B-Yc1" id="q3r-vm-be2"/>
                         <outlet property="dateTextField" destination="3CL-Kp-ZcS" id="MEY-1H-yw3"/>
+                        <outlet property="rebateImage" destination="GRa-QV-ufN" id="jbq-dV-6bN"/>
                         <outlet property="receiptTextField" destination="MJb-IT-4EP" id="g9n-DF-9Ua"/>
                         <outlet property="scrollView" destination="Qjd-M5-n7f" id="3eM-bG-T28"/>
                     </connections>
@@ -789,15 +790,24 @@
                                                     <action selector="onEditBtnPressed:" destination="4f2-3Y-s1f" eventType="touchUpInside" id="I3y-BF-lJq"/>
                                                 </connections>
                                             </button>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tnh-CG-FIQ">
+                                                <rect key="frame" x="176" y="211" width="240" height="300"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="240" id="ilc-jN-3nV"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="tMe-MR-cqE" firstAttribute="top" secondItem="8Gq-5x-dj8" secondAttribute="topMargin" constant="5" id="5g2-k3-GOq"/>
+                                            <constraint firstItem="Tnh-CG-FIQ" firstAttribute="top" secondItem="Tiz-hM-z1f" secondAttribute="bottom" constant="8" symbolic="YES" id="FIV-Y7-ghn"/>
                                             <constraint firstItem="Tiz-hM-z1f" firstAttribute="top" secondItem="tMe-MR-cqE" secondAttribute="bottom" constant="10" id="HbJ-50-pTU"/>
                                             <constraint firstItem="Tiz-hM-z1f" firstAttribute="leading" secondItem="8Gq-5x-dj8" secondAttribute="leading" constant="5" id="JKI-rw-IeT"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="tMe-MR-cqE" secondAttribute="trailing" constant="5" id="KuF-w1-dyh"/>
                                             <constraint firstItem="tMe-MR-cqE" firstAttribute="top" secondItem="8Gq-5x-dj8" secondAttribute="top" constant="10" id="Va1-Lj-dXl"/>
+                                            <constraint firstItem="Tnh-CG-FIQ" firstAttribute="centerX" secondItem="Tiz-hM-z1f" secondAttribute="centerX" id="geZ-TM-Chs"/>
                                             <constraint firstAttribute="trailing" secondItem="tMe-MR-cqE" secondAttribute="trailing" constant="5" id="owB-Tw-gqy"/>
+                                            <constraint firstAttribute="bottom" secondItem="Tnh-CG-FIQ" secondAttribute="bottom" constant="69" id="qWC-Gx-lOJ"/>
                                             <constraint firstItem="tMe-MR-cqE" firstAttribute="trailing" secondItem="Tiz-hM-z1f" secondAttribute="trailing" id="rgt-mj-GvF"/>
                                         </constraints>
                                         <variation key="default">
@@ -829,6 +839,7 @@
                     <connections>
                         <outlet property="amountTextField" destination="PKU-0y-sch" id="QE9-Hi-Xdl"/>
                         <outlet property="dateTextField" destination="g1Z-mr-vn8" id="8hv-Z8-xfb"/>
+                        <outlet property="rebateImageView" destination="Tnh-CG-FIQ" id="85h-Jo-rWM"/>
                         <outlet property="rebateTypeTextField" destination="OvW-mY-8lb" id="9Px-xE-IpZ"/>
                         <outlet property="receiptNoTextField" destination="YZI-6p-rNc" id="8f1-Is-PtE"/>
                     </connections>
@@ -867,6 +878,9 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1KO-tj-kIj">
                                                         <rect key="frame" x="270" y="0.0" width="30" height="30"/>
                                                         <state key="normal" image="camera"/>
+                                                        <connections>
+                                                            <action selector="addReceipt:" destination="SPF-Vw-MsA" eventType="touchUpInside" id="QF3-kn-bfG"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -946,6 +960,7 @@
                     <connections>
                         <outlet property="amountTextField" destination="9ra-fI-7vG" id="gPq-Vf-EkQ"/>
                         <outlet property="dateTextField" destination="qti-c5-guf" id="cji-EV-Gnb"/>
+                        <outlet property="incomeImage" destination="HaV-jy-xjM" id="YMH-a2-1MQ"/>
                         <outlet property="incomeTextField" destination="GgC-Gh-XkQ" id="go3-Hn-IbD"/>
                         <outlet property="refTextField" destination="9gZ-rK-4kz" id="NuI-ys-wbe"/>
                         <outlet property="scrollView" destination="OaO-YW-ctt" id="DS4-cN-tdX"/>
@@ -1160,13 +1175,22 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="alg-A5-ATg">
+                                                <rect key="frame" x="180" y="203" width="240" height="300"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="240" id="6yk-fi-Qdd"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstItem="alg-A5-ATg" firstAttribute="top" secondItem="MdO-Zt-6Sa" secondAttribute="bottom" constant="8" symbolic="YES" id="4Zd-SC-hKu"/>
                                             <constraint firstAttribute="trailing" secondItem="xyX-sT-T1p" secondAttribute="trailing" constant="5" id="6zT-vE-M8X"/>
                                             <constraint firstItem="xyX-sT-T1p" firstAttribute="top" secondItem="sIS-yj-SiR" secondAttribute="top" constant="5" id="BX7-x3-v5E"/>
+                                            <constraint firstItem="alg-A5-ATg" firstAttribute="centerX" secondItem="MdO-Zt-6Sa" secondAttribute="centerX" id="LsX-UQ-MVj"/>
                                             <constraint firstItem="MdO-Zt-6Sa" firstAttribute="top" secondItem="xyX-sT-T1p" secondAttribute="bottom" constant="10" id="NCE-Ri-sWw"/>
                                             <constraint firstItem="xyX-sT-T1p" firstAttribute="trailing" secondItem="MdO-Zt-6Sa" secondAttribute="trailing" id="mOI-CZ-bhc"/>
+                                            <constraint firstAttribute="bottom" secondItem="alg-A5-ATg" secondAttribute="bottom" constant="77" id="tJ6-so-0BF"/>
                                             <constraint firstItem="MdO-Zt-6Sa" firstAttribute="leading" secondItem="sIS-yj-SiR" secondAttribute="leading" constant="5" id="zx9-19-f4M"/>
                                         </constraints>
                                     </view>
@@ -1194,6 +1218,7 @@
                         <outlet property="dateTextField" destination="W3a-pK-YKx" id="l8g-dp-da9"/>
                         <outlet property="editBtn" destination="xyX-sT-T1p" id="LxW-rr-mM5"/>
                         <outlet property="incomeTypeTextField" destination="bm2-rT-OSf" id="cVf-7l-tNu"/>
+                        <outlet property="receiptImageView" destination="alg-A5-ATg" id="bmN-sh-Bpq"/>
                         <outlet property="refTextField" destination="zly-vk-W8m" id="1sa-fd-tQf"/>
                     </connections>
                 </viewController>

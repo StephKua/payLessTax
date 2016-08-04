@@ -91,7 +91,7 @@ class IncomeDetailViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let vc = storyboard?.instantiateViewControllerWithIdentifier("EditIncController") as! EditIncViewController
-        vc.preferredContentSize = CGSizeMake(400, 300)
+        vc.preferredContentSize = CGSizeMake(400, 500)
         let navController = UINavigationController(rootViewController: vc)
         navController.modalPresentationStyle = UIModalPresentationStyle.Popover
         

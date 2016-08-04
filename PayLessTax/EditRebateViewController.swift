@@ -20,6 +20,8 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
     var strDate: String = ""
     var datePicker = UIDatePicker()
     
+    @IBOutlet weak var rebateImageView: UIImageView!
+
     @IBOutlet weak var scrollView: UIScrollView!
     var activeTextField: UITextField?
     
@@ -57,6 +59,33 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
             self.edit = true
             
         }
+    }
+    
+    func getImage() {
+        var imageID: String!
+        
+        let incomeRef = firebaseRef.child("income").child(User.currentUserId()!).child(rebReceipt!.category).child("imageID")
+        incomeRef.observeEventType(.Value, withBlock:  { (snapshot) in
+            if let imageDict = snapshot.value as? [String: Bool] {
+                for (index, _) in imageDict {
+                    imageID = index
+                    self.printImage(imageID)
+                }
+            }
+        })
+        
+    }
+    
+    func printImage(imageID: String) {
+        let imageRef = firebaseRef.child("image").child(imageID)
+        imageRef.observeEventType(.Value, withBlock: { (snapshot) in
+            if let imageDict = snapshot.value as? [String: AnyObject] {
+                let  url = imageDict["imageUrl"] as! String
+                let imageurl = NSURL(string: url)
+                self.rebateImageView.sd_setImageWithURL(imageurl)
+                
+            }
+        })
     }
     
     func updateRebate() {
