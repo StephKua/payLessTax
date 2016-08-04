@@ -6,9 +6,14 @@ target 'PayLessTax' do
   use_frameworks!
 
   # Pods for PayLessTax
-	pod 'Firebase'
+	pod 'Firebase/Core'
 	pod 'FirebaseAuth’
 	pod 'FirebaseDatabase’
 	pod 'FirebaseStorage’
+    pod 'Firebase/Messaging'
+    pod 'OneSignal'
+    pod 'Fusuma'
+    pod 'SwiftyJSON'
+    pod 'SDWebImage'
 
 end

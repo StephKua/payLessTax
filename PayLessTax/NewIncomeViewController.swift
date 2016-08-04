@@ -14,28 +14,43 @@ class NewIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     let firebaseRef = FIRDatabase.database().reference()
     var lastSubtotal = Int()
     var strDate: String = ""
-    var activeTextField: UITextField?
+    var datePicker = UIDatePicker()
     
-    //    @IBOutlet weak var incomePickerView: UIPickerView!
+    var activeTextField: UITextField?
     
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var refTextField: UITextField!
     @IBOutlet weak var incomeTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    var incomePickerView = UIPickerView()
     let pickerData = ["Employment", "Rental", "Others"]
     var selectedData: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        datePicker = UIDatePicker(frame: CGRectMake(10, 10, view.frame.width, 200))
+        incomePickerView = UIPickerView(frame: CGRectMake(10, 10, view.frame.width, 200))
     }
     
     
     @IBAction func onSaveBtnPressed(sender: UIBarButtonItem) {
-        self.addIncome()
-        self.navigationController?.popViewControllerAnimated(true)
-        self.resignFirstResponder()
+        if amountTextField.text == "" {
+            self.resignFirstResponder()
+            let alertController = UIAlertController(title: "No Amount Entered", message: "Please enter the total income amount", preferredStyle: .Alert)
+            let dismissAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(dismissAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+        } else {
+            self.addIncome()
+            self.navigationController?.popViewControllerAnimated(true)
+            self.resignFirstResponder()
+        }
+        
     }
     
     func addIncome() {
@@ -74,15 +89,14 @@ class NewIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         let inputView = UIView(frame: CGRectMake(0, 200, view.frame.width, 200))
         inputView.backgroundColor = UIColor.whiteColor()
         
-        let datePicker = UIDatePicker(frame: CGRectMake(10, 10, view.frame.width, 200))
         datePicker.datePickerMode = UIDatePickerMode.Date
         datePicker.addTarget(self, action: #selector(NewRebateViewController.donePicker), forControlEvents: UIControlEvents.TouchUpInside)
         
-        let incomePickerView = UIPickerView(frame: CGRectMake(10, 10, view.frame.width, 200))
         incomePickerView.backgroundColor = UIColor.clearColor()
         incomePickerView.dataSource = self
         incomePickerView.delegate = self
         incomePickerView.showsSelectionIndicator = true
+        self.selectedData = self.pickerData[0]
         
         let toolbar = UIToolbar()
         toolbar.barStyle = UIBarStyle.Default
@@ -103,7 +117,6 @@ class NewIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         switch activeTextField! {
         case dateTextField:
             inputView.addSubview(datePicker)
-            handleDatePicker(datePicker)
         case incomeTextField:
             inputView.addSubview(incomePickerView)
         default:
@@ -112,19 +125,21 @@ class NewIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
     }
     
-    func handleDatePicker(sender: UIDatePicker) {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        strDate = dateFormatter.stringFromDate(sender.date)
-        
+    func textFieldDidEndEditing(textField: UITextField) {
+//        activeTextField = nil
     }
+
     
     func donePicker() {
         activeTextField!.resignFirstResponder()
         
         switch activeTextField! {
         case dateTextField:
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yyyy"
+            strDate = dateFormatter.stringFromDate(datePicker.date)
             activeTextField?.text = strDate
+            
         case incomeTextField:
             activeTextField?.text = selectedData
         default:
@@ -152,5 +167,29 @@ class NewIncomeViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.selectedData = pickerData[row]
     }
+    
+    func registerForKeyboardNotifications() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWasShown), name: UIKeyboardWillShowNotification, object: nil)
+    }
+    
+    func keyboardWasShown(notification: NSNotification) {
+        let info = notification.userInfo!
+        let kbSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue().size
+        
+        let contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize!.height, 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+        
+        var rect = self.view.frame
+        rect.size.height -= kbSize!.height
+        
+        if let activeField = activeTextField {
+            if CGRectContainsPoint(rect, activeTextField!.frame.origin) {
+                self.scrollView.scrollRectToVisible(activeField.frame, animated: true)
+                
+            }
+        }
+    }
+
     
 }

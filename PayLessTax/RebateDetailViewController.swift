@@ -16,77 +16,55 @@ class RebateDetailViewController: UIViewController, UITableViewDataSource, UITab
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
 
-    var bookReceipt = [Receipt]()
-    var donationReceipt = [Receipt]()
-    var sportReceipt = [Receipt]()
+    var userRebateCategories = [UserRebateCategory]()
     
-    var allReceipts = [Receipt]()
-    var allAmounts = [Int]()
-    
-    var rebateType =  ["Books", "Donations", "Sports"]
-        
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.getReceipts()
+        rebateCategories ()
     }
     
+    
+    func rebateCategories(){
+        let rebateRef = firebaseRef.child("rebate").child(User.currentUserId()!)
+        rebateRef.observeEventType(.ChildAdded, withBlock: { (snapshot) in
+            if let category = UserRebateCategory(snapshot: snapshot){
+                guard category.receiptUIDs.count > 0 else {return}
+                category.downloadReceiptDetails() {
+                    self.tableView.reloadData()
+                    self.calcTotal()
+                }
+                self.userRebateCategories.append(category)
+            }
+        })
+    }
+
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("RebateDetailCell")!
         
-        switch indexPath.section {
-        case 0:
-            let selectedReceipt = self.bookReceipt[indexPath.row]
-            cell.textLabel?.text = "Receipt No: \(selectedReceipt.receiptNo) (Date: \(selectedReceipt.date))"
-            cell.detailTextLabel?.text = "RM \(selectedReceipt.amount)"
-        case 1:
-            let selectedReceipt = self.donationReceipt[indexPath.row]
-            cell.textLabel?.text = "Receipt No: \(selectedReceipt.receiptNo) (Date: \(selectedReceipt.date))"
-            cell.detailTextLabel?.text = "RM \(selectedReceipt.amount)"
-        case 2:
-            let selectedReceipt = self.sportReceipt[indexPath.row]
-            cell.textLabel?.text = "Receipt No: \(selectedReceipt.receiptNo) (Date: \(selectedReceipt.date))"
-            cell.detailTextLabel?.text = "RM \(selectedReceipt.amount)"
-        default:
-            cell.textLabel?.text = "No receipts"
-            cell.detailTextLabel?.text = "RM 0"
-        }
+        let category = userRebateCategories[indexPath.section]
+        
+        let receipt = category.receipts[indexPath.row]
+        
+        cell.textLabel?.text = "Receipt No: \(receipt.receiptNo)"
+        cell.detailTextLabel?.text = "RM \(receipt.amount)"
         
         return cell
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return rebateType.count
+        return userRebateCategories.count
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return self.rebateType[0]
-        case 1:
-            return self.rebateType[1]
-        case 2:
-            return self.rebateType[2]
-        default:
-            return ""
-        }
-        
+        let selectedCategory = userRebateCategories[section]
+        let title = selectedCategory.categoryName
+        return title
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        switch section {
-        case 0:
-            return self.bookReceipt.count
-        case 1:
-            return self.donationReceipt.count
-        case 2:
-            return self.sportReceipt.count
-        default:
-            return 0
-        }
-        
+        let category = userRebateCategories[section]
+        return category.receipts.count
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -96,39 +74,76 @@ class RebateDetailViewController: UIViewController, UITableViewDataSource, UITab
         navController.modalPresentationStyle = UIModalPresentationStyle.Popover
         
         let popover = navController.popoverPresentationController
-        let section = tableView.indexPathForSelectedRow?.section
         
-        popover?.permittedArrowDirections = UIPopoverArrowDirection.Up
+        guard let cell = tableView.cellForRowAtIndexPath(indexPath) else { return }
+        
+        popover?.permittedArrowDirections = UIPopoverArrowDirection.init(rawValue: 100)
         popover?.delegate = self
-        popover?.sourceView = self.tableView
-        //        popover?.sourceRect = CGRect(
+        popover?.sourceView = cell.textLabel
+        popover?.sourceRect = CGRectMake(0, 20, 0, 0)
         
         self.presentViewController(navController, animated: true, completion: nil)
-        self.performSegueWithIdentifier("EditRebSegue", sender: self)
         
-        switch section! {
-        case 0:
-            let selectedReceipt: Receipt?
-            selectedReceipt = self.bookReceipt[indexPath.row]
-            vc.rebReceipt = selectedReceipt
-            print(selectedReceipt!.amount)
-            print("receipt \(selectedReceipt)")
-            
-        case 1:
-            let selectedReceipt: Receipt?
-            selectedReceipt = self.donationReceipt[indexPath.row]
-            vc.rebReceipt = selectedReceipt
-            print(selectedReceipt!.amount)
-            
-        case 2:
-            let selectedReceipt: Receipt?
-            selectedReceipt = self.sportReceipt[indexPath.row]
-            vc.rebReceipt = selectedReceipt
-            print(selectedReceipt!.amount)
-            
-        default:
-            break
+        let category = userRebateCategories[indexPath.section]
+        let receipt = category.receipts[indexPath.row]
+        vc.rebReceipt = receipt
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let category = userRebateCategories[indexPath.section]
+        let receipt = category.receipts[indexPath.row]
+        print(category.receipts.count)
+        category.receipts.removeAtIndex(indexPath.row)
+        print(category.receipts.count)
+        
+        deleteReceipt(receipt.key, category: receipt.category, completion: {
+            self.tableView.reloadData()
+        })
+        
+    }
+    
+    
+    func deleteReceipt(key: String, category: String, completion: () -> Void) {
+        self.updateSubtotal(key, category: category)
+        
+        let rebateRef = firebaseRef.child("rebate").child(User.currentUserId()!).child(category).child("receiptID").child(key)
+        rebateRef.removeValue()
+        
+        let receiptRef = firebaseRef.child("receipt").child(key)
+        receiptRef.removeValue()
+        completion()
+        
+    }
+    
+    func updateSubtotal(key: String, category: String) {
+        self.getReceipt(key) { (receipt) in
+            let amountDiff = receipt.amount
+            let rebateRef = self.firebaseRef.child("rebate").child(User.currentUserId()!).child(category)
+            rebateRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
+                if var rebateTypeDict = snapshot.value as? [String: AnyObject] {
+                    if let oldValue = rebateTypeDict["subtotal"] as? Int {
+                        rebateTypeDict["subtotal"] = oldValue - amountDiff
+                    }
+                    rebateRef.updateChildValues(rebateTypeDict)
+                }
+            })
         }
+    }
+    
+    func getReceipt(key: String, completionHandler: (receipt: Receipt) -> ()){
+        let receiptRef = firebaseRef.child("receipt").child(key)
+        receiptRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            if let receipt = Receipt(snapshot: snapshot) {
+                completionHandler(receipt: receipt)
+            }
+        })
+    }
+    
+    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
+        self.userRebateCategories.removeAll()
+        rebateCategories ()
+        self.tableView.reloadData()
     }
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
@@ -136,49 +151,12 @@ class RebateDetailViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     
-    func getReceipts() {
-        
-        for category in rebateType {
-            let rebateRef = firebaseRef.child("rebate").child(User.currentUserId()!).child(category).child("receiptID")
-            rebateRef.observeEventType(.Value, withBlock: { (snapshot) in
-                if let rebateDict = snapshot.value as? [String: Bool] {
-                    for (key, _) in rebateDict {
-                        let receiptRef = self.firebaseRef.child("receipt").child(key)
-                        receiptRef.observeEventType(.Value, withBlock: { (receiptSnapshot) in
-                            if let receipt = Receipt(snapshot: receiptSnapshot) {
-                                print("amount: \(receipt.amount)")
-                                self.allReceipts.append(receipt)
-                                
-                                print("receipt: \(self.allReceipts)")
-                            }
-                            
-                            for receipt in self.allReceipts {
-                                self.allAmounts.append(receipt.amount)
-                                self.totalLabel.text = "RM \(self.allAmounts.reduce(0, combine: +))"
-                                
-                                switch receipt.category {
-                                case self.rebateType[0]:
-                                    self.bookReceipt.removeAll()
-                                    self.bookReceipt.append(receipt)
-                                case self.rebateType[0]:
-                                    self.donationReceipt.removeAll()
-                                    self.donationReceipt.append(receipt)
-                                case self.rebateType[0]:
-                                    self.sportReceipt.removeAll()
-                                    self.sportReceipt.append(receipt)
-                                default:
-                                    break
-                                }
-                                self.tableView.reloadData()
-                            }
-                            
-                        })
-                    }
-                }
-                
-            })
+    func calcTotal() {
+        var total = 0.0
+        for c in userRebateCategories{
+            total += c.subTotal
         }
+        self.totalLabel.text = "\(total)"
     }
-    
     
 }

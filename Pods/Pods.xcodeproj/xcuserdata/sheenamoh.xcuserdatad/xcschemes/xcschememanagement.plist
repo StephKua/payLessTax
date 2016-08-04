@@ -4,7 +4,22 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Fusuma.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-PayLessTax.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SDWebImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -12,7 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>748AAC9C49DAA5C496A8D24A138D8207</key>
+		<key>7380ABD049E12DCFEC9B9E1D2D52C627</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C68E92C3F27F343E765790C3022275A1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CDA217562E80306660A0000B953DFC1C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EF9958D2B5BA287F13A8139E4931B7A3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

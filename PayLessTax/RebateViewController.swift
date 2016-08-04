@@ -10,72 +10,61 @@
 
 import UIKit
 import Firebase
+import SDWebImage
 
 class RebateViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var rebate: Rebate?
     
     let firebaseRef = FIRDatabase.database().reference()
-    var listOfImages = [UIImage]()
-    var typesOfRebates = [String]()
+    
+    var rebateCat = [RebateCategories]()
+    
     @IBOutlet weak var tableView: UITableView!
     
-    override func viewDidLoad() {
+    
+    override func viewDidAppear(animated: Bool) {
         super.viewDidLoad()
+        self.rebateCat.removeAll()
         self.title = "Get Rebates"
         
-        self.typesOfRebates = ["Books", "Donations", "Sports"]
-        if let image1 = UIImage(named: "books"), let image2 = UIImage(named: "donation"), let image3 = UIImage(named: "sports"){
-            self.listOfImages += [image1, image2, image3]
-        }
-        self.getRebate()
-        
+        self.getRebateCategories()
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.getRebate()
-    }
-    
     // MARK: - Table view data source
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return self.typesOfRebates.count
+        return self.rebateCat.count
     }
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("RebateCell", forIndexPath: indexPath) as! RebateTableViewCell
-        cell.rebateLabel.text = self.typesOfRebates[indexPath.row]
         
-        switch cell.rebateLabel.text! {
-        case "Books":
-            cell.maxPointLabel.text = "/ RM 1000"
-            
-            let books = self.rebate?.booksSubTotal ?? 0
-            cell.pointLabel.text = "RM \(books)"
-            
-        case "Donations":
-            cell.maxPointLabel.text = "/ RM 1000"
-            
-            let donations = self.rebate?.donationsSubTotal ?? 0
-            cell.pointLabel.text = "RM \(donations)"
-            
-        case "Sports":
-            cell.maxPointLabel.text = "/ RM 1000"
-            
-            let sports = self.rebate?.sportsSubTotal ?? 0
-            cell.pointLabel.text = "RM \(sports)"
-            
-        default:
-            break
-        }
-        cell.rebateImageView.image = self.listOfImages[indexPath.row]
+        let selectedItems = self.rebateCat[indexPath.row]
+        
+        cell.rebateLabel.text = selectedItems.title
+        cell.pointLabel.text = "RM \(selectedItems.subtotal)"
+        cell.maxPointLabel.text = "/ RM \(selectedItems.max)"
+        
+        cell.rebateImageView.layer.cornerRadius = cell.rebateImageView.frame.size.width / 2
+        cell.rebateImageView.clipsToBounds = true
+        
+        let url = NSURL(string: selectedItems.imageUrl)
+        cell.rebateImageView.sd_setImageWithURL(url)
+        
         
         return cell
     }
     
+    func getRebateCategories() {
+        let rebateCatRef = firebaseRef.child("RebateCategories")
+        rebateCatRef.observeEventType(.ChildAdded, withBlock:  { (snapshot) in
+            if let rebateCat = RebateCategories(snapshot: snapshot) {
+                self.rebateCat.append(rebateCat)
+                self.tableView.reloadData()
+            }
+        })
+    }
     
     @IBAction func logOutBtnClicked(sender: UIBarButtonItem) {
         
@@ -88,28 +77,16 @@ class RebateViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
-    func getRebate() {
-        let rebateRef = firebaseRef.child("rebate").child(User.currentUserId()!)
-        rebateRef.observeEventType(.Value, withBlock:  { (snapshot) in
-            if let rebate = Rebate(snapshot: snapshot) {
-                self.rebate = rebate
-                self.tableView.reloadData()
-            }
-        })
-        
-    }
-    
-    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "NewRebateSegue" {
             let dest = segue.destinationViewController as! NewRebateViewController
             let indexPath = self.tableView.indexPathForSelectedRow
-            let rebate = self.typesOfRebates[(indexPath!.row)]
+            let rebate = self.rebateCat[(indexPath!.row)]
             dest.selectedRebate = rebate
         }
         
     }
-    
-    
 }
+
+

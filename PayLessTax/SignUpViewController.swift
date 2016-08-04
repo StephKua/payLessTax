@@ -9,15 +9,15 @@
 import UIKit
 import Firebase
 
-class SignUpViewController: UIViewController, UITextFieldDelegate {
-
+class SignUpViewController: ReusableKeyboardViewController {
+    
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var incomeTaxNoTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-
-    //add iboutlet fr scroll view
-    var activeTextField: UITextField?
+    
+//    @IBOutlet weak var scrollView: UIScrollView!
+//    var activeTextField: UITextField?
     
     var firebaseRef = FIRDatabase.database().reference()
     
@@ -25,12 +25,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTapped()
-    
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-//        self.registerForKeyboardNotifications()
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SignUpViewController.registerForKeyboardNotifications), name:UIKeyboardWillShowNotification, object: self.view.window)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SignUpViewController.registerForKeyboardNotifications), name: UIKeyboardWillHideNotification, object: self.view.window)
+        
     }
     
     @IBAction func onSignUpBtnClicked(sender: UIButton) {
@@ -57,54 +59,61 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             }
             
         })
-    }
-    
-    /*
-    
-    func registerForKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWasShown), name: UIKeyboardWillShowNotification, object: nil)
-    }
-    
-    func keyboardWasShown(notification: NSNotification) {
-        let info = notification.userInfo!    //userinfo tells u info incl keyboard size (info tat notification sends)
-        let kbSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue().size    //obtain keyboard frame N size
         
-        let contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize!.height, 0.0)
-        scrollView.contentInset = contentInsets //need too add iboutlet
-        scrollView.scrollIndicatorInsets = contentInsets
-        
-        var varrect = self.view.frame //getting frame of whole view
-        rect.size.height -= kbSize!.height
-        
-        if let activeField = activeTextField {
-            if CGRectContainsPoint(rect, activeTextField?.frame.origin) {
-                self.scrollView.scrollRectToVisible(activeField.frame, animated: true)
-
-            }
-        }
     }
- 
- */
     
     
-    func textFieldDidBeginEditing(textField: UITextField) {
-        activeTextField = textField
-    }
-
-    func textFieldDidEndEditing(textField: UITextField) {
-        activeTextField = nil
-    }
-
+//    func registerForKeyboardNotifications() {
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWasShown), name: UIKeyboardWillShowNotification, object: nil)
+//    }
+//    
+//    func keyboardWasShown(notification: NSNotification) {
+//        let info = notification.userInfo!    //userinfo tells u info incl keyboard size (info tat notification sends)
+//        let kbSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue().size    //obtain keyboard frame N size
+//        
+//        let contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize!.height, 0.0)
+//        scrollView.contentInset = contentInsets //need too add iboutlet
+//        scrollView.scrollIndicatorInsets = contentInsets
+//        
+//        var rect = self.view.frame //getting frame of whole view
+//        rect.size.height -= kbSize!.height
+//        
+//        if let activeField = activeTextField {
+//            if CGRectContainsPoint(rect, activeTextField!.frame.origin) {
+//                self.scrollView.scrollRectToVisible(activeField.frame, animated: true)
+//                
+//            }
+//        }
+//    }
+    
+    
+//    func textFieldDidBeginEditing(textField: UITextField) {
+//        activeTextField = textField
+//    }
+//    
+//    func textFieldDidEndEditing(textField: UITextField) {
+//        activeTextField = nil
+//    }
+//    
+    
     
 }
 
-extension UIViewController {
-    func hideKeyboardWhenTapped() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        view.addGestureRecognizer(tap)
-    }
+//extension UIViewController {
+//    
+//    //MARK: Hide keyboard when tapped
+//    
+//    func hideKeyboardWhenTapped() {
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+//        view.addGestureRecognizer(tap)
+//    }
+//    
+//    func dismissKeyboard()  {
+//        view.endEditing(true)
+//    }
+//    
+//    //MARK: Move screen up when keyboard is tapped
+
     
-    func dismissKeyboard()  {
-        view.endEditing(true)
-    }
-}
+    
+//}

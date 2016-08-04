@@ -11,25 +11,60 @@ import Firebase
 
 class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var sections: [Section] = SectionsData().getSectionsFromData()
     var firebaseRef = FIRDatabase.database().reference()
     var income: Income?
     var rebate: Rebate?
+    let incomeType = ["Employment", "Rental", "Others"]
+    let sections = ["Income", "Deductions"]
+    
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     @IBOutlet weak var incomeLabel: UILabel!
     @IBOutlet weak var deductionsLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
+    var userRebateCategories = [UserRebateCategory]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Summary for the Year"
+        self.title = "Summary"
+        tableView.allowsSelection = false
+        
         getIncome()
-        getRebates()
+        rebateCategories()
+    }
+    
+    func rebateCategories(){
+        let rebateRef = firebaseRef.child("rebate").child(User.currentUserId()!)
+        rebateRef.observeEventType(.ChildAdded, withBlock: { (snapshot) in
+            if let category = UserRebateCategory(snapshot: snapshot){
+                guard category.receiptUIDs.count > 0 else {return}
+                category.downloadReceiptDetails() {
+                    self.tableView.reloadData()
+                    self.calcTotal()
+                }
+                self.userRebateCategories.append(category)
+            }
+        })
+    }
+    
+    func calcTotal() {
+        var total = 0.0
+        for c in userRebateCategories{
+            total += c.subTotal
+        }
+        self.deductionsLabel.text = "RM \(total)"
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section].heading
+        switch section {
+        case 0:
+            return "Income"
+        case 1:
+            return "Rebates"
+        default:
+            return ""
+        }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -37,46 +72,56 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections[section].items.count
-        
+        switch section {
+        case 0:
+            return self.incomeType.count
+        case 1:
+            return self.userRebateCategories.count
+        default:
+            return 0
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SummaryCell", forIndexPath: indexPath)
         
-        cell.textLabel?.text = sections[indexPath.section].items[indexPath.row]
-        
-        switch (cell.textLabel!.text)! {
-        case "Employment":
-            let employment = income?.employmentSubTotal ?? 0
-            cell.detailTextLabel?.text = "RM \(employment)"
-        case "Rental":
-            let rental = income?.rentalSubTotal ?? 0
-            cell.detailTextLabel?.text = "RM \(rental)"
-        case "Others":
-            let others = income?.othersSubTotal ?? 0
-            cell.detailTextLabel?.text = "RM \(others)"
-            
-        case "Books":
-            let books = rebate?.booksSubTotal ?? 0
-            cell.detailTextLabel?.text = "RM \(books)"
-        case "Donations":
-            let donations = rebate?.donationsSubTotal ?? 0
-            cell.detailTextLabel?.text = "RM \(donations)"
-        case "Sports":
-            let sports = rebate?.sportsSubTotal ?? 0
-            cell.detailTextLabel?.text = "RM \(sports)"
-
+        switch indexPath.section {
+        case 0:
+            cell.textLabel?.text = self.incomeType[indexPath.row]
+        case 1:
+            let category = userRebateCategories[indexPath.row]
+            cell.textLabel?.text = category.categoryName
         default:
-            cell.detailTextLabel?.text = "-"
+            cell.textLabel?.text = ""
+        }
+        
+        switch indexPath.section {
+        case 0:
+            switch (cell.textLabel!.text)! {
+            case "Employment":
+                let employment = income?.employmentSubTotal ?? 0
+                cell.detailTextLabel?.text = "RM \(employment)"
+            case "Rental":
+                let rental = income?.rentalSubTotal ?? 0
+                cell.detailTextLabel?.text = "RM \(rental)"
+            case "Others":
+                let others = income?.othersSubTotal ?? 0
+                cell.detailTextLabel?.text = "RM \(others)"
+            default:
+                cell.detailTextLabel?.text = "-"
+            }
+            
+        case 1:
+            let category = userRebateCategories[indexPath.row]
+            cell.detailTextLabel?.text = "RM \(category.subTotal)"
+            
+        default:
+            break
         }
         
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        print(sections[indexPath.section].items[indexPath.row])
-    }
     
     func getIncome() {
         let incomeRef = firebaseRef.child("income").child(User.currentUserId()!)
@@ -86,19 +131,6 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.tableView.reloadData()
                 
                 self.incomeLabel.text = "RM \(income.employmentSubTotal + income.rentalSubTotal + income.othersSubTotal)"
-            }
-        })
-        
-    }
-    
-    func getRebates() {
-        let rebateRef = firebaseRef.child("rebate").child(User.currentUserId()!)
-        rebateRef.observeEventType(.Value, withBlock:{ (snapshot) in
-            if let rebate = Rebate(snapshot: snapshot) {
-                self.rebate = rebate
-                self.tableView.reloadData()
-                
-                self.deductionsLabel.text = "RM \(rebate.booksSubTotal + rebate.donationsSubTotal + rebate.sportsSubTotal)"
             }
         })
         

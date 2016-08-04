@@ -28,7 +28,6 @@ class IncomeViewController: UIViewController {
         self.typesOfIncome = ["Employment", "Rental", "Others"]
         self.getIncome()
 
-        
     }
     
     override func viewWillAppear(animated: Bool) {
