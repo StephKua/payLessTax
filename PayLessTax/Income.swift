@@ -12,9 +12,9 @@ import Firebase
 class Income {
     
     var incomeCat: String?
-    var employmentSubTotal = 0
-    var rentalSubTotal = 0
-    var othersSubTotal = 0
+    var employmentSubTotal = 0.0
+    var rentalSubTotal = 0.0
+    var othersSubTotal = 0.0
     var receiptID = [String: Bool]()
     
     init?(snapshot: FIRDataSnapshot) {
@@ -22,15 +22,15 @@ class Income {
         
         self.incomeCat = snapshot.key
         
-        if let employmentDict = incomeDict["Employment"] as? [String: AnyObject], let subtotal = employmentDict["subtotal"] as? Int {
+        if let employmentDict = incomeDict["Employment"] as? [String: AnyObject], let subtotal = employmentDict["subtotal"] as? Double {
             self.employmentSubTotal = subtotal
         }
         
-        if let rentalDict = incomeDict["Rental"] as? [String: AnyObject], let subtotal = rentalDict["subtotal"] as? Int {
+        if let rentalDict = incomeDict["Rental"] as? [String: AnyObject], let subtotal = rentalDict["subtotal"] as? Double {
             self.rentalSubTotal = subtotal
         }
         
-        if let othersDict = incomeDict["Others"] as? [String: AnyObject], let subtotal = othersDict["subtotal"] as? Int {
+        if let othersDict = incomeDict["Others"] as? [String: AnyObject], let subtotal = othersDict["subtotal"] as? Double {
             self.othersSubTotal = subtotal
         }
         

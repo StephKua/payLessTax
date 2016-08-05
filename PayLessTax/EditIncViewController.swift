@@ -39,7 +39,7 @@ class EditIncViewController: UIViewController, UITextFieldDelegate {
         self.dateTextField.text = date
         self.incomeTypeTextField.text = incomeType
         self.refTextField.text = ref
-        self.amountTextField.text = "\(amount)"
+        self.amountTextField.text = "\(amount.asCurrency)"
         
     }
 
@@ -89,7 +89,7 @@ class EditIncViewController: UIViewController, UITextFieldDelegate {
     
     
     func updateIncome() {
-        guard let date = dateTextField?.text, let incomeType = incomeTypeTextField.text, let ref = refTextField.text, let amountString = amountTextField.text, let amount = Int(amountString), let receiptID = incReceipt?.key else { return }
+        guard let date = dateTextField?.text, let incomeType = incomeTypeTextField.text, let ref = refTextField.text, let amountString = amountTextField.text, let amount = Double(amountString), let receiptID = incReceipt?.key else { return }
         
         let receiptRef = firebaseRef.child("receipt").child(receiptID)
         let receiptDict: [String:AnyObject] = ["date": date, "reference no": ref, "amount": amount, "category": incomeType]
@@ -101,7 +101,7 @@ class EditIncViewController: UIViewController, UITextFieldDelegate {
         let incomeRef = firebaseRef.child("income").child(User.currentUserId()!).child(incomeType)
         incomeRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
             if var incomeTypeDict = snapshot.value as? [String: AnyObject] {
-                if let oldValue = incomeTypeDict["subtotal"] as? Int {
+                if let oldValue = incomeTypeDict["subtotal"] as? Double {
                     incomeTypeDict["subtotal"] = oldValue + amountDiff
                 } else {
                     incomeTypeDict["subtotal"] = amountDiff
@@ -156,12 +156,10 @@ class EditIncViewController: UIViewController, UITextFieldDelegate {
     
     func enableEdit () {
         self.dateTextField.userInteractionEnabled = true
-//        self.incomeTypeTextField.userInteractionEnabled = true
         self.refTextField.userInteractionEnabled = true
         self.amountTextField.userInteractionEnabled = true
         
         self.dateTextField.backgroundColor = UIColor.whiteColor()
-//        self.incomeTypeTextField.backgroundColor = UIColor.whiteColor()
         self.refTextField.backgroundColor = UIColor.whiteColor()
         self.amountTextField.backgroundColor = UIColor.whiteColor()
 
@@ -179,7 +177,28 @@ class EditIncViewController: UIViewController, UITextFieldDelegate {
         self.incomeTypeTextField.backgroundColor = color
         self.refTextField.backgroundColor = color
         self.amountTextField.backgroundColor = color
-        
     }
     
+}
+
+
+extension Bool {
+    var isNumber: Bool {
+        var amount = String()
+        let string = Double(amount)
+        if string == nil {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+//    func isNumber(amount: String) -> Bool {
+//        let string = Double(amount)
+//        if string == nil {
+//            return false
+//        } else {
+//            return true
+//        }
+//    }
 }

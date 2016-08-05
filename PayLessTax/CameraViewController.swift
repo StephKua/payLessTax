@@ -34,7 +34,6 @@ class CameraViewController: UIViewController, FusumaDelegate {
         self.hideKeyboardWhenTapped()
         fusuma.delegate = self
         fusuma.hasVideo = true
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -46,7 +45,8 @@ class CameraViewController: UIViewController, FusumaDelegate {
     func fusumaImageSelected(image: UIImage) {
         let imageName = NSUUID().UUIDString
         let imageRef = FIRStorage.storage().reference().child("Images").child("\(imageName).png")
-        if let uploadData = UIImageJPEGRepresentation(image, 0.1){
+        
+        if let uploadData = UIImageJPEGRepresentation(image, 0.1), let resizedImage = UIImage(data: uploadData){
             imageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
                 if error != nil {
                     print(error?.localizedDescription)
@@ -55,13 +55,10 @@ class CameraViewController: UIViewController, FusumaDelegate {
                 
                 if let imageUrl = metadata?.downloadURL()?.absoluteString {
                     self.imageURL = imageUrl
-                    self.imageUploadCompleted(imageUrl, image: image)
+                    self.imageUploadCompleted(imageUrl, image: resizedImage)
                 }
             })
         }
-        
-        self.tabBarController?.selectedIndex = 0
-        print("Image selected")
         
         let binaryImageData = base64EncodeImage(image)
         createRequest(binaryImageData)
@@ -266,6 +263,15 @@ class CameraViewController: UIViewController, FusumaDelegate {
     func setInfo(total: String, date: String, InvNo: String) {
     }
     
+    func isNumber(amount: String) -> Bool {
+        let string = Double(amount)
+        if string == nil {
+            return false
+        } else {
+            return true
+        }
+    }
+    
     func regexMatch(message: String) -> String?{
         do {
             let regex = try NSRegularExpression(pattern: "[0-9]+\\.[0-9][0-9]", options: [])
@@ -280,16 +286,6 @@ class CameraViewController: UIViewController, FusumaDelegate {
             return nil
         }
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 

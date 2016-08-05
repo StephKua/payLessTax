@@ -53,7 +53,7 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
         for c in userRebateCategories{
             total += c.subTotal
         }
-        self.deductionsLabel.text = "RM \(total)"
+        self.deductionsLabel.text = "RM \(total.asCurrency)"
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -100,20 +100,20 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
             switch (cell.textLabel!.text)! {
             case "Employment":
                 let employment = income?.employmentSubTotal ?? 0
-                cell.detailTextLabel?.text = "RM \(employment)"
+                cell.detailTextLabel?.text = "RM \(employment.asCurrency)"
             case "Rental":
                 let rental = income?.rentalSubTotal ?? 0
-                cell.detailTextLabel?.text = "RM \(rental)"
+                cell.detailTextLabel?.text = "RM \(rental.asCurrency)"
             case "Others":
                 let others = income?.othersSubTotal ?? 0
-                cell.detailTextLabel?.text = "RM \(others)"
+                cell.detailTextLabel?.text = "RM \(others.asCurrency)"
             default:
                 cell.detailTextLabel?.text = "-"
             }
             
         case 1:
             let category = userRebateCategories[indexPath.row]
-            cell.detailTextLabel?.text = "RM \(category.subTotal)"
+            cell.detailTextLabel?.text = "RM \(category.subTotal.asCurrency)"
             
         default:
             break
@@ -129,8 +129,7 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
             if let income = Income(snapshot: snapshot) {
                 self.income = income
                 self.tableView.reloadData()
-                
-                self.incomeLabel.text = "RM \(income.employmentSubTotal + income.rentalSubTotal + income.othersSubTotal)"
+                self.incomeLabel.text = "RM \((income.employmentSubTotal + income.rentalSubTotal + income.othersSubTotal).asCurrency)"
             }
         })
         

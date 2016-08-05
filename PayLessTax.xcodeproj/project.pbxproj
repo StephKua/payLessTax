@@ -29,6 +29,7 @@
 		44840AA31D3E227800071DAE /* IncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840AA21D3E227800071DAE /* IncomeViewController.swift */; };
 		44840AA51D3E228A00071DAE /* RebateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840AA41D3E228A00071DAE /* RebateViewController.swift */; };
 		44840AA71D3E2B1000071DAE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44840AA61D3E2B1000071DAE /* User.swift */; };
+		449615A71D53706F00C937E2 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449615A61D53706F00C937E2 /* Validation.swift */; };
 		44A80FA01D4EF05B00AF0AF8 /* RebateCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A80F9F1D4EF05B00AF0AF8 /* RebateCategories.swift */; };
 		44A80FA21D4F063E00AF0AF8 /* ReusableKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A80FA11D4F063E00AF0AF8 /* ReusableKeyboardViewController.swift */; };
 		44A80FA41D5054BB00AF0AF8 /* UserRebateCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A80FA31D5054BB00AF0AF8 /* UserRebateCategory.swift */; };
@@ -64,6 +65,7 @@
 		44840AA21D3E227800071DAE /* IncomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomeViewController.swift; sourceTree = "<group>"; };
 		44840AA41D3E228A00071DAE /* RebateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RebateViewController.swift; sourceTree = "<group>"; };
 		44840AA61D3E2B1000071DAE /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		449615A61D53706F00C937E2 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		44A80F9F1D4EF05B00AF0AF8 /* RebateCategories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RebateCategories.swift; sourceTree = "<group>"; };
 		44A80FA11D4F063E00AF0AF8 /* ReusableKeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableKeyboardViewController.swift; sourceTree = "<group>"; };
 		44A80FA31D5054BB00AF0AF8 /* UserRebateCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRebateCategory.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				442093ED1D3F8DC000261120 /* Income.swift */,
 				442093EB1D3F70BF00261120 /* Receipt.swift */,
 				4438CAED1D41F3D300168EB6 /* Image.swift */,
+				449615A61D53706F00C937E2 /* Validation.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				442DB8931D4B59F10047865F /* ReusableCameraViewController.swift in Sources */,
 				44840A9F1D3E225C00071DAE /* NewIncomeViewController.swift in Sources */,
 				442DB8911D4B46E80047865F /* CameraViewController.swift in Sources */,
+				449615A71D53706F00C937E2 /* Validation.swift in Sources */,
 				44840A9D1D3E225300071DAE /* SummaryViewController.swift in Sources */,
 				4438CAEE1D41F3D300168EB6 /* Image.swift in Sources */,
 				44840AA71D3E2B1000071DAE /* User.swift in Sources */,

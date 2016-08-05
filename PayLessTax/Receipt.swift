@@ -11,7 +11,7 @@ import FirebaseDatabase
 
 class Receipt: NSObject {
     
-    var amount = 0
+    var amount = 0.0
     var receiptNo = "0"
     var refNo = "0"
     var date = String()
@@ -34,7 +34,7 @@ class Receipt: NSObject {
         }
         
         
-        if let amount = receiptDict["amount"] as? Int {
+        if let amount = receiptDict["amount"] as? Double {
             self.amount = amount
         }
         

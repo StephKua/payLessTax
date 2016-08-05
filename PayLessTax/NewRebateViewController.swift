@@ -21,7 +21,7 @@ import Fusuma
 class NewRebateViewController: CameraViewController, UITextFieldDelegate {
     
     var selectedRebate: RebateCategories?
-    var lastSubtotal = Int()
+    var lastSubtotal = Double()
     
     var strDate: String = ""
     var datePicker = UIDatePicker()
@@ -43,6 +43,11 @@ class NewRebateViewController: CameraViewController, UITextFieldDelegate {
         self.title = selectedRebate!.title
         datePicker = UIDatePicker(frame: CGRectMake(10, 10, view.frame.width, 200))
         
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        strDate = dateFormatter.stringFromDate(datePicker.date)
+        dateTextField.text = strDate
+        
         let rebateCategoryRef = firebaseRef.child("RebateCategories").child(selectedRebate!.title).child("catDesc")
         rebateCategoryRef.observeEventType(.Value, withBlock:  { (snapshot) in
             if let description = snapshot.value as? String {
@@ -50,8 +55,6 @@ class NewRebateViewController: CameraViewController, UITextFieldDelegate {
                 self.categoryDetailsTextView.text = text
             }
         })
-
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -116,7 +119,11 @@ class NewRebateViewController: CameraViewController, UITextFieldDelegate {
             let dismissAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(dismissAction)
             self.presentViewController(alertController, animated: true, completion: nil)
-            
+//        } else if Validation.isStringNumerical(amountTextField.text!) == false {
+//            let alertController = UIAlertController(title: "Invalid amount", message: "Please enter a valid amount", preferredStyle: .Alert)
+//            let dismissAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+//            alertController.addAction(dismissAction)
+//            self.presentViewController(alertController, animated: true, completion: nil)
         } else {
             self.resignFirstResponder()
             self.addRebate()
@@ -167,7 +174,6 @@ class NewRebateViewController: CameraViewController, UITextFieldDelegate {
                 }
                 rebateCatRef.child(User.currentUserId()!).setValue(newTotal)
                 rebateRef.updateChildValues(rebateTypeDict)
-                
             }
         })
         
@@ -197,9 +203,11 @@ class NewRebateViewController: CameraViewController, UITextFieldDelegate {
     }
     
     override func imageUploadCompleted(imageURL: String, image: UIImage) {
+        let rect = CGRectMake(0, 0, 100, 100)
         rebateImage.image = image
+        rebateImage.image!.drawInRect(rect)
         self.imageUrl = imageURL
-
+        
     }
     
     override func setInfo(total: String, date: String, InvNo: String) {
@@ -209,5 +217,7 @@ class NewRebateViewController: CameraViewController, UITextFieldDelegate {
     }
     
 }
+
+
 
 
