@@ -7,7 +7,6 @@
 //
 
 
-
 import UIKit
 import Firebase
 import SDWebImage
@@ -43,7 +42,7 @@ class RebateViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let selectedItems = self.rebateCat[indexPath.row]
         
         cell.rebateLabel.text = selectedItems.title
-        cell.pointLabel.text = "RM \(selectedItems.subtotal)"
+        cell.pointLabel.text = "RM \(selectedItems.subtotal.asCurrencyNoDecimal)"
         cell.maxPointLabel.text = "/ RM \(selectedItems.max)"
         
         cell.rebateImageView.layer.cornerRadius = cell.rebateImageView.frame.size.width / 2
@@ -76,8 +75,6 @@ class RebateViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "NewRebateSegue" {
             let dest = segue.destinationViewController as! NewRebateViewController
@@ -85,8 +82,26 @@ class RebateViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let rebate = self.rebateCat[(indexPath!.row)]
             dest.selectedRebate = rebate
         }
-        
     }
 }
+
+extension Double {
+    var asCurrencyNoDecimal:String {
+        var formatter = NSNumberFormatter()
+        formatter.numberStyle = .CurrencyAccountingStyle
+        formatter.currencySymbol = ""
+        formatter.maximumFractionDigits = 0
+        return formatter.stringFromNumber(self)!
+    }
+    
+    var asCurrency:String {
+        var formatter = NSNumberFormatter()
+        formatter.numberStyle = .CurrencyAccountingStyle
+        formatter.currencySymbol = ""
+        return formatter.stringFromNumber(self)!
+    }
+}
+
+
 
 

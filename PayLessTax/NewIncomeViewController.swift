@@ -11,7 +11,7 @@ import Firebase
 
 class NewIncomeViewController: CameraViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
-    var lastSubtotal = Int()
+    var lastSubtotal = Double()
     var strDate: String = ""
     var datePicker = UIDatePicker()
     var imageUrl: String?
@@ -34,12 +34,20 @@ class NewIncomeViewController: CameraViewController, UIPickerViewDelegate, UIPic
         
         datePicker = UIDatePicker(frame: CGRectMake(10, 10, view.frame.width, 200))
         incomePickerView = UIPickerView(frame: CGRectMake(10, 10, view.frame.width, 200))
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        strDate = dateFormatter.stringFromDate(datePicker.date)
+        dateTextField.text = strDate
+        
     }
     
     override func imageUploadCompleted(imageURL: String, image: UIImage) {
+        let rect = CGRectMake(0, 0, 100, 100)
         incomeImage.image = image
+        incomeImage.image!.drawInRect(rect)
         self.imageUrl = imageURL
-
+        
     }
     
     @IBAction func addReceipt(sender: UIButton) {
@@ -47,14 +55,19 @@ class NewIncomeViewController: CameraViewController, UIPickerViewDelegate, UIPic
     }
     
     @IBAction func onSaveBtnPressed(sender: UIBarButtonItem) {
-        if amountTextField.text == "" {
+        if amountTextField.text == "" || self.isNumber(amountTextField.text!) == false {
             self.resignFirstResponder()
-            let alertController = UIAlertController(title: "No Amount Entered", message: "Please enter the total income amount", preferredStyle: .Alert)
+            let alertController = UIAlertController(title: "Invalid amount", message: "Please enter a valid amount", preferredStyle: .Alert)
             let dismissAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(dismissAction)
             self.presentViewController(alertController, animated: true, completion: nil)
-            
-        } else {
+        } else if incomeTextField.text == "" {
+            let alertController = UIAlertController(title: "No Income Type Selected", message: "Please select an income type", preferredStyle: .Alert)
+            let dismissAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(dismissAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        else {
             self.addIncome()
             self.navigationController?.popViewControllerAnimated(true)
             self.resignFirstResponder()
@@ -143,11 +156,6 @@ class NewIncomeViewController: CameraViewController, UIPickerViewDelegate, UIPic
         
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
-//        activeTextField = nil
-    }
-
-    
     func donePicker() {
         activeTextField!.resignFirstResponder()
         
@@ -214,6 +222,6 @@ class NewIncomeViewController: CameraViewController, UIPickerViewDelegate, UIPic
         self.dateTextField.text = date
         self.refTextField.text = InvNo
     }
-
+    
     
 }

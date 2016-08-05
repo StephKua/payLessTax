@@ -35,12 +35,12 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
         guard let title = rebReceipt?.category, let date = rebReceipt?.date, let rebateType = rebReceipt?.category, let receiptNo = rebReceipt?.receiptNo, let amount = rebReceipt?.amount else { return }
         
         self.disableEdit()
-        
+        getImage()
         self.title = title
         self.dateTextField.text = date
         self.rebateTypeTextField.text = rebateType
         self.receiptNoTextField.text = receiptNo
-        self.amountTextField.text = "\(amount)"
+        self.amountTextField.text = "\(amount.asCurrency)"
         
         datePicker = UIDatePicker(frame: CGRectMake(10, 10, view.frame.width, 200))
     }
@@ -64,7 +64,7 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
     func getImage() {
         var imageID: String!
         
-        let incomeRef = firebaseRef.child("income").child(User.currentUserId()!).child(rebReceipt!.category).child("imageID")
+        let incomeRef = firebaseRef.child("rebate").child(User.currentUserId()!).child(rebReceipt!.category).child("imageID")
         incomeRef.observeEventType(.Value, withBlock:  { (snapshot) in
             if let imageDict = snapshot.value as? [String: Bool] {
                 for (index, _) in imageDict {
@@ -89,7 +89,7 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
     }
     
     func updateRebate() {
-        guard let date = dateTextField.text, let rebateType = rebateTypeTextField.text, let receiptNo = receiptNoTextField.text, let amountString = amountTextField.text, let amount = Int(amountString), let receiptID = rebReceipt?.key else { return }
+        guard let date = dateTextField.text, let rebateType = rebateTypeTextField.text, let receiptNo = receiptNoTextField.text, let amountString = amountTextField.text, let amount = Double(amountString), let receiptID = rebReceipt?.key else { return }
         
         let receiptRef = firebaseRef.child("receipt").child(receiptID)
         let receiptDict: [String: AnyObject] = ["date": date, "receipt no": receiptNo, "amount": amount, "category": rebateType]
@@ -97,13 +97,13 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
         
         let amountDiff = amount - (rebReceipt?.amount)!
         
-        var newTotal = Int()
+        var newTotal = Double()
         let rebateCatRef = firebaseRef.child("RebateCategories").child(rebateType).child("subtotal")
         
         let rebateRef = firebaseRef.child("rebate").child(User.currentUserId()!).child(rebateType)
         rebateRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
             if var rebateTypeDict = snapshot.value as? [String: AnyObject] {
-                if let oldValue = rebateTypeDict["subtotal"] as? Int {
+                if let oldValue = rebateTypeDict["subtotal"] as? Double {
                     rebateTypeDict["subtotal"] = oldValue + amountDiff
                     newTotal = oldValue + amountDiff
                 } else {
@@ -170,12 +170,10 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
     
     func enableEdit () {
         self.dateTextField.userInteractionEnabled = true
-        //        self.rebateTypeTextField.userInteractionEnabled = true
         self.receiptNoTextField.userInteractionEnabled = true
         self.amountTextField.userInteractionEnabled = true
         
         self.dateTextField.backgroundColor = UIColor.whiteColor()
-        //        self.rebateTypeTextField.backgroundColor = UIColor.whiteColor()
         self.receiptNoTextField.backgroundColor = UIColor.whiteColor()
         self.amountTextField.backgroundColor = UIColor.whiteColor()
         

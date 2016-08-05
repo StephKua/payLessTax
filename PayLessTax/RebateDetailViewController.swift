@@ -47,7 +47,7 @@ class RebateDetailViewController: UIViewController, UITableViewDataSource, UITab
         let receipt = category.receipts[indexPath.row]
         
         cell.textLabel?.text = "Receipt No: \(receipt.receiptNo)"
-        cell.detailTextLabel?.text = "RM \(receipt.amount)"
+        cell.detailTextLabel?.text = "RM \(receipt.amount.asCurrency)"
         
         return cell
     }
@@ -122,7 +122,7 @@ class RebateDetailViewController: UIViewController, UITableViewDataSource, UITab
             let rebateRef = self.firebaseRef.child("rebate").child(User.currentUserId()!).child(category)
             rebateRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
                 if var rebateTypeDict = snapshot.value as? [String: AnyObject] {
-                    if let oldValue = rebateTypeDict["subtotal"] as? Int {
+                    if let oldValue = rebateTypeDict["subtotal"] as? Double {
                         rebateTypeDict["subtotal"] = oldValue - amountDiff
                     }
                     rebateRef.updateChildValues(rebateTypeDict)
@@ -156,7 +156,9 @@ class RebateDetailViewController: UIViewController, UITableViewDataSource, UITab
         for c in userRebateCategories{
             total += c.subTotal
         }
-        self.totalLabel.text = "\(total)"
+        self.totalLabel.text = "\(total.asCurrency)"
     }
     
 }
+
+

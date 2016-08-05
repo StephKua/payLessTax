@@ -20,7 +20,7 @@ class IncomeViewController: UIViewController {
     @IBOutlet weak var otherLabel: UILabel!
     
     @IBOutlet weak var totalLabel: UILabel!
-    var totalInc = Int()
+    var totalInc = Double()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,26 +35,22 @@ class IncomeViewController: UIViewController {
         self.getIncome()
     }
     
-    @IBAction func onEditBtnPressed(sender: UIBarButtonItem) {
-    }
-    
     
     func getIncome () {
         let incomeRef = firebaseRef.child("income").child(User.currentUserId()!)
         incomeRef.observeEventType(.Value, withBlock: { (snapshot) in
             if let income = Income(snapshot: snapshot) {
-                self.employmentLabel.text = "RM \(income.employmentSubTotal)"
-                self.rentalLabel.text = "RM \(income.rentalSubTotal)"
-                self.otherLabel.text = "RM \(income.othersSubTotal)"
+                
+                self.employmentLabel.text = "RM \(income.employmentSubTotal.asCurrencyNoDecimal)"
+                self.rentalLabel.text = "RM \(income.rentalSubTotal.asCurrencyNoDecimal)"
+                self.otherLabel.text = "RM \(income.othersSubTotal.asCurrencyNoDecimal)"
                 
                 self.totalInc = income.employmentSubTotal + income.rentalSubTotal + income.othersSubTotal
-                self.totalLabel.text = "RM \(self.totalInc)"
+                self.totalLabel.text = "RM \(self.totalInc.asCurrencyNoDecimal)"
                 
                 
             }
         })
     }
-
-    
     
 }

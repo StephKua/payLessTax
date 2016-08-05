@@ -15,7 +15,7 @@ class RebateCategories: NSObject {
     var details = String()
     var max = String()
     var imageUrl = String()
-    var subtotal = Int()
+    var subtotal = Double()
     
     
     init? (snapshot: FIRDataSnapshot) {
@@ -41,7 +41,7 @@ class RebateCategories: NSObject {
             self.imageUrl = image
         }
         
-        if let subtotal = rebateCatDict["subtotal"] as? [String: Int]{
+        if let subtotal = rebateCatDict["subtotal"] as? [String: Double]{
             for (key, value) in subtotal {
                 if key == User.currentUserId() {
                     self.subtotal = value

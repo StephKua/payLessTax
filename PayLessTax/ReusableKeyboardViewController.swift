@@ -41,7 +41,6 @@ class ReusableKeyboardViewController: UIViewController, UITextFieldDelegate {
         scrollView.scrollIndicatorInsets = contentInsets
         
         var rect = self.view.frame //getting frame of whole view
-//        let newHeight = kbSize!.height + 500
         rect.size.height -= kbSize!.height
         
         if let activeField = activeTextField {

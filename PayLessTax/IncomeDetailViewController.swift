@@ -26,14 +26,10 @@ class IncomeDetailViewController: UIViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         self.getIncome()
         self.calcTotal { (x, y, z) in
-            self.totalLabel.text = "RM \(x + y + z)"
+            self.totalLabel.text = "RM \((x + y + z).asCurrency)"
         }
     }
-    
-    //    override func viewWillAppear(animated: Bool) {
-    //        super.viewWillAppear(true)
-    //        self.calcTotal()
-    //    }
+
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("IncomeDetailCell")!
@@ -42,15 +38,15 @@ class IncomeDetailViewController: UIViewController, UITableViewDelegate, UITable
         case 0:
             let selectedReceipt = self.employmentInc[indexPath.row]
             cell.textLabel?.text = "Ref. No: \(selectedReceipt.refNo)"
-            cell.detailTextLabel?.text = "RM \(selectedReceipt.amount)"
+            cell.detailTextLabel?.text = "RM \(selectedReceipt.amount.asCurrency)"
         case 1:
             let selectedReceipt = self.rentalInc[indexPath.row]
             cell.textLabel?.text = "Ref. No: \(selectedReceipt.refNo)"
-            cell.detailTextLabel?.text = "RM \(selectedReceipt.amount)"
+            cell.detailTextLabel?.text = "RM \(selectedReceipt.amount.asCurrency)"
         case 2:
             let selectedReceipt = self.otherInc[indexPath.row]
             cell.textLabel?.text = "Ref. No: \(selectedReceipt.refNo)"
-            cell.detailTextLabel?.text = "RM \(selectedReceipt.amount)"
+            cell.detailTextLabel?.text = "RM \(selectedReceipt.amount.asCurrency)"
         default:
             cell.textLabel?.text = "No income"
             cell.detailTextLabel?.text = "RM 0"
@@ -112,20 +108,16 @@ class IncomeDetailViewController: UIViewController, UITableViewDelegate, UITable
             let selectedReceipt: Receipt?
             selectedReceipt = self.employmentInc[indexPath.row]
             vc.incReceipt = selectedReceipt
-            print(selectedReceipt!.amount)
-            print("receipt \(selectedReceipt)")
             
         case 1:
             let selectedReceipt: Receipt?
             selectedReceipt = self.rentalInc[indexPath.row]
             vc.incReceipt = selectedReceipt
-            print(selectedReceipt!.amount)
             
         case 2:
             let selectedReceipt: Receipt?
             selectedReceipt = self.otherInc[indexPath.row]
             vc.incReceipt = selectedReceipt
-            print(selectedReceipt!.amount)
             
         default:
             break
@@ -174,7 +166,7 @@ class IncomeDetailViewController: UIViewController, UITableViewDelegate, UITable
             let incomeRef = self.firebaseRef.child("income").child(User.currentUserId()!).child(category)
             incomeRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
                 if var incomeTypeDict = snapshot.value as? [String: AnyObject] {
-                    if let oldValue = incomeTypeDict["subtotal"] as? Int {
+                    if let oldValue = incomeTypeDict["subtotal"] as? Double {
                         incomeTypeDict["subtotal"] = oldValue - amountDiff
                     }
                     incomeRef.updateChildValues(incomeTypeDict)
@@ -250,16 +242,16 @@ class IncomeDetailViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
-    func calcTotal(completionHandler: (x: Int, y: Int, z: Int) -> ()) {
-        var employment: Int = 0
-        var rental: Int = 0
-        var other: Int = 0
+    func calcTotal(completionHandler: (x: Double, y: Double, z: Double) -> ()) {
+        var employment: Double = 0
+        var rental: Double = 0
+        var other: Double = 0
         
         let incomeRef = firebaseRef.child("income").child(User.currentUserId()!)
         for category in incomeType {
             incomeRef.child(category).observeEventType(.Value, withBlock: { (snapshot) in
                 if var incomeTypeDict = snapshot.value as? [String: AnyObject] {
-                    if let categoryAmount = incomeTypeDict ["subtotal"] as? Int {
+                    if let categoryAmount = incomeTypeDict ["subtotal"] as? Double {
                         switch category {
                         case self.incomeType[0]:
                             employment = categoryAmount
