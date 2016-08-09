@@ -53,9 +53,12 @@ class NewIncomeViewController: CameraViewController, UIPickerViewDelegate, UIPic
     @IBAction func addReceipt(sender: UIButton) {
         self.presentViewController(fusuma, animated: true, completion: nil)
     }
+
     
     @IBAction func onSaveBtnPressed(sender: UIBarButtonItem) {
-        if amountTextField.text == "" || self.isNumber(amountTextField.text!) == false {
+        let amount = amountTextField.text?.formattedNo
+        
+        if amountTextField.text == "" || amount?.isValidNumber == false {
             self.resignFirstResponder()
             let alertController = UIAlertController(title: "Invalid amount", message: "Please enter a valid amount", preferredStyle: .Alert)
             let dismissAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
@@ -72,19 +75,17 @@ class NewIncomeViewController: CameraViewController, UIPickerViewDelegate, UIPic
             self.navigationController?.popViewControllerAnimated(true)
             self.resignFirstResponder()
         }
-        
     }
     
     func addIncome() {
         guard let date = dateTextField.text, let incomeType = incomeTextField.text, let ref = refTextField.text, let amount = amountTextField.text else { return }
         
         var amountAdded = Double()
-        if amount != "" {
-            amountAdded = Double(amount)!
+        if amount.formattedNo != "" {
+            amountAdded = Double(amount.formattedNo)!
         }
         
         let imageLink = self.imageUrl ?? ""
-        
         
         let receiptID = NSUUID().UUIDString
         let imageID = NSUUID().UUIDString
@@ -218,6 +219,7 @@ class NewIncomeViewController: CameraViewController, UIPickerViewDelegate, UIPic
     }
     
     override func setInfo(total: String, date: String, InvNo: String) {
+
         self.amountTextField.text = total
         self.dateTextField.text = date
         self.refTextField.text = InvNo

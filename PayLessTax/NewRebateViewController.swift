@@ -112,18 +112,21 @@ class NewRebateViewController: CameraViewController, UITextFieldDelegate {
     }
     
     @IBAction func onSaveBtnPressed(sender: UIBarButtonItem) {
+        let amount = amountTextField.text?.formattedNo
         
-        if amountTextField.text == "" || receiptTextField.text == "" {
+        if amountTextField.text == "" || amount?.isValidNumber == false {
             self.resignFirstResponder()
-            let alertController = UIAlertController(title: "Missing Info", message: "Please enter both the receipt number and receipt amount", preferredStyle: .Alert)
+            let alertController = UIAlertController(title: "Invalid amount", message: "Please enter a valid amount", preferredStyle: .Alert)
             let dismissAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(dismissAction)
             self.presentViewController(alertController, animated: true, completion: nil)
-//        } else if Validation.isStringNumerical(amountTextField.text!) == false {
-//            let alertController = UIAlertController(title: "Invalid amount", message: "Please enter a valid amount", preferredStyle: .Alert)
-//            let dismissAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-//            alertController.addAction(dismissAction)
-//            self.presentViewController(alertController, animated: true, completion: nil)
+        } else if receiptTextField.text == "" {
+            self.resignFirstResponder()
+            let alertController = UIAlertController(title: "Missing Receipt Number", message: "Please enter valid receipt number", preferredStyle: .Alert)
+            let dismissAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(dismissAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+        
         } else {
             self.resignFirstResponder()
             self.addRebate()
@@ -139,8 +142,8 @@ class NewRebateViewController: CameraViewController, UITextFieldDelegate {
         guard let date = dateTextField.text, let receiptNo = receiptTextField.text, let amount = amountTextField.text else { return }
         
         var amountAdded = Double()
-        if amount != "" {
-            amountAdded = Double(amount)!
+        if amount.formattedNo != "" {
+            amountAdded = Double(amount.formattedNo)!
         }
         
         let imageUrl = self.imageUrl ?? ""
@@ -197,7 +200,6 @@ class NewRebateViewController: CameraViewController, UITextFieldDelegate {
         if let activeField = activeTextField {
             if CGRectContainsPoint(rect, activeTextField!.frame.origin) {
                 self.scrollView.scrollRectToVisible(activeField.frame, animated: true)
-                
             }
         }
     }

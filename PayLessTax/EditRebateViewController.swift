@@ -21,7 +21,7 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
     var datePicker = UIDatePicker()
     
     @IBOutlet weak var rebateImageView: UIImageView!
-
+    
     @IBOutlet weak var scrollView: UIScrollView!
     var activeTextField: UITextField?
     
@@ -31,7 +31,7 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTapped()
-       
+        
         guard let title = rebReceipt?.category, let date = rebReceipt?.date, let rebateType = rebReceipt?.category, let receiptNo = rebReceipt?.receiptNo, let amount = rebReceipt?.amount else { return }
         
         self.disableEdit()
@@ -44,15 +44,30 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
         
         datePicker = UIDatePicker(frame: CGRectMake(10, 10, view.frame.width, 200))
     }
-
+    
     
     @IBAction func onEditBtnPressed(sender: UIButton) {
         if edit == true {
-            self.disableEdit()
-            sender.setTitle("Edit", forState: UIControlState.Normal)
-            self.edit = false
-            self.updateRebate()
+            let amount = amountTextField.text?.formattedNo
             
+            if amountTextField.text == "" || amount?.isValidNumber == false {
+                self.resignFirstResponder()
+                let alertController = UIAlertController(title: "Invalid amount", message: "Please enter a valid amount", preferredStyle: .Alert)
+                let dismissAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alertController.addAction(dismissAction)
+                self.presentViewController(alertController, animated: true, completion: nil)
+            } else if self.receiptNoTextField.text == "" {
+                self.resignFirstResponder()
+                let alertController = UIAlertController(title: "Missing Receipt Number", message: "Please enter valid receipt number", preferredStyle: .Alert)
+                let dismissAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alertController.addAction(dismissAction)
+                self.presentViewController(alertController, animated: true, completion: nil)
+            } else {
+                self.disableEdit()
+                sender.setTitle("Edit", forState: UIControlState.Normal)
+                self.edit = false
+                self.updateRebate()
+            }
         } else {
             self.enableEdit()
             sender.setTitle("Save", forState: UIControlState.Normal)
@@ -148,10 +163,10 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
         dateTextField.inputAccessoryView = toolbar
         
     }
-//    
-//    func textFieldDidEndEditing(textField: UITextField) {
-//        activeTextField = nil
-//    }
+    //
+    //    func textFieldDidEndEditing(textField: UITextField) {
+    //        activeTextField = nil
+    //    }
     
     func donePicker() {
         dateTextField.resignFirstResponder()
