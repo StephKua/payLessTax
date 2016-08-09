@@ -249,8 +249,8 @@ class CameraViewController: UIViewController, FusumaDelegate {
     
     func confirmInfo(total: String, date: String, InvNo: String) {
         print("checking")
-        let alert = UIAlertController(title: "Confirmation Message", message: "Total: \(total)\nDate: \(date)\nInvoice No: \(InvNo)", preferredStyle: .Alert)
-        let yes = UIAlertAction(title: "Okay", style: .Default) { (action) in
+        let alert = UIAlertController(title: "Details Captured", message: "Date: \(date)\nInvoice No: \(InvNo)\nTotal: \(total)\n\nClick OK to Save or Edit the details", preferredStyle: .Alert)
+        let yes = UIAlertAction(title: "OK", style: .Default) { (action) in
             self.setInfo(total, date: date, InvNo: InvNo)
         }
         

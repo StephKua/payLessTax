@@ -19,7 +19,7 @@ class EditIncViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var editBtn: UIButton!
     @IBOutlet weak var receiptImageView: UIImageView!
-
+    
     var strDate: String = ""
     var datePicker = UIDatePicker()
     
@@ -42,16 +42,24 @@ class EditIncViewController: UIViewController, UITextFieldDelegate {
         self.amountTextField.text = "\(amount.asCurrency)"
         
     }
-
+    
     
     @IBAction func onEditBtnPressed(sender: UIButton) {
         
         if edit == true {
-            self.disableEdit()
-            sender.setTitle("Edit", forState: UIControlState.Normal)
-            self.edit = false
-            self.updateIncome()
-            
+            let amount = amountTextField.text?.formattedNo
+            if amountTextField.text == "" || amount?.isValidNumber == false {
+                self.resignFirstResponder()
+                let alertController = UIAlertController(title: "Invalid amount", message: "Please enter a valid amount", preferredStyle: .Alert)
+                let dismissAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alertController.addAction(dismissAction)
+                self.presentViewController(alertController, animated: true, completion: nil)
+            } else {
+                self.disableEdit()
+                sender.setTitle("Edit", forState: UIControlState.Normal)
+                self.edit = false
+                self.updateIncome()
+            }
         } else {
             self.enableEdit()
             sender.setTitle("Save", forState: UIControlState.Normal)
@@ -89,7 +97,7 @@ class EditIncViewController: UIViewController, UITextFieldDelegate {
     
     
     func updateIncome() {
-        guard let date = dateTextField?.text, let incomeType = incomeTypeTextField.text, let ref = refTextField.text, let amountString = amountTextField.text, let amount = Double(amountString), let receiptID = incReceipt?.key else { return }
+        guard let date = dateTextField?.text, let incomeType = incomeTypeTextField.text, let ref = refTextField.text, let amountString = amountTextField.text, let amount = Double(amountString.formattedNo), let receiptID = incReceipt?.key else { return }
         
         let receiptRef = firebaseRef.child("receipt").child(receiptID)
         let receiptDict: [String:AnyObject] = ["date": date, "reference no": ref, "amount": amount, "category": incomeType]
@@ -110,7 +118,7 @@ class EditIncViewController: UIViewController, UITextFieldDelegate {
             }
         })
     }
-        
+    
     func textFieldDidBeginEditing(textField: UITextField) {
         let inputView = UIView(frame: CGRectMake(0, 200, view.frame.width, 200))
         inputView.backgroundColor = UIColor.whiteColor()
@@ -152,7 +160,7 @@ class EditIncViewController: UIViewController, UITextFieldDelegate {
         dateTextField.resignFirstResponder()
     }
     
-
+    
     
     func enableEdit () {
         self.dateTextField.userInteractionEnabled = true
@@ -162,7 +170,7 @@ class EditIncViewController: UIViewController, UITextFieldDelegate {
         self.dateTextField.backgroundColor = UIColor.whiteColor()
         self.refTextField.backgroundColor = UIColor.whiteColor()
         self.amountTextField.backgroundColor = UIColor.whiteColor()
-
+        
     }
     
     func disableEdit () {
@@ -179,26 +187,4 @@ class EditIncViewController: UIViewController, UITextFieldDelegate {
         self.amountTextField.backgroundColor = color
     }
     
-}
-
-
-extension Bool {
-    var isNumber: Bool {
-        var amount = String()
-        let string = Double(amount)
-        if string == nil {
-            return false
-        } else {
-            return true
-        }
-    }
-    
-//    func isNumber(amount: String) -> Bool {
-//        let string = Double(amount)
-//        if string == nil {
-//            return false
-//        } else {
-//            return true
-//        }
-//    }
 }

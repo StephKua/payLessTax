@@ -30,7 +30,15 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.title = "Summary"
         tableView.allowsSelection = false
         
+//        getIncome()
+//        rebateCategories()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
         getIncome()
+        self.userRebateCategories.removeAll()
         rebateCategories()
     }
     

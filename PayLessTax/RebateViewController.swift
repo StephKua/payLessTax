@@ -21,14 +21,19 @@ class RebateViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var tableView: UITableView!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
     
     override func viewDidAppear(animated: Bool) {
-        super.viewDidLoad()
+        super.viewDidAppear(true)
+        
         self.rebateCat.removeAll()
         self.title = "Get Rebates"
-        
         self.getRebateCategories()
     }
+    
     // MARK: - Table view data source
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -85,9 +90,10 @@ class RebateViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 }
 
+
 extension Double {
     var asCurrencyNoDecimal:String {
-        var formatter = NSNumberFormatter()
+        let formatter = NSNumberFormatter()
         formatter.numberStyle = .CurrencyAccountingStyle
         formatter.currencySymbol = ""
         formatter.maximumFractionDigits = 0
@@ -95,13 +101,28 @@ extension Double {
     }
     
     var asCurrency:String {
-        var formatter = NSNumberFormatter()
+        let formatter = NSNumberFormatter()
         formatter.numberStyle = .CurrencyAccountingStyle
         formatter.currencySymbol = ""
         return formatter.stringFromNumber(self)!
     }
 }
 
+extension String {
+    var isValidNumber:Bool {
+        let amount = self
+        let amountClean = amount.stringByReplacingOccurrencesOfString(".", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        let nonDigits = NSCharacterSet.decimalDigitCharacterSet().invertedSet
+        let isValidNumber : Bool = amountClean.rangeOfCharacterFromSet(nonDigits) == nil
+        return isValidNumber
+    }
+    
+    var formattedNo: String {
+        let str = self
+        let formatter = str.stringByReplacingOccurrencesOfString(",", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        return formatter
+    }
+}
 
 
 

@@ -37,15 +37,15 @@ class IncomeDetailViewController: UIViewController, UITableViewDelegate, UITable
         switch indexPath.section {
         case 0:
             let selectedReceipt = self.employmentInc[indexPath.row]
-            cell.textLabel?.text = "Ref. No: \(selectedReceipt.refNo)"
+            cell.textLabel?.text = "Ref: \(selectedReceipt.refNo)"
             cell.detailTextLabel?.text = "RM \(selectedReceipt.amount.asCurrency)"
         case 1:
             let selectedReceipt = self.rentalInc[indexPath.row]
-            cell.textLabel?.text = "Ref. No: \(selectedReceipt.refNo)"
+            cell.textLabel?.text = "Ref: \(selectedReceipt.refNo)"
             cell.detailTextLabel?.text = "RM \(selectedReceipt.amount.asCurrency)"
         case 2:
             let selectedReceipt = self.otherInc[indexPath.row]
-            cell.textLabel?.text = "Ref. No: \(selectedReceipt.refNo)"
+            cell.textLabel?.text = "Ref: \(selectedReceipt.refNo)"
             cell.detailTextLabel?.text = "RM \(selectedReceipt.amount.asCurrency)"
         default:
             cell.textLabel?.text = "No income"

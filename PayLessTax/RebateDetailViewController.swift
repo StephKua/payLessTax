@@ -98,6 +98,8 @@ class RebateDetailViewController: UIViewController, UITableViewDataSource, UITab
         print(category.receipts.count)
         
         deleteReceipt(receipt.key, category: receipt.category, completion: {
+            self.userRebateCategories.removeAll()
+            self.rebateCategories ()
             self.tableView.reloadData()
         })
         
@@ -105,28 +107,36 @@ class RebateDetailViewController: UIViewController, UITableViewDataSource, UITab
     
     
     func deleteReceipt(key: String, category: String, completion: () -> Void) {
-        self.updateSubtotal(key, category: category)
-        
-        let rebateRef = firebaseRef.child("rebate").child(User.currentUserId()!).child(category).child("receiptID").child(key)
-        rebateRef.removeValue()
-        
-        let receiptRef = firebaseRef.child("receipt").child(key)
-        receiptRef.removeValue()
-        completion()
+        self.updateSubtotal(key, category: category, completion: {
+            let rebateRef = self.firebaseRef.child("rebate").child(User.currentUserId()!).child(category).child("receiptID").child(key)
+            rebateRef.removeValue()
+            
+            let receiptRef = self.firebaseRef.child("receipt").child(key)
+            receiptRef.removeValue()
+            completion()
+        })
+
         
     }
     
-    func updateSubtotal(key: String, category: String) {
+    func updateSubtotal(key: String, category: String, completion:() ->()) {
         self.getReceipt(key) { (receipt) in
             let amountDiff = receipt.amount
             let rebateRef = self.firebaseRef.child("rebate").child(User.currentUserId()!).child(category)
+            
+            var newTotal = Double()
+            let rebateCatRef = self.firebaseRef.child("RebateCategories").child(category).child("subtotal")
+            
             rebateRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
                 if var rebateTypeDict = snapshot.value as? [String: AnyObject] {
                     if let oldValue = rebateTypeDict["subtotal"] as? Double {
                         rebateTypeDict["subtotal"] = oldValue - amountDiff
+                        newTotal = oldValue - amountDiff
                     }
                     rebateRef.updateChildValues(rebateTypeDict)
+                    rebateCatRef.child(User.currentUserId()!).setValue(newTotal)
                 }
+                completion()
             })
         }
     }
