@@ -102,7 +102,6 @@ class RebateDetailViewController: UIViewController, UITableViewDataSource, UITab
             self.rebateCategories ()
             self.tableView.reloadData()
         })
-        
     }
     
     
@@ -115,8 +114,6 @@ class RebateDetailViewController: UIViewController, UITableViewDataSource, UITab
             receiptRef.removeValue()
             completion()
         })
-
-        
     }
     
     func updateSubtotal(key: String, category: String, completion:() ->()) {

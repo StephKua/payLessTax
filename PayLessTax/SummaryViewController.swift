@@ -29,30 +29,37 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         self.title = "Summary"
         tableView.allowsSelection = false
-        
-//        getIncome()
-//        rebateCategories()
+        getIncome()
+        rebateCategories()
     }
+    
+
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         
-        getIncome()
-        self.userRebateCategories.removeAll()
-        rebateCategories()
+        
     }
     
     func rebateCategories(){
         let rebateRef = firebaseRef.child("rebate").child(User.currentUserId()!)
         rebateRef.observeEventType(.ChildAdded, withBlock: { (snapshot) in
-            if let category = UserRebateCategory(snapshot: snapshot){
-                guard category.receiptUIDs.count > 0 else {return}
-                category.downloadReceiptDetails() {
-                    self.tableView.reloadData()
-                    self.calcTotal()
+            snapshot.ref.observeEventType(.Value, withBlock: { (snapshot) in
+                if let category = UserRebateCategory(snapshot: snapshot){
+                    guard category.receiptUIDs.count > 0 else {return}
+                    category.downloadReceiptDetails() {
+                        self.tableView.reloadData()
+                        self.calcTotal()
+                    }
+                    if let index = self.userRebateCategories.indexOf({ category.categoryName == $0.categoryName }){
+                        self.userRebateCategories.removeAtIndex(index)
+                        self.userRebateCategories.insert(category, atIndex: index)
+                    }else{
+                        self.userRebateCategories.append(category)
+                    }
+                    
                 }
-                self.userRebateCategories.append(category)
-            }
+            })
         })
     }
     
@@ -84,6 +91,7 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
         case 0:
             return self.incomeType.count
         case 1:
+            print("in numberOf Rows count \(self.userRebateCategories.count)")
             return self.userRebateCategories.count
         default:
             return 0
@@ -97,6 +105,7 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
         case 0:
             cell.textLabel?.text = self.incomeType[indexPath.row]
         case 1:
+            print("in cellFor count \(self.userRebateCategories.count)")
             let category = userRebateCategories[indexPath.row]
             cell.textLabel?.text = category.categoryName
         default:

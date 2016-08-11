@@ -138,6 +138,7 @@ class NewRebateViewController: CameraViewController, UITextFieldDelegate {
         self.presentViewController(fusuma, animated: true, completion: nil)
     }
     
+
     func addRebate() {
         guard let date = dateTextField.text, let receiptNo = receiptTextField.text, let amount = amountTextField.text else { return }
         
