@@ -22,7 +22,6 @@ class SignUpViewController: ReusableKeyboardViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTapped()
-        
     }
 
     
@@ -43,11 +42,8 @@ class SignUpViewController: ReusableKeyboardViewController {
                 controller.addAction(dismissBtn)
                 
                 self.presentViewController(controller, animated: true, completion: nil)
-                
             }
-            
         })
-        
     }
     
 }
