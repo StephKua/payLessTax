@@ -31,7 +31,7 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTapped()
-        
+
         guard let title = rebReceipt?.category, let date = rebReceipt?.date, let rebateType = rebReceipt?.category, let receiptNo = rebReceipt?.receiptNo, let amount = rebReceipt?.amount else { return }
         
         self.disableEdit()
@@ -167,6 +167,8 @@ class EditRebateViewController: UIViewController, UITextFieldDelegate {
     //    func textFieldDidEndEditing(textField: UITextField) {
     //        activeTextField = nil
     //    }
+    
+
     
     func donePicker() {
         dateTextField.resignFirstResponder()

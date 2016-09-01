@@ -28,6 +28,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "44E239551D5C699700BA8793"
+               BuildableName = "PayLessTaxUITests.xctest"
+               BlueprintName = "PayLessTaxUITests"
+               ReferencedContainer = "container:PayLessTax.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
@@ -63,6 +73,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
+            argument = ""
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

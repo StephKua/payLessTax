@@ -37,8 +37,20 @@
 		44B340771D461CF2005C31DC /* EditIncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B340761D461CF2005C31DC /* EditIncViewController.swift */; };
 		44B340791D475CD9005C31DC /* EditRebateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B340781D475CD9005C31DC /* EditRebateViewController.swift */; };
 		44B3407B1D48949E005C31DC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44B3407A1D48949E005C31DC /* GoogleService-Info.plist */; };
+		44E239591D5C699700BA8793 /* PayLessTaxUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E239581D5C699700BA8793 /* PayLessTaxUITests.swift */; };
+		44E239611D5C69AD00BA8793 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E239601D5C69AD00BA8793 /* SnapshotHelper.swift */; };
 		EDF16A84558D568672D20C20 /* Pods_PayLessTax.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBCC983C9428DE1F3AF825DD /* Pods_PayLessTax.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		44E2395B1D5C699700BA8793 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 440219841D3CD02B0056954E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4402198B1D3CD02B0056954E;
+			remoteInfo = PayLessTax;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		4402198C1D3CD02B0056954E /* PayLessTax.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PayLessTax.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +85,10 @@
 		44B340761D461CF2005C31DC /* EditIncViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditIncViewController.swift; sourceTree = "<group>"; };
 		44B340781D475CD9005C31DC /* EditRebateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditRebateViewController.swift; sourceTree = "<group>"; };
 		44B3407A1D48949E005C31DC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		44E239561D5C699700BA8793 /* PayLessTaxUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PayLessTaxUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		44E239581D5C699700BA8793 /* PayLessTaxUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayLessTaxUITests.swift; sourceTree = "<group>"; };
+		44E2395A1D5C699700BA8793 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		44E239601D5C69AD00BA8793 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		86FAC1704652C77E12145874 /* Pods-PayLessTax.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PayLessTax.release.xcconfig"; path = "Pods/Target Support Files/Pods-PayLessTax/Pods-PayLessTax.release.xcconfig"; sourceTree = "<group>"; };
 		93D76607A46217C14F72A9AE /* Pods-PayLessTax.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PayLessTax.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PayLessTax/Pods-PayLessTax.debug.xcconfig"; sourceTree = "<group>"; };
 		BBCC983C9428DE1F3AF825DD /* Pods_PayLessTax.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PayLessTax.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +100,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDF16A84558D568672D20C20 /* Pods_PayLessTax.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		44E239531D5C699700BA8793 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +129,7 @@
 				440219931D3CD02B0056954E /* Main.storyboard */,
 				442DB8921D4B59F10047865F /* ReusableCameraViewController.swift */,
 				4402198E1D3CD02B0056954E /* PayLessTax */,
+				44E239571D5C699700BA8793 /* PayLessTaxUITests */,
 				4402198D1D3CD02B0056954E /* Products */,
 				0074A4CD6D3634AFAA0B0FEE /* Pods */,
 				76E02987C8D988C407CF5812 /* Frameworks */,
@@ -116,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				4402198C1D3CD02B0056954E /* PayLessTax.app */,
+				44E239561D5C699700BA8793 /* PayLessTaxUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -179,6 +204,16 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		44E239571D5C699700BA8793 /* PayLessTaxUITests */ = {
+			isa = PBXGroup;
+			children = (
+				44E239601D5C69AD00BA8793 /* SnapshotHelper.swift */,
+				44E239581D5C699700BA8793 /* PayLessTaxUITests.swift */,
+				44E2395A1D5C699700BA8793 /* Info.plist */,
+			);
+			path = PayLessTaxUITests;
+			sourceTree = "<group>";
+		};
 		76E02987C8D988C407CF5812 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +245,24 @@
 			productReference = 4402198C1D3CD02B0056954E /* PayLessTax.app */;
 			productType = "com.apple.product-type.application";
 		};
+		44E239551D5C699700BA8793 /* PayLessTaxUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 44E2395D1D5C699700BA8793 /* Build configuration list for PBXNativeTarget "PayLessTaxUITests" */;
+			buildPhases = (
+				44E239521D5C699700BA8793 /* Sources */,
+				44E239531D5C699700BA8793 /* Frameworks */,
+				44E239541D5C699700BA8793 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				44E2395C1D5C699700BA8793 /* PBXTargetDependency */,
+			);
+			name = PayLessTaxUITests;
+			productName = PayLessTaxUITests;
+			productReference = 44E239561D5C699700BA8793 /* PayLessTaxUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -232,6 +285,10 @@
 							};
 						};
 					};
+					44E239551D5C699700BA8793 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 4402198B1D3CD02B0056954E;
+					};
 				};
 			};
 			buildConfigurationList = 440219871D3CD02B0056954E /* Build configuration list for PBXProject "PayLessTax" */;
@@ -248,6 +305,7 @@
 			projectRoot = "";
 			targets = (
 				4402198B1D3CD02B0056954E /* PayLessTax */,
+				44E239551D5C699700BA8793 /* PayLessTaxUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -262,6 +320,13 @@
 				44B3407B1D48949E005C31DC /* GoogleService-Info.plist in Resources */,
 				4402199A1D3CD02B0056954E /* Assets.xcassets in Resources */,
 				440219951D3CD02B0056954E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		44E239541D5C699700BA8793 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,7 +413,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		44E239521D5C699700BA8793 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				44E239591D5C699700BA8793 /* PayLessTaxUITests.swift in Sources */,
+				44E239611D5C69AD00BA8793 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		44E2395C1D5C699700BA8793 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4402198B1D3CD02B0056954E /* PayLessTax */;
+			targetProxy = 44E2395B1D5C699700BA8793 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		440219931D3CD02B0056954E /* Main.storyboard */ = {
@@ -461,11 +543,12 @@
 			baseConfigurationReference = 93D76607A46217C14F72A9AE /* Pods-PayLessTax.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sheena Moh (26QHXRT656)";
 				INFOPLIST_FILE = PayLessTax/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.smohcodes.PayLessTax2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "426047a8-9ecf-4a69-994c-a89d1ae1f6c0";
 				SWIFT_OBJC_BRIDGING_HEADER = "PayLessTax-Bridging-Header.h";
 			};
 			name = Debug;
@@ -475,12 +558,37 @@
 			baseConfigurationReference = 86FAC1704652C77E12145874 /* Pods-PayLessTax.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sheena Moh (26QHXRT656)";
 				INFOPLIST_FILE = PayLessTax/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.smohcodes.PayLessTax2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "426047a8-9ecf-4a69-994c-a89d1ae1f6c0";
 				SWIFT_OBJC_BRIDGING_HEADER = "PayLessTax-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		44E2395E1D5C699700BA8793 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = PayLessTaxUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.smohcodes.PayLessTaxUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "426047a8-9ecf-4a69-994c-a89d1ae1f6c0";
+				TEST_TARGET_NAME = PayLessTax;
+			};
+			name = Debug;
+		};
+		44E2395F1D5C699700BA8793 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = PayLessTaxUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.smohcodes.PayLessTaxUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "426047a8-9ecf-4a69-994c-a89d1ae1f6c0";
+				TEST_TARGET_NAME = PayLessTax;
 			};
 			name = Release;
 		};
@@ -501,6 +609,15 @@
 			buildConfigurations = (
 				440219A21D3CD02B0056954E /* Debug */,
 				440219A31D3CD02B0056954E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		44E2395D1D5C699700BA8793 /* Build configuration list for PBXNativeTarget "PayLessTaxUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				44E2395E1D5C699700BA8793 /* Debug */,
+				44E2395F1D5C699700BA8793 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -22,7 +22,6 @@ class SignUpViewController: ReusableKeyboardViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTapped()
-        
     }
 
     
@@ -37,20 +36,14 @@ class SignUpViewController: ReusableKeyboardViewController {
                 User.signIn(user.uid)
                 self.performSegueWithIdentifier("LoginSegue", sender: sender)
                 
-//                let incomeDict = ["receiptID": [:], "subtotal": 0]
-//                self.firebaseRef.child("testing").child(user.uid).setValue(incomeDict)
-                
             } else {
                 let controller = UIAlertController(title: "Error", message: (error?.localizedDescription), preferredStyle: .Alert)
                 let dismissBtn = UIAlertAction(title: "Try Again", style: .Default, handler: nil)
                 controller.addAction(dismissBtn)
                 
                 self.presentViewController(controller, animated: true, completion: nil)
-                
             }
-            
         })
-        
     }
     
 }

@@ -23,15 +23,16 @@ class RebateViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.rebateCat.removeAll()
+        self.title = "Get Rebates"
+        self.getRebateCategories()
     }
     
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         
-        self.rebateCat.removeAll()
-        self.title = "Get Rebates"
-        self.getRebateCategories()
+        
     }
     
     // MARK: - Table view data source
@@ -63,11 +64,20 @@ class RebateViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func getRebateCategories() {
         let rebateCatRef = firebaseRef.child("RebateCategories")
         rebateCatRef.observeEventType(.ChildAdded, withBlock:  { (snapshot) in
-            if let rebateCat = RebateCategories(snapshot: snapshot) {
-                self.rebateCat.append(rebateCat)
-                self.tableView.reloadData()
-            }
+            snapshot.ref.observeEventType(.Value, withBlock: { (rebateSnapshot) in
+                if let rebateCat = RebateCategories(snapshot: rebateSnapshot) {
+                    if let index = self.rebateCat.indexOf({rebateCat.key == $0.key}){
+                        self.rebateCat.removeAtIndex(index)
+                        self.rebateCat.insert(rebateCat, atIndex: index)
+                    }else{
+                        self.rebateCat.append(rebateCat)
+                    }
+                    self.tableView.reloadData()
+                }
+            })
         })
+        
+        
     }
     
     @IBAction func logOutBtnClicked(sender: UIBarButtonItem) {
