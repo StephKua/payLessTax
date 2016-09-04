@@ -1309,11 +1309,11 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Riu-W6-MUV">
-                                                <rect key="frame" x="249" y="452" width="102" height="28"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Riu-W6-MUV">
+                                                <rect key="frame" x="243" y="452" width="114" height="28"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="2rZ-9Y-bIm"/>
-                                                    <constraint firstAttribute="width" constant="96" id="Ygj-bd-Y6U"/>
+                                                    <constraint firstAttribute="width" constant="114" id="Ygj-bd-Y6U"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <state key="normal" title="Forget password">
