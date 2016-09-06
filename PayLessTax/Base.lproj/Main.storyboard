@@ -315,7 +315,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tTB-W7-beh">
-                                <rect key="frame" x="246" y="84" width="109" height="90"/>
+                                <rect key="frame" x="156" y="84" width="109" height="90"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4lM-9M-E0L">
                                         <rect key="frame" x="0.0" y="0.0" width="109" height="40"/>
@@ -353,7 +353,7 @@
                                                     <constraint firstAttribute="width" constant="40" id="qtU-8B-dad"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="RM 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="22T-9E-gh7">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RM 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="22T-9E-gh7">
                                                 <rect key="frame" x="50" y="0.0" width="59" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="150" id="mbl-QL-nPk"/>
