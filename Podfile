@@ -15,5 +15,6 @@ target 'PayLessTax' do
     pod 'Fusuma'
     pod 'SwiftyJSON'
     pod 'SDWebImage'
+    pod 'Firebase/Crash'
 
 end

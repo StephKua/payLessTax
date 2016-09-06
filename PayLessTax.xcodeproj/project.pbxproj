@@ -235,6 +235,7 @@
 				4402198A1D3CD02B0056954E /* Resources */,
 				21B6646C325F7F47B1B9B87C /* [CP] Embed Pods Frameworks */,
 				6FC8FAC232AD3D950C830B7F /* [CP] Copy Pods Resources */,
+				282D1B6E1D7DE84D00A83201 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -362,6 +363,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PayLessTax/Pods-PayLessTax-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		282D1B6E1D7DE84D00A83201 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "JSON_FILE=${SRCROOT}/payLessTax/ServiceAccount.json\n1:470414759491:ios:562936324e0f1995=1:**********:ios:*********\n\ndefaults write com.google.SymbolUpload version -integer 1\n\nJSON=$(cat \"${JSON_FILE}\")\n/usr/bin/plutil -replace \"app_${GOOGLE_APP_ID//:/_}\" -json \"${JSON}\" \"$HOME/Library/Preferences/com.google.SymbolUpload.plist\"\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym";
 		};
 		6FC8FAC232AD3D950C830B7F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -547,7 +561,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PayLessTax/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.smohcodes.PayLessTax2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smohcodes.PayLessTax3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PayLessTax-Bridging-Header.h";
@@ -563,7 +577,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PayLessTax/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.smohcodes.PayLessTax2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smohcodes.PayLessTax3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PayLessTax-Bridging-Header.h";
