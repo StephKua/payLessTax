@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Override point for customization after application launch.
         FIRApp.configure()
-        FIRCrashMessage("Cause Crash button clicked")
+//        FIRCrashMessage("Cause Crash button clicked")
 //        fatalError()
         FIRDatabase.database().persistenceEnabled = true
         _ = OneSignal(launchOptions: launchOptions, appId: "dc517816-7ba6-4930-b971-0713eb397061", handleNotification: nil)
