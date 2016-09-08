@@ -1,0 +1,2 @@
+-Allow users to reset their password
+-Support of iOS version 9.0 and above

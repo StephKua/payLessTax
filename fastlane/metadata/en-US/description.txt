@@ -1,0 +1,10 @@
+PayLessTax is an app to keep track of all your income and receipts required for your tax rebates/ relief/ deductions.
+
+Simply snap a photo of your receipt and never worry about faded receipts or receipts going missing again!
+
+When it is time to file your taxes, just refer to the Summary page. 
+
+Don't overpay your taxes again!
+
+
+** Credits to Steph Kua & JJ Tan **
