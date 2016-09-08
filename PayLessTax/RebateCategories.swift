@@ -21,9 +21,7 @@ class RebateCategories: NSObject {
     init? (snapshot: FIRDataSnapshot) {
         guard let rebateCatDict = snapshot.value as? [String: AnyObject] else { return nil }
         
-        if let key = snapshot.key as? String {
-            self.key = key
-        }
+        self.key = snapshot.key
         
         if let title = rebateCatDict["catName"] as? String {
             self.title = title

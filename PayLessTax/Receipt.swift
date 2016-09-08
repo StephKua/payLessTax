@@ -21,9 +21,7 @@ class Receipt: NSObject {
     init?(snapshot: FIRDataSnapshot) {
         guard let receiptDict = snapshot.value as? [String: AnyObject] else { return }
         
-        if let key = snapshot.key as? String {
-            self.key = key
-        }
+        self.key = snapshot.key
         
         if let receiptNo = receiptDict["receipt no"] as? String {
             self.receiptNo = receiptNo
