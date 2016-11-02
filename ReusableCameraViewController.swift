@@ -15,7 +15,7 @@ class ReusableCameraViewController: UIViewController, FusumaDelegate {
         fusumaVC.hasVideo = true
         }
     }
-
+// Testing fusuma //
     func fusumaDismissedWithImage(image: UIImage) {
         print("Called just after FusumaViewController is dismissed.")
         self.fusumaClosed()
